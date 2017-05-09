@@ -10,15 +10,17 @@ $(document).ready(function () {
                     password: password
                 },
                 function (data, status) {
-                    alert("Data: " + data + "\nStatus: " + status);
-                    var datas = data.toString();
+                    alert("Data: " + data.length + data  + "\nStatus: " + status);
+                  var result = $.trim(data);
                     //belom bener if nya
               
-                    if(datas == "admin "){
+                    if(result === "admin"){
                          alert("welcome admin");
+                          window.location.href="index.html?code="+result;
                     }
-                    else if(datas =="client"){
+                    else if(result ==="client"){
                          alert("welcome client");
+                          window.location.href="index.html?code="+result;
                     }
                     else{
                         

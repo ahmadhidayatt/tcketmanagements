@@ -85,7 +85,7 @@ public class login extends HttpServlet {
         String pass = request.getParameter("password");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticke_management", "root", "");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
             PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
             pst.setString(1, user);
             pst.setString(2, pass);
@@ -94,13 +94,13 @@ public class login extends HttpServlet {
                 if (rs.getString("jabatan") == "" || rs.getString("status") == "n") {
                     out.println("account anda tidak aktif");
                 } else {
-           
-                    out.println(rs.getString("jabatan"));
-                
+                    String jabatan = rs.getString("jabatan").toString().trim();
+                    out.println(jabatan);
+
                 }
-               
+
             } else {
-                out.println("Incorrect login");
+                out.println("Kesalahan Login");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

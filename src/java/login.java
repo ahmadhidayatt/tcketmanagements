@@ -85,7 +85,7 @@ public class login extends HttpServlet {
         String pass = request.getParameter("password");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "");
             PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
             pst.setString(1, user);
             pst.setString(2, pass);

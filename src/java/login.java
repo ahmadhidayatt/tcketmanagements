@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -95,8 +96,9 @@ public class login extends HttpServlet {
                     out.println("account anda tidak aktif");
                 } else {
                     String jabatan = rs.getString("jabatan").toString().trim();
+                    HttpSession session = request.getSession();
+                    session.setAttribute("nama", rs.getString("nama"));
                     out.println(jabatan);
-
                 }
 
             } else {

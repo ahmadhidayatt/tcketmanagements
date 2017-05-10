@@ -9,7 +9,7 @@ $(document).ready(function () {
         $('#iframe').attr('src', 'page-news-form.html');
     });
     $("#open_ticket").click(function () {
-        $('#iframe').attr('src', 'page-opentiket-form');
+        $('#iframe').attr('src', 'page-opentiket-form.html');
     });
     
     $.get("index", function (data, status) {

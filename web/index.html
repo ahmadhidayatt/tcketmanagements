@@ -21,8 +21,8 @@
         <script>
 
             $(document).ready(function () {
-              
-              
+
+
             });
         </script>
         <!-- EOF CSS INCLUDE -->                                    
@@ -55,24 +55,24 @@
                         </div>                                                                        
                     </li>
                     <li class="active" >
-                        <a href="index.html"><span class="fa  fa-tachometer"></span> <span class="xn-text">Dashboard</span></a>                        
+                        <a id="dashboard"><span class="fa  fa-tachometer"></span> <span class="xn-text">Dashboard</span></a>                        
                     </li>               
                     <li class="xn-openable">
                         <a href="#"><span class="fa  fa-ticket"></span> <span class="xn-text">Ticket</span></a>
                         <ul>
-                            <li><a href="page-opentiket-form.html"><span class="fa fa-image"></span> Open</a></li>
-                            <li><a href="#"><span class="fa fa-user"></span> Closed</a></li>
-                            <li><a href="#"><span class="fa fa-users"></span> Pending</a></li>                                                       
+                            <li><a id="open_ticket"><span class="fa fa-image"></span> Open</a></li>
+                            <li><a id="close_ticket_ticket"><span class="fa fa-user"></span> Closed</a></li>
+                            <li><a id="pending_ticket"><span class="fa fa-users"></span> Pending</a></li>                                                       
                         </ul>
                     </li>  
-                    <li class="xn-text" id="enginer">
-                        <a href="pages-enginerr-visit.html" name="isi_menu"><span class="fa fa-user"></span> <span class="xn-text">Engineer Visit</span></a>                     
+                    <li class="xn-text" >
+                        <a  id="enginer"><span class="fa fa-user"></span> <span class="xn-text">Engineer Visit</span></a>                     
                     </li>  
-                    <li class="xn-text">
-                        <a href="#"><span class="fa fa-desktop"></span> <span class="xn-text">Monitor</span></a>                     
+                    <li class="xn-text" >
+                        <a id="monitor"><span class="fa fa-desktop"></span> <span class="xn-text">Monitor</span></a>                     
                     </li>  
-                    <li class=" xn-text">
-                        <a href="page-news-form.html"><span class="fa fa-info"/></span> <span class="xn-text">News</span></a>                     
+                    <li class=" xn-text" >
+                        <a id="news"><span class="fa fa-info"/></span> <span class="xn-text">News</span></a>                     
                     </li>    
                 </ul>
                 <!-- END X-NAVIGATION -->
@@ -109,32 +109,12 @@
                 <!-- END BREADCRUMB -->                       
 
                 <!-- PAGE CONTENT WRAPPER -->
-                <div class="page-content-wrap">
+                <iframe src="pages-dashboard.html" width="100%" height="100%"  id="iframe">
 
-                    <!-- START WIDGETS -->                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive" style="margin-left: 8px;">
-                                    <table id="myTable" class="table table-striped display table" width="100%" >
+                    <!-- PAGE CONTENT WRAPPER -->
+                  
 
-                                    <thead>  
-                                        <tr>  
-                                            <th>ENO</th>  
-                                            <th>EMPName</th>  
-                                            <th>Country</th>  
-                                            <th>Salary</th>
-                                            <th>ENO</th>  
-                                            <th>EMPName</th>  
-                                        </tr>  
-                                    </thead>  
-
-                                </table>  
-                            </div>
-                        </div>                        
-                        <!-- END WIDGET CLOCK -->
-
-                    </div>
-                </div>
+                </iframe>
                 <!-- END WIDGETS -->                    
 
 
@@ -147,89 +127,89 @@
 
     <!-- END PAGE CONTENT -->
 
-<!-- END PAGE CONTAINER -->
+    <!-- END PAGE CONTAINER -->
 
-<!-- MESSAGE BOX-->
-<div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-            <div class="mb-content">
-                <p>Are you sure you want to log out?</p>                    
-                <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-            </div>
-            <div class="mb-footer">
-                <div class="pull-right">
-                    <a id="logout" class="btn btn-success btn-lg">Yes</a>
-                    <button class="btn btn-default btn-lg mb-control-close">No</button>
+    <!-- MESSAGE BOX-->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                <div class="mb-content">
+                    <p>Are you sure you want to log out?</p>                    
+                    <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a id="logout" class="btn btn-success btn-lg">Yes</a>
+                        <button class="btn btn-default btn-lg mb-control-close">No</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- END MESSAGE BOX-->
+    <!-- END MESSAGE BOX-->
 
-<!-- START PRELOADS -->
-<audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-<audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-<!-- END PRELOADS -->                  
+    <!-- START PRELOADS -->
+    <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
+    <!-- END PRELOADS -->                  
 
-<!-- START SCRIPTS -->
-<!-- START PLUGINS -->
-<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 
 
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 
-<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
 
 
 
 
-<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
-<!-- END PLUGINS -->
 
-<!-- START THIS PAGE PLUGINS-->        
-<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        
-<script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-<script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
+    <!-- END PLUGINS -->
 
-<script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
-<script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>       
-<script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
-<script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script>
-<script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-<script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>                
-<script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                
-<script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>                 
+    <!-- START THIS PAGE PLUGINS-->        
+    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        
+    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
-<script type="text/javascript" src="js/plugins/moment.min.js"></script>
-<script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- END THIS PAGE PLUGINS-->        
+    <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
+    <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>       
+    <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
+    <script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script>
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>                
+    <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                
+    <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>                 
 
-<!-- START TEMPLATE -->
+    <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- END THIS PAGE PLUGINS-->        
 
-<script type="text/javascript" src="js/settings.js"></script>
+    <!-- START TEMPLATE -->
 
-<script type="text/javascript" src="js/plugins.js"></script>        
-<script type="text/javascript" src="js/actions.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
 
-<script type="text/javascript" src="js/demo_dashboard.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>        
+    <script type="text/javascript" src="js/actions.js"></script>
+
+    <script type="text/javascript" src="js/demo_dashboard.js"></script>
 
 
-<!-- END TEMPLATE -->
-<!-- END SCRIPTS -->         
+    <!-- END TEMPLATE -->
+    <!-- END SCRIPTS -->         
 </body>
 </html>
 

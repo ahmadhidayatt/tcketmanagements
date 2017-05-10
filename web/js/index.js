@@ -1,5 +1,14 @@
 $(document).ready(function () {
-
+    $("#dashboard").click(function () {
+        $('#iframe').attr('src', 'pages-dashboard.html');
+    });
+    $("#enginer").click(function () {
+        $('#iframe').attr('src', 'pages-enginerr-visit.html');
+    });
+    $("#news").click(function () {
+        $('#iframe').attr('src', 'page-news-form.html');
+    });
+    
     $.get("index", function (data, status) {
         var result = $.trim(data);
         if (result === "true") {
@@ -36,7 +45,7 @@ $(document).ready(function () {
         console.log(data);
         $("#myTable").dataTable({
             "processing": true,
-            "data": JSON.parse( data ),
+            "data": JSON.parse(data),
             "columns": [{
                     "data": "code"
                 }, {

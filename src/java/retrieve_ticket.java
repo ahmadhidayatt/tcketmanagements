@@ -90,7 +90,7 @@ public class retrieve_ticket extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "");
             PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai ");
             rs = pst.executeQuery();
             int i = 0;

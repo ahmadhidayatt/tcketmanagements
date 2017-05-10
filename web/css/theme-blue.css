@@ -3144,7 +3144,7 @@ blockquote.pull-right {
 }
 .dataTables_wrapper {
   float: left;
-  width: 100%;
+  width: 99%;
 }
 .dataTables_length {
   width: 50%;

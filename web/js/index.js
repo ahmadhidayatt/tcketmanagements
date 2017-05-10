@@ -8,6 +8,9 @@ $(document).ready(function () {
     $("#news").click(function () {
         $('#iframe').attr('src', 'page-news-form.html');
     });
+    $("#open_ticket").click(function () {
+        $('#iframe').attr('src', 'page-opentiket-form');
+    });
     
     $.get("index", function (data, status) {
         var result = $.trim(data);

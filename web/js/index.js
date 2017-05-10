@@ -14,7 +14,6 @@ $(document).ready(function () {
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var code = getURLParameter(url, 'code');
     console.log(code);
-    alert(code);
 
     $("#logout").click(function () {
         $.post("logout", function (data, status) {
@@ -24,13 +23,37 @@ $(document).ready(function () {
                 alert(result);
                 window.location.href = "pages-login.html";
             } else {
-                 alert("try again logout");
+                alert("try again logout");
                 return;
             }
             ;
         });
     });
 
+
+    $.post("retrieve_ticket", function (data) {
+        var response = jQuery.parseJSON(data);
+        console.log(data);
+        $("#myTable").dataTable({
+            "processing": true,
+            "data": JSON.parse( data ),
+            "columns": [{
+                    "data": "code"
+                }, {
+                    "data": "transname"
+                }, {
+                    "data": "cusname"
+                }, {
+                    "data": "date"
+                }, {
+                    "data": "addres"
+                }, {
+                    "data": "id"
+                }
+
+            ]
+        });
+    });
 
 });
 

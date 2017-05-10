@@ -79,14 +79,12 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-
         PrintWriter out = response.getWriter();
-
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
             PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
             pst.setString(1, user);
             pst.setString(2, pass);

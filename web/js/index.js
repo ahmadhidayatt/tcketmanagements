@@ -52,19 +52,29 @@ $(document).ready(function () {
             "processing": true,
             "data": JSON.parse(data),
             "columns": [{
-                    "data": "code"
+                    "data": "id_pegawai"
                 }, {
-                    "data": "transname"
+                    "data": "nik"
                 }, {
-                    "data": "cusname"
+                    "data": "nama"
                 }, {
-                    "data": "date"
+                    "data": "id_atm"
                 }, {
-                    "data": "addres"
+                    "data": "nama_lokasi"
                 }, {
-                    "data": "id"
+                    "data": "id_masalah"
+                },{
+                    "data": "nama_masalah"
+                }, {
+                    "data": "deskripsi"
+                }, {
+                    "data": "id_ticket"
+                }, {
+                    "data": "start_time"
+                }, {
+                    "data": "end_time"
                 }
-
+  
             ]
         });
     });

@@ -64,7 +64,54 @@ public class retrieve_ticket extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        String hasil = null;
+        Connection con;
+        Statement stmt;
+        String Kodeaut = "";
+        ResultSet rs;
+        CallableStatement st;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
+            PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai ");
+            rs = pst.executeQuery();
+            int i = 0;
+            JSONArray jArray = new JSONArray();
+            while (rs.next()) {
+
+                String code = rs.getString("id_pegawai");
+                String transname = rs.getString("nik");
+                String cusname = rs.getString("nama");
+                String date = rs.getString("password");
+                String addres = rs.getString("jabatan");
+                String id = rs.getString("tanggal");
+
+                JSONObject arrayObj = new JSONObject();
+
+                arrayObj.put("code", code);
+                arrayObj.put("transname", transname);
+                arrayObj.put("cusname", cusname);
+                arrayObj.put("date", date);
+                arrayObj.put("addres", addres);
+                arrayObj.put("id", id);
+
+                jArray.add(i, arrayObj);
+                i++;
+            }
+            rs.close();
+
+            hasil = jArray.toString();
+            out.print(hasil);
+
+        } catch (SQLException sx) {
+            hasil = sx.toString();
+        } catch (ClassNotFoundException cx) {
+            hasil = cx.toString();
+        }
     }
 
     /**
@@ -90,7 +137,7 @@ public class retrieve_ticket extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
             PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai ");
             rs = pst.executeQuery();
             int i = 0;

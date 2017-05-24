@@ -25,6 +25,7 @@ $(document).ready(function () {
 
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var code = getURLParameter(url, 'code');
+   
     console.log(code);
 
     $("#logout").click(function () {
@@ -44,28 +45,53 @@ $(document).ready(function () {
 
 
     $.post("retrieve_ticket", function (data) {
-        var response = jQuery.parseJSON(data);
-        console.log(data);
+          console.log(data);
+      //  var response = jQuery.parseJSON(data);
+      
         $("#myTable").dataTable({
             "processing": true,
             "data": JSON.parse(data),
             "columns": [{
-                    "data": "code"
+                    "data": "id_pegawai"
                 }, {
-                    "data": "transname"
+                    "data": "nik"
                 }, {
-                    "data": "cusname"
+                    "data": "nama"
                 }, {
-                    "data": "date"
+                    "data": "id_atm"
                 }, {
-                    "data": "addres"
+                    "data": "nama_lokasi"
                 }, {
-                    "data": "id"
+                    "data": "id_masalah"
+                },{
+                    "data": "nama_masalah"
+                }, {
+                    "data": "deskripsi"
+                }, {
+                    "data": "id_ticket"
+                }, {
+                    "data": "start_time"
+                }, {
+                    "data": "end_time"
                 }
-
+  
             ]
         });
     });
+     if(code !== null){
+        if(code ==="admin"){
+           return;
+        }
+        else if(code === "client"){
+            document.getElementById("open_ticket").style.display = "none";
+            return ;
+        }
+        else{
+             alert("tidak ada jabatan harap login dahulu");
+              window.location.href = "pages-login.html";
+        }
+    }
+   
 
 });
 

@@ -28,6 +28,7 @@ public class helper_atm extends HttpServlet {
     public final String retrieve_atm = "0";
     public final String insert_atm = "1";
     public final String update_atm = "2";
+    private Connection conn;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -92,10 +93,8 @@ public class helper_atm extends HttpServlet {
         CallableStatement st;
 
         String code = request.getParameter("code");
-
+        conn = new connection().getConn();
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
             if (code == retrieve_atm) {
                 String query = "{call retrieve_atm()}";
                 st = conn.prepareCall(query);
@@ -128,12 +127,10 @@ public class helper_atm extends HttpServlet {
                 hasil = jArray.toString();
                 out.print(hasil);
             }
-
+            conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } catch (ClassNotFoundException cx) {
-            hasil = cx.toString();
-        }
+        } 
     }
 
     /**

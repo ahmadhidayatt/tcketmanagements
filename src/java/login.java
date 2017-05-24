@@ -25,6 +25,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
+    private Connection conn;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -82,10 +84,9 @@ public class login extends HttpServlet {
         PrintWriter out = response.getWriter();
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
+        conn = new connection().getConn();
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
-            PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
+          PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
             pst.setString(1, user);
             pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
@@ -102,7 +103,7 @@ public class login extends HttpServlet {
             } else {
                 out.println("Kesalahan Login");
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

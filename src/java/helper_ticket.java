@@ -24,8 +24,11 @@ import org.json.simple.JSONObject;
  * @author ahmad
  */
 public class helper_ticket extends HttpServlet {
+
     public final String insert_ticket = "1";
     public final String update_ticket = "2";
+    private Connection conn;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +46,7 @@ public class helper_ticket extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ticket_helper</title>");            
+            out.println("<title>Servlet ticket_helper</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ticket_helper at " + request.getContextPath() + "</h1>");
@@ -78,9 +81,10 @@ public class helper_ticket extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             response.setContentType("text/html");
+        response.setContentType("text/html");
 
         PrintWriter out = response.getWriter();
+        conn = new connection().getConn();
         String hasil = null;
         Connection con;
         Statement stmt;
@@ -91,8 +95,6 @@ public class helper_ticket extends HttpServlet {
         String code = request.getParameter("code");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
             if (code == insert_ticket) {
                 String query = "{call retrieve_masalah()}";
                 st = conn.prepareCall(query);
@@ -104,14 +106,12 @@ public class helper_ticket extends HttpServlet {
                     String id_masalah = rs.getString("id_masalah");
                     String nama_masalah = rs.getString("nama_masalah");
                     String deskripsi = rs.getString("deskripsi");
-                    
 
                     JSONObject arrayObj = new JSONObject();
 
                     arrayObj.put("id_masalah", id_masalah);
                     arrayObj.put("nama_masalah", nama_masalah);
                     arrayObj.put("deskripsi", deskripsi);
-                  
 
                     jArray.add(i, arrayObj);
                     i++;
@@ -121,11 +121,9 @@ public class helper_ticket extends HttpServlet {
                 hasil = jArray.toString();
                 out.print(hasil);
             }
-
+            conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } catch (ClassNotFoundException cx) {
-            hasil = cx.toString();
         }
     }
 

@@ -26,6 +26,8 @@ import org.json.simple.JSONObject;
  */
 public class retrieve_ticket extends HttpServlet {
 
+    private Connection conn;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -129,15 +131,14 @@ public class retrieve_ticket extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         String hasil = null;
-        Connection con;
+
         Statement stmt;
         String Kodeaut = "";
         ResultSet rs;
         CallableStatement st;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
+            conn = new connection().getConn();
             String query = "{call retrieve_ticket()}";
             st = conn.prepareCall(query);
             rs = st.executeQuery();
@@ -178,12 +179,12 @@ public class retrieve_ticket extends HttpServlet {
 
             hasil = jArray.toString();
             out.print(hasil);
+            conn.close();
 
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } catch (ClassNotFoundException cx) {
-            hasil = cx.toString();
-        }
+        } 
+        
     }
 
     /**

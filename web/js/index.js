@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () { 
     $("#dashboard").click(function () {
         $('#iframe').attr('src', 'pages-dashboard.html');
     });

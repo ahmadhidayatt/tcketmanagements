@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,29 +97,22 @@ public class helper_ticket extends HttpServlet {
 
         try {
             if (code == insert_ticket) {
-                String query = "{call retrieve_masalah()}";
-                st = conn.prepareCall(query);
-                rs = st.executeQuery();
-                int i = 0;
-                JSONArray jArray = new JSONArray();
-                while (rs.next()) {
-
-                    String id_masalah = rs.getString("id_masalah");
-                    String nama_masalah = rs.getString("nama_masalah");
-                    String deskripsi = rs.getString("deskripsi");
-
-                    JSONObject arrayObj = new JSONObject();
-
-                    arrayObj.put("id_masalah", id_masalah);
-                    arrayObj.put("nama_masalah", nama_masalah);
-                    arrayObj.put("deskripsi", deskripsi);
-
-                    jArray.add(i, arrayObj);
-                    i++;
-                }
-                rs.close();
-
-                hasil = jArray.toString();
+                String id_atm = request.getParameter("id_atm");
+                String id_masalah = request.getParameter("id_masalah");
+                String start_time = request.getParameter("start_time");
+                String end_time = request.getParameter("end_time");
+                String nik = request.getParameter("nik");
+                String satwal = request.getParameter("satwal");
+                String kartu_tertelan = request.getParameter("kartu_tertelan");
+                String query = "insert into tb_ticket(id_atm,id_masalah,start_time,end_time,nik,satwal,kartu_tertelan)values( ?,?,?,?,?,?,?)";
+                PreparedStatement statement = conn.prepareStatement(query);
+                statement.setString(1, id_atm);
+                statement.setString(2, id_masalah);
+                statement.setString(3, start_time);
+                statement.setString(4, end_time);
+                statement.setString(5, kartu_tertelan);
+                statement.executeUpdate();
+                hasil = "sukses";
                 out.print(hasil);
             }
             conn.close();

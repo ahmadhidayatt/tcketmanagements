@@ -11,20 +11,13 @@ $(document).ready(function () {
 
     $.post('helper_atm', {code: "0"},
             function (returnedData) {
+             
+                var arr = $.parseJSON(returnedData);
+                  console.log(returnedData);
+                for (var i = 0; i <= arr.length; i++) {
+                    console.log(arr["id_atm"]);                    
+                };
 
-                var data = JSON.parse(returnedData);
-                    JSON.stringify(data);
-                var index = data.indexOf('ddlViewBy');
-
-                for (var i = 0; i < data.length(); i++) {
-                    var x = document.createElement("OPTION");
-                    x.setAttribute("value", "volvocar");
-                    var t = document.createTextNode("Volvo");
-                    x.appendChild(t);
-                    document.getElementById("ddlViewBy").appendChild(x);
-                   
-                    console.log(i);
-                }
             }).fail(function () {
         console.log("error");
     });

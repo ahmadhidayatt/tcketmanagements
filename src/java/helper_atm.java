@@ -95,7 +95,7 @@ public class helper_atm extends HttpServlet {
         String code = request.getParameter("code");
         conn = new connection().getConn();
         try {
-            if (code == retrieve_atm) {
+            if (code.equals(retrieve_atm)) {
                 String query = "{call retrieve_atm()}";
                 st = conn.prepareCall(query);
                 rs = st.executeQuery();

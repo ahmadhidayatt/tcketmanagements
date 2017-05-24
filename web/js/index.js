@@ -11,7 +11,7 @@ $(document).ready(function () {
     $("#open_ticket").click(function () {
         $('#iframe').attr('src', 'page-opentiket-form.html');
     });
-    $("#profile").click(function () {
+    $(".profile").click(function () {
         $('#iframe').attr('src', 'pages-profile.html');
     });
     

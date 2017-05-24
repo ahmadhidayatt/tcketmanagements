@@ -53,37 +53,8 @@
                         <div class="panel-body padding-0">
                             <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
 
-                                                <div class='col-md-4'>
-                                                    <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
-                                                    <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
-                                                        
-                                                        <div class='form-row'>
-                                                            <div class='col-xs-12 form-group card required'>
-                                                                <label class='control-label' style="margin-top: 10px">Nik</label>
-                                                                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                            </div>
-                                                        </div>
-                                                        <div class='form-row'>
-                                                            <div class='col-xs-12 form-group card required'>
-                                                                <label class='control-label' style="margin-top: 10px">Custody Name</label>
-                                                                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                            </div>
-                                                        </div>
-                                                        <div class='form-row'>
-                                                            <div class='col-xs-12 form-group card required'>
-                                                                <label class='control-label' style="margin-top: 10px">ID ATM</label>
-                                                                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                            </div>
-                                                        </div>
-                                                        <div class='form-row'>
-                                                            <div class='col-xs-12 form-group card required'>
-                                                                <label class='control-label' style="margin-top: 10px">ATM Location</label>
-                                                                <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                            </div>
-                                                        </div>
-                                                        <div class='form-row'>
-                                                            <div class='col-xs-12 form-group card required'>
-                                                                <label class="control-label" style="margin-top: 10px;" for="declineType">Client</label>
+                                <div class="container">
+                                    <div class='row'>
 
                                         <div class='col-md-12'>
                                             <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
@@ -145,19 +116,18 @@
                                                         <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
                                                     </div>
                                                 </div>
+
                                                 <div class='form-row'>
                                                     <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">Satwal</label>
-                                                        <input autocomplete='off' class='form-control card-number' size='20' type='text'>
-                                                    </div>
+                                                        <label class="control-label"  for="declineType">Open Safe</label>
+
+                                                        <select id="declineType" name="declineType" class="form-control">
+                                                            <option value="Exponential">Exponential (Conventional)</option>
+                                                            <option value="Hyperbolic">Hyperbolic (Unconventional)</option>
+                                                        </select>
+                                                    </div><br>
                                                 </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">Nik</label>
-                                                        <textareae autocomplete='off' class='form-control card-number' size='20' type='text'/>
-                                                    </div>
-                                                </div>
-                                               
+
                                                 <div class='form-row'>
                                                     <div class='col-xs-12 form-group card required' >
                                                         <button id="submit" name="submit" class="btn btn-group">Submit</button>

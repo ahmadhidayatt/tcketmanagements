@@ -17,16 +17,16 @@
         <servlet-class>retrieve_ticket</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>atm_helper</servlet-name>
-        <servlet-class>helper_atm</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>masalah_helper</servlet-name>
         <servlet-class>helper_masalah</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ticket_helper</servlet-name>
         <servlet-class>helper_ticket</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>helper_atm</servlet-name>
+        <servlet-class>helper_atm</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>retrieve_ticket</servlet-name>
@@ -45,16 +45,16 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>atm_helper</servlet-name>
-        <url-pattern>/atm_helper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>masalah_helper</servlet-name>
         <url-pattern>/masalah_helper</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ticket_helper</servlet-name>
         <url-pattern>/ticket_helper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>helper_atm</servlet-name>
+        <url-pattern>/helper_atm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

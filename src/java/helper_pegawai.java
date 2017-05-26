@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,13 +22,11 @@ import org.json.simple.JSONObject;
  *
  * @author ahmad
  */
-public class helper_masalah extends HttpServlet {
-
-    public final String retrieve_masalah = "0";
-    public final String insert_masalah = "1";
-    public final String update_masalah = "2";
+public class helper_pegawai extends HttpServlet {
+  public final String retrieve_pegawai = "0";
+    public final String insert_pegawai = "1";
+    public final String update_pegawai = "2";
     private Connection conn;
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,10 +44,10 @@ public class helper_masalah extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet masalah_helper</title>");
+            out.println("<title>Servlet helper_pegawai</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet masalah_helper at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet helper_pegawai at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,7 +80,7 @@ public class helper_masalah extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        conn = new connection().getConn();
+
         PrintWriter out = response.getWriter();
         String hasil = null;
         Connection con;
@@ -93,25 +90,37 @@ public class helper_masalah extends HttpServlet {
         CallableStatement st;
 
         String code = request.getParameter("code");
-
+        conn = new connection().getConn();
         try {
-            if (code.equals(retrieve_masalah)) {
-                String query = "{call retrieve_masalah()}";
+            if (code.equals(retrieve_pegawai)) {
+                String query = "{call retrieve_pegawai()}";
                 st = conn.prepareCall(query);
                 rs = st.executeQuery();
                 int i = 0;
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
 
-                    String id_masalah = rs.getString("id_masalah");
-                    String nama_masalah = rs.getString("nama_masalah");
-                    String deskripsi = rs.getString("deskripsi");
+                    String nik = rs.getString("nik");
+                    String nama = rs.getString("nama");
+                    String status = rs.getString("status");
+                    String tanggal = rs.getString("tanggal");
+                    String alamat = rs.getString("alamat");
+                    String jabatan = rs.getString("jabatan");
+                    String no_telp = rs.getString("no_telp");
+                    String regional = rs.getString("regional");
+                    String foto = rs.getString("foto");
 
                     JSONObject arrayObj = new JSONObject();
 
-                    arrayObj.put("id_masalah", id_masalah);
-                    arrayObj.put("nama_masalah", nama_masalah);
-                    arrayObj.put("deskripsi", deskripsi);
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("nama", nama);
+                    arrayObj.put("status", status);
+                    arrayObj.put("tanggal", tanggal);
+                    arrayObj.put("alamat", alamat);
+                    arrayObj.put("jabatan", jabatan);
+                     arrayObj.put("no_telp", no_telp);
+                    arrayObj.put("regional", regional);
+                    arrayObj.put("foto", foto);
 
                     jArray.add(i, arrayObj);
                     i++;

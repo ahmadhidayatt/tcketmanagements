@@ -14,7 +14,35 @@
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <link rel="stylesheet" href="js/plugins/codemirror/mode/tiddlywiki/tiddlywiki.css" type="text/css">
 
-        <!-- EOF CSS INCLUDE -->                                    
+        <!-- EOF CSS INCLUDE -->   
+        <style>
+            .ui-autocomplete {
+                position: absolute;
+                z-index: 1000;
+                cursor: default;
+                padding: 0;
+                margin-top: 2px;
+                list-style: none;
+                background-color: #ffffff;
+                border: 1px solid #ccc
+                    -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+            .ui-autocomplete > li {
+                padding: 3px 20px;
+            }
+            .ui-autocomplete > li.ui-state-focus {
+                background-color: #DDD;
+            }
+            .ui-helper-hidden-accessible {
+                display: none;
+            }
+
+        </style>
     </head>
     <body >
         <!-- START PAGE CONTAINER -->
@@ -68,8 +96,8 @@
                                                     <div class='col-xs-12 form-group card required'>
                                                         <label class='control-label' style="margin-top: 10px">ID ATM</label>
                                                         <select  id="select_atm" name="select_atm" class="form-control">
-                                                           <option style="display:none;" selected>Select one</option>
-                                                            
+                                                            <option style="display:none;" selected>Select one</option>
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -101,12 +129,8 @@
 
                                                 <div class='form-row'>
                                                     <div class='col-xs-12 form-group card required'>
-                                                        <label class="control-label" style="margin-top: 10px;" for="declineType">Custody</label>
-
-                                                        <select id="declineType" name="declineType" class="form-control">
-                                                            <option value="Exponential">Exponential (Conventional)</option>
-                                                            <option value="Hyperbolic">Hyperbolic (Unconventional)</option>
-                                                        </select>
+                                                          <label style="margin-top: 10px" class='control-label'>Custody</label>
+                                                         <input class='form-control card-expiry-month' id="custody" placeholder='CUSTODY'  type='text'>
                                                     </div>
                                                 </div>
                                                 <div class='form-row'>
@@ -182,12 +206,14 @@
     <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
     <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
     <!-- END PRELOADS -->                  
-
     <!-- START SCRIPTS -->
     <!-- START PLUGINS -->
     <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>  
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/PageOpenTicket.js"></script>
     <!-- END PLUGINS -->
 
     <!-- START THIS PAGE PLUGINS-->        
@@ -203,13 +229,18 @@
     <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>                
     <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                
     <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>                 
-    <script type="text/javascript" src="js/PageOpenTicket.js"></script>
+
     <script type="text/javascript" src="js/plugins/moment.min.js"></script>
     <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- END THIS PAGE PLUGINS-->        
 
     <!-- START TEMPLATE -->
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
 
     <script type="text/javascript" src="js/plugins.js"></script>      
 

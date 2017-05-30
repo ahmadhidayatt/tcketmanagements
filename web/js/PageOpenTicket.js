@@ -62,30 +62,30 @@ $(document).ready(function () {
     });
 
     $('#nik').autocomplete({
-        // This shows the min length of charcters that must be typed before the autocomplete looks for a match.
-        minLength: 0,
+
+        minLength: 2,
         source: function (request, response) {
             response($.map(data_peg, function (value, key) {
                 return {
                     label: value.nik,
-                    value: value.nama
+                    value: value.nik
                 }
             }));
 
-        },
-        focus: function (event, ui) {
-            $('#nik').val(ui.item.first_name);
-            return false;
-        },
-        // Once a value in the drop down list is selected, do the following:
-        select: function (event, ui) {
-            // place the person.given_name value into the textfield called 'select_origin'...
-            $('#nik').val(ui.item.first_name);
-            // and place the person.id into the hidden textfield called 'link_origin_id'. 
-            $('#link_origin_id').val(ui.item.id);
-            return false;
         }
     });
 
+    $('#nik').on('autocompletechange change', function () {
+        var nik = this.value;
+        jQuery.each(data_peg, function (i, val) {
+            console.log(data_peg[i]["nik"]);
+            if (data_peg[i]["nik"].trim() ===nik.trim()) {
+                //nih disini 
+                $('#custody').val(data_peg[i]["nama"]);
+            }
 
+        });
+//   $('#custody').val(this.value);
+    }).change();
 });
+

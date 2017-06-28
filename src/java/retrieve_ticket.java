@@ -149,7 +149,7 @@ public class retrieve_ticket extends HttpServlet {
                 String id_pegawai = rs.getString("id_pegawai");
                 String nik = rs.getString("nik");
                 String nama = rs.getString("nama");
-                String id_atm = rs.getString("id_atm");
+                String id_atm = rs.getString("nama_atm");
                 String nama_lokasi = rs.getString("nama_lokasi");
                 String id_masalah = rs.getString("id_masalah");
                 String nama_masalah = rs.getString("nama_masalah");

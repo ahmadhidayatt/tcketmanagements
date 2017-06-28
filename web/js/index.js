@@ -55,7 +55,7 @@ $(document).ready(function () {
             "processing": true,
             "data": JSON.parse(data),
             "columns": [{
-                    "data": "id_pegawai"
+                    "data": "id_ticket"
                 }, {
                     "data": "nik"
                 }, {
@@ -65,13 +65,9 @@ $(document).ready(function () {
                 }, {
                     "data": "nama_lokasi"
                 }, {
-                    "data": "id_masalah"
-                },{
                     "data": "nama_masalah"
                 }, {
                     "data": "deskripsi"
-                }, {
-                    "data": "id_ticket"
                 }, {
                     "data": "start_time"
                 }, {

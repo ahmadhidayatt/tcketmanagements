@@ -41,10 +41,11 @@
             .ui-helper-hidden-accessible {
                 display: none;
             }
+            
 
         </style>
     </head>
-    <body >
+    <body style="margin-left: 45px; margin-right: 35px; margin-bottom: 15px">
         <!-- START PAGE CONTAINER -->
 
 
@@ -59,120 +60,121 @@
             <!-- START WIDGETS -->                    
             <div class="row">
                 <div class="row">
-                    <!-- START MEMBER PROPORTION BLOCK -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title-box">
-                                <h3>Open Ticket</h3>
-                                <span>New Ticket & Task for engineer</span>
-                            </div>                                    
-                            <ul class="panel-controls" style="margin-top: 2px;">
+                    <div class="col-md-12">
+                        <!-- START MEMBER PROPORTION BLOCK -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title-box">
+                                    <h3>Open Ticket</h3>
+                                    <span>New Ticket & Task for engineer</span>
+                                </div>                                    
+                                <ul class="panel-controls" style="margin-top: 2px;">
 
-                                <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
-                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
-                                    </ul>                                        
-                                </li>                                        
-                            </ul>                                    
-                        </div>                                
-                        <div class="panel-body padding-0">
-                            <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
+                                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                                        </ul>                                        
+                                    </li>                                        
+                                </ul>                                    
+                            </div>                                
+                            <div class="panel-body padding-0">
+                                <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
 
-                                <div class="container">
-                                    <div class='row'>
+                                    <div class="container">
+                                        <div class='row'>
 
-                                        <div class='col-md-12'>
-                                            <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group required'>
-                                                        <label class='control-label' style="margin-top: 15px">ID Ticket</label>
-                                                        <input class='form-control' size='4' type='text' readonly="true"/>
+                                            <div class='col-md-12'>
+                                                <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group required'>
+                                                            <label class='control-label' style="margin-top: 15px">ID Ticket</label>
+                                                            <input class='form-control' size='4' type='text' readonly="true"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">ID ATM</label>
-                                                        <select  id="select_atm" name="select_atm" class="form-control">
-                                                            <option style="display:none;" selected>Select one</option>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class='control-label' style="margin-top: 10px">ID ATM</label>
+                                                            <select  id="select_atm" name="select_atm" class="form-control">
+                                                                <option style="display:none;" selected>Select one</option>
 
-                                                        </select>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">ATM Name</label>
-                                                        <input autocomplete='off' id="input_atm_name" class='form-control card-number' size='20' type='text'>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class='control-label' style="margin-top: 10px">ATM Name</label>
+                                                            <input autocomplete='off' id="input_atm_name" class='form-control card-number' size='20' type='text'>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">ATM Location</label>
-                                                        <input autocomplete='off' id="input_atm_loct" class='form-control card-number' size='20' type='text'>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class='control-label' style="margin-top: 10px">ATM Location</label>
+                                                            <input autocomplete='off' id="input_atm_loct" class='form-control card-number' size='20' type='text'>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">Problem ATM</label>
-                                                        <select id="select_masalah" name="ProblemAtm" class="form-control">
-                                                        </select>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class='control-label' style="margin-top: 10px">Problem ATM</label>
+                                                            <select id="select_masalah" name="ProblemAtm" class="form-control">
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class='control-label' style="margin-top: 10px">Nik</label>
-                                                        <input autocomplete='on' id="nik" class='form-control card-number' size='20' type='text'>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class='control-label' style="margin-top: 10px">Nik</label>
+                                                            <input autocomplete='on' id="nik" class='form-control card-number' size='20' type='text'>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                          <label style="margin-top: 10px" class='control-label'>Custody</label>
-                                                         <input class='form-control card-expiry-month' id="custody" placeholder='CUSTODY'  type='text'>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label style="margin-top: 10px" class='control-label'>Custody</label>
+                                                            <input class='form-control card-expiry-month' id="custody" placeholder='CUSTODY'  type='text'>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class='form-row'>
-                                                    <div class='col-xs-4 form-group cvc required'>
-                                                        <label style="margin-top: 10px" class='control-label'>Start Time</label>
-                                                        <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-4 form-group cvc required'>
+                                                            <label style="margin-top: 10px" class='control-label'>Start Time</label>
+                                                            <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+                                                        </div>
+                                                        <div class='col-xs-4 form-group expiration required'>
+                                                            <label style="margin-top: 10px"  class='control-label'>End Time</label>
+                                                            <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                                                        </div>
                                                     </div>
-                                                    <div class='col-xs-4 form-group expiration required'>
-                                                        <label style="margin-top: 10px"  class='control-label'>End Time</label>
-                                                        <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required'>
+                                                            <label class="control-label"  for="declineType">Open Safe</label>
+
+                                                            <select id="declineType" name="declineType" class="form-control">
+                                                                <option value="Exponential">Exponential (Conventional)</option>
+                                                                <option value="Hyperbolic">Hyperbolic (Unconventional)</option>
+                                                            </select>
+                                                        </div><br>
                                                     </div>
-                                                </div>
 
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required'>
-                                                        <label class="control-label"  for="declineType">Open Safe</label>
-
-                                                        <select id="declineType" name="declineType" class="form-control">
-                                                            <option value="Exponential">Exponential (Conventional)</option>
-                                                            <option value="Hyperbolic">Hyperbolic (Unconventional)</option>
-                                                        </select>
-                                                    </div><br>
-                                                </div>
-
-                                                <div class='form-row'>
-                                                    <div class='col-xs-12 form-group card required' >
-                                                        <button id="submit" name="submit" class="btn btn-group">Submit</button>
+                                                    <div class='form-row'>
+                                                        <div class='col-xs-12 form-group card required' >
+                                                            <button id="submit" name="submit" class="btn btn-group">Submit</button>
+                                                        </div>
+                                                        <br>
                                                     </div>
-                                                    <br>
-                                                </div>
 
-                                            </form>
+                                                </form>
+                                            </div>
+                                            <div class='col-md-4'></div>
                                         </div>
-                                        <div class='col-md-4'></div>
                                     </div>
+
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
-
 
                 </div>
             </div>

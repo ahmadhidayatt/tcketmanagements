@@ -26,7 +26,7 @@ public class connection {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             this.conn = DriverManager.getConnection(URL, USER, PASSWD);
         } catch (Exception e) {
-            System.out.println("Error when konakting: ");
+            System.out.println("Error when konekting: ");
             e.printStackTrace();
         }
     }

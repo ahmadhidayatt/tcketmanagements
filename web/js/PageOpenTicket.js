@@ -29,7 +29,7 @@ $(document).ready(function () {
                 console.log(returnedData);
                 jQuery.each(obj, function (i, val) {
                     console.log(obj[i]["id_masalah"]);
-                    $('<option>').val(obj[i]["nama_masalah"]).text(obj[i]["nama_masalah"]).appendTo('#select_masalah');
+                    $('<option>').val(obj[i]["id_masalah"]).text(obj[i]["id_masalah"]).appendTo('#select_masalah');
                 });
                 ;
 
@@ -60,6 +60,7 @@ $(document).ready(function () {
 
         });
     });
+   
 
     $('#nik').autocomplete({
 
@@ -79,7 +80,7 @@ $(document).ready(function () {
         var nik = this.value;
         jQuery.each(data_peg, function (i, val) {
             console.log(data_peg[i]["nik"]);
-            if (data_peg[i]["nik"].trim() ===nik.trim()) {
+            if (data_peg[i]["nik"].trim() === nik.trim()) {
                 //nih disini 
                 $('#custody').val(data_peg[i]["nama"]);
             }
@@ -87,5 +88,26 @@ $(document).ready(function () {
         });
 //   $('#custody').val(this.value);
     }).change();
+     
 });
+$("#buttons").click(function () {
+    var idatm=document.getElementById("select_atm").value;
+    var idmasalah=document.getElementById("select_masalah").value;
+    var starttime=document.getElementById("start_time").value;
+    var endtime=document.getElementById("end_time").value;
+    var niks=document.getElementById("nik").value;
+    
+        $.post('helper_ticket', {code: "1", id_atm : idatm,
+                 id_masalah :idmasalah,
+                 start_time :starttime,
+                 end_time :endtime,
+                 nik :niks,
+                 satwal :"0",
+                 kartu_tertelan :""},
+                function (returnedData) {
+                   console.log(returnedData);
+                }).fail(function () {
+            console.log("error");
+        });
+    });
 

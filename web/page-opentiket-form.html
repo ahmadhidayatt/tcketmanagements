@@ -81,13 +81,13 @@
                                 </ul>                                    
                             </div>                                
                             <div class="panel-body padding-0">
-                                <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
+                           
 
                                     <div class="container">
                                         <div class='row'>
 
                                             <div class='col-md-12'>
-                                                <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden" value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
+                                                <form >
                                                     <div class='form-row'>
                                                         <div class='col-xs-12 form-group required'>
                                                             <label class='control-label' style="margin-top: 15px">ID Ticket</label>
@@ -132,34 +132,25 @@
                                                     <div class='form-row'>
                                                         <div class='col-xs-12 form-group card required'>
                                                             <label style="margin-top: 10px" class='control-label'>Custody</label>
-                                                            <input class='form-control card-expiry-month' id="custody" placeholder='CUSTODY'  type='text'>
+                                                            <input class='form-control ' id="custody" placeholder='CUSTODY'  type='text'>
                                                         </div>
                                                     </div>
                                                     <div class='form-row'>
                                                         <div class='col-xs-4 form-group cvc required'>
                                                             <label style="margin-top: 10px" class='control-label'>Start Time</label>
-                                                            <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+                                                            <input autocomplete='off' id="start_time" class='form-control'  type='datetime-local'>
                                                         </div>
                                                         <div class='col-xs-4 form-group expiration required'>
                                                             <label style="margin-top: 10px"  class='control-label'>End Time</label>
-                                                            <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                                                            <input class='form-control' id="end_time"  type='datetime-local' >
                                                         </div>
                                                     </div>
 
-                                                    <div class='form-row'>
-                                                        <div class='col-xs-12 form-group card required'>
-                                                            <label class="control-label"  for="declineType">Open Safe</label>
-
-                                                            <select id="declineType" name="declineType" class="form-control">
-                                                                <option value="Exponential">Exponential (Conventional)</option>
-                                                                <option value="Hyperbolic">Hyperbolic (Unconventional)</option>
-                                                            </select>
-                                                        </div><br>
-                                                    </div>
+                                                   
 
                                                     <div class='form-row'>
-                                                        <div class='col-xs-12 form-group card required' >
-                                                            <button id="submit" name="submit" class="btn btn-group">Submit</button>
+                                                        <div class='col-xs-12 form-group' >
+                                                            <input type="button" id="buttons" name="buttons" class="btn btn-group"  value="submit" />
                                                         </div>
                                                         <br>
                                                     </div>
@@ -168,7 +159,7 @@
                                             </div>
                                             <div class='col-md-4'></div>
                                         </div>
-                                    </div>
+                           
 
                                 </div>
 
@@ -181,27 +172,11 @@
             <!-- END PAGE CONTENT WRAPPER -->                                
         </div>            
         <!-- END PAGE CONTENT -->
-    </iframe>
+
     <!-- END PAGE CONTAINER -->
 
     <!-- MESSAGE BOX-->
-    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-        <div class="mb-container">
-            <div class="mb-middle">
-                <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-                <div class="mb-content">
-                    <p>Are you sure you want to log out?</p>                    
-                    <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-                </div>
-                <div class="mb-footer">
-                    <div class="pull-right">
-                        <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
-                        <button class="btn btn-default btn-lg mb-control-close">No</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
     <!-- END MESSAGE BOX-->
 
     <!-- START PRELOADS -->

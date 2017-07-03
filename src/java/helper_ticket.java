@@ -8,11 +8,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +92,6 @@ public class helper_ticket extends HttpServlet {
         PrintWriter out = response.getWriter();
         conn = new connection().getConn();
         String hasil = null;
-        Connection con;
         Statement stmt;
         String Kodeaut = "";
         ResultSet rs;
@@ -96,7 +100,8 @@ public class helper_ticket extends HttpServlet {
         String code = request.getParameter("code");
 
         try {
-            if (code == insert_ticket) {
+            if (code.equals(insert_ticket)) {
+                out.print(code);
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
                 String start_time = request.getParameter("start_time");
@@ -104,21 +109,26 @@ public class helper_ticket extends HttpServlet {
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
-                String query = "insert into tb_ticket(id_atm,id_masalah,start_time,end_time,nik,satwal,kartu_tertelan)values( ?,?,?,?,?,?,?)";
+
+                String query = "insert into tb_ticket(id_atm,id_masalah,start_time,end_time,nik,satwal,kartu_tertelan)values(?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, id_atm);
                 statement.setString(2, id_masalah);
                 statement.setString(3, start_time);
                 statement.setString(4, end_time);
-                statement.setString(5, kartu_tertelan);
+                statement.setString(5, nik);
+                statement.setString(6, satwal);
+                statement.setString(7, kartu_tertelan);
                 statement.executeUpdate();
                 hasil = "sukses";
-                out.print(hasil);
+           
             }
+
             conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        }
+        } 
+        out.print(hasil);
     }
 
     /**

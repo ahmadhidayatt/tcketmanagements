@@ -1,4 +1,4 @@
-$(document).ready(function () { 
+$(document).ready(function () {
     $("#dashboard").click(function () {
         $('#iframe').attr('src', 'pages-dashboard.html');
     });
@@ -14,7 +14,7 @@ $(document).ready(function () {
     $(".profile").click(function () {
         $('#iframe').attr('src', 'pages-profile.html');
     });
-    
+
     $.get("index", function (data, status) {
         var result = $.trim(data);
         if (result === "true") {
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var code = getURLParameter(url, 'code');
-   
+
     console.log(code);
 
     $("#logout").click(function () {
@@ -48,9 +48,9 @@ $(document).ready(function () {
 
 
     $.post("retrieve_ticket", function (data) {
-          console.log(data);
-      //  var response = jQuery.parseJSON(data);
-      
+        console.log(data);
+        //  var response = jQuery.parseJSON(data);
+
         $("#myTable").dataTable({
             "processing": true,
             "data": JSON.parse(data),
@@ -73,24 +73,33 @@ $(document).ready(function () {
                 }, {
                     "data": "end_time"
                 }
-  
+
             ]
         });
+        var detailRows = [];
+        var dt = $("#myTable").DataTable();
+        $('#myTable tbody').on('click', 'tr ', function () {
+          console.log( dt.row( this ).data() );
+                  alert( 'You clicked on '+data.nama_lokasi+'\'s row' );
+        });
+
+        // On each draw, loop over the `detailRows` array and show any child rows
+        
     });
-     if(code !== null){
-        if(code ==="admin"){
-           return;
-        }
-        else if(code === "client"){
+
+
+    if (code !== null) {
+        if (code === "admin") {
+            return;
+        } else if (code === "client") {
             document.getElementById("open_ticket").style.display = "none";
-            return ;
-        }
-        else{
-             alert("tidak ada jabatan harap login dahulu");
-              window.location.href = "pages-login.html";
+            return;
+        } else {
+            alert("tidak ada jabatan harap login dahulu");
+            window.location.href = "pages-login.html";
         }
     }
-   
+
 
 });
 

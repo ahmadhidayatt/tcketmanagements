@@ -13,7 +13,7 @@ $(document).ready(function () {
             function (returnedData) {
                 var obj = JSON.parse(returnedData);
                 data_atm = JSON.parse(returnedData);
-                console.log(returnedData);
+                console.log(data_atm);
                 jQuery.each(obj, function (i, val) {
                     console.log(obj[i]["id_atm"]);
                     $('<option>').val(obj[i]["id_atm"]).text(obj[i]["id_atm"]).appendTo('#select_atm');
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 console.log(returnedData);
                 jQuery.each(obj, function (i, val) {
                     console.log(obj[i]["id_masalah"]);
-                    $('<option>').val(obj[i]["id_masalah"]).text(obj[i]["id_masalah"]).appendTo('#select_masalah');
+                    $('<option>').val(obj[i]["id_masalah"]).text(obj[i]["nama_masalah"]).appendTo('#select_masalah');
                 });
                 ;
 
@@ -60,7 +60,7 @@ $(document).ready(function () {
 
         });
     });
-   
+
 
     $('#nik').autocomplete({
 
@@ -88,26 +88,29 @@ $(document).ready(function () {
         });
 //   $('#custody').val(this.value);
     }).change();
-     
+
 });
 $("#buttons").click(function () {
-    var idatm=document.getElementById("select_atm").value;
-    var idmasalah=document.getElementById("select_masalah").value;
-    var starttime=document.getElementById("start_time").value;
-    var endtime=document.getElementById("end_time").value;
-    var niks=document.getElementById("nik").value;
-    
-        $.post('helper_ticket', {code: "1", id_atm : idatm,
-                 id_masalah :idmasalah,
-                 start_time :starttime,
-                 end_time :endtime,
-                 nik :niks,
-                 satwal :"0",
-                 kartu_tertelan :""},
-                function (returnedData) {
-                   console.log(returnedData);
-                }).fail(function () {
-            console.log("error");
-        });
+    var idatm = document.getElementById("select_atm").value;
+    var idmasalah = document.getElementById("select_masalah").value;
+    var atm_name = document.getElementById("input_atm_name").value;
+    var atm_klien = document.getElementById("input_atm_loct").value;
+    var custody = document.getElementById("custody").value;
+
+    var niks = document.getElementById("nik").value;
+    console.log(idatm + " " + idmasalah + " " + atm_name + " " + atm_klien + " " + custody + " " + niks + " ");
+    $.post('helper_ticket', {code: "1", id_atm: idatm,
+        id_masalah: idmasalah,
+        atm_name: atm_name,
+        atm_klien: atm_klien,
+        custody: custody,
+        nik: niks,
+        satwal: "0",
+        kartu_tertelan: ""},
+            function (returnedData) {
+                console.log(returnedData);
+            }).fail(function () {
+        console.log("error");
     });
+});
 

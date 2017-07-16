@@ -70,8 +70,6 @@ $(document).ready(function () {
                     "data": "start_time"
                 }, {
                     "data": "end_time"
-                }, {
-                    "data": "deskripsi"
                 }
 
             ]

@@ -104,18 +104,19 @@ public class helper_ticket extends HttpServlet {
                 out.print(code);
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
-                String start_time = request.getParameter("start_time");
-                String end_time = request.getParameter("end_time");
+                String atm_name = request.getParameter("atm_name");
+                String atm_klien = request.getParameter("atm_klien");
+                 String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
 
-                String query = "insert into tb_ticket(id_atm,id_masalah,start_time,end_time,nik,satwal,kartu_tertelan)values(?,?,?,?,?,?,?)";
+                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan)values(?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, id_atm);
                 statement.setString(2, id_masalah);
-                statement.setString(3, start_time);
-                statement.setString(4, end_time);
+                statement.setString(3, "open");
+                statement.setString(4, custody);
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);

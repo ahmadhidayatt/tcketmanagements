@@ -63,15 +63,15 @@ $(document).ready(function () {
                 }, {
                     "data": "id_atm"
                 }, {
-                    "data": "nama_lokasi"
+                    "data": "nama_atm"
                 }, {
                     "data": "nama_masalah"
-                }, {
-                    "data": "deskripsi"
                 }, {
                     "data": "start_time"
                 }, {
                     "data": "end_time"
+                }, {
+                    "data": "deskripsi"
                 }
 
             ]

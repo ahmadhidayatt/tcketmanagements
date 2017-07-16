@@ -146,29 +146,28 @@ public class retrieve_ticket extends HttpServlet {
             JSONArray jArray = new JSONArray();
             while (rs.next()) {
 
-                String id_pegawai = rs.getString("id_pegawai");
+                String id_ticket = rs.getString("id_ticket");
                 String nik = rs.getString("nik");
                 String nama = rs.getString("nama");
-                String id_atm = rs.getString("nama_atm");
-                String nama_lokasi = rs.getString("nama_lokasi");
-                String id_masalah = rs.getString("id_masalah");
+                String id_atm = rs.getString("id_atm");
+                String nama_atm = rs.getString("nama_atm");
+
                 String nama_masalah = rs.getString("nama_masalah");
                 String deskripsi = rs.getString("deskripsi");
-                String id_ticket = rs.getString("id_ticket");
+
                 String start_time = rs.getString("start_time");
                 String end_time = rs.getString("end_time");
 
                 JSONObject arrayObj = new JSONObject();
 
-                arrayObj.put("id_pegawai", id_pegawai);
+                arrayObj.put("id_ticket", id_ticket);
                 arrayObj.put("nik", nik);
                 arrayObj.put("nama", nama);
                 arrayObj.put("id_atm", id_atm);
-                arrayObj.put("nama_lokasi", nama_lokasi);
-                arrayObj.put("id_masalah", id_masalah);
+                arrayObj.put("nama_atm", nama_atm);
                 arrayObj.put("nama_masalah", nama_masalah);
                 arrayObj.put("deskripsi", deskripsi);
-                arrayObj.put("id_ticket", id_ticket);
+
                 arrayObj.put("start_time", start_time);
                 arrayObj.put("end_time", end_time);
 
@@ -183,8 +182,8 @@ public class retrieve_ticket extends HttpServlet {
 
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } 
-        
+        }
+
     }
 
     /**

@@ -4,12 +4,10 @@ $(document).ready(function () {
         var username = $("#username").val();
         var password = $("#password").val();
 
-        $.post("login",
-                {
+        $.post("login",{
                     username: username,
                     password: password
-                },
-                function (data, status) {
+                },function (data, status) {
                     alert("Data: " + data.length + data  + "\nStatus: " + status);
                   var result = $.trim(data);
                     //belom bener if nya

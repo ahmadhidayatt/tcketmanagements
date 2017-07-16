@@ -104,20 +104,20 @@ public class helper_atm extends HttpServlet {
                 while (rs.next()) {
 
                     String id_atm = rs.getString("id_atm");
-                    String nama_lokasi = rs.getString("nama_lokasi");
+                    String atm_klien = rs.getString("atm_klien");
                     String nama_atm = rs.getString("nama_atm");
-                    String status = rs.getString("status");
+                    
                     String kordinator = rs.getString("kordinator");
-                    String p_terakhir = rs.getString("p_terakhir");
+             
 
                     JSONObject arrayObj = new JSONObject();
 
                     arrayObj.put("id_atm", id_atm);
-                    arrayObj.put("nama_lokasi", nama_lokasi);
+                    arrayObj.put("atm_klien", atm_klien);
                     arrayObj.put("nama_atm", nama_atm);
-                    arrayObj.put("status", status);
+                
                     arrayObj.put("kordinator", kordinator);
-                    arrayObj.put("p_terakhir", p_terakhir);
+                 
 
                     jArray.add(i, arrayObj);
                     i++;

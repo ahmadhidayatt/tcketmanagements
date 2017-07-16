@@ -80,7 +80,7 @@ $(document).ready(function () {
         var dt = $("#myTable").DataTable();
         $('#myTable tbody').on('click', 'tr ', function () {
           console.log( dt.row( this ).data() );
-                  alert( 'You clicked on '+data.nama_lokasi+'\'s row' );
+                  alert( 'You clicked on '+dt.row( this ).data().nama_atm+'\'s row' );
         });
 
         // On each draw, loop over the `detailRows` array and show any child rows

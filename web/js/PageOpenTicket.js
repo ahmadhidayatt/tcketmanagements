@@ -54,8 +54,8 @@ $(document).ready(function () {
             if (data_atm[i]["id_atm"] === id_atm) {
                 //nih disini 
                 $("#input_atm_name").val(data_atm[i]["nama_atm"]);
-                $("#input_atm_loct").val(data_atm[i]["nama_lokasi"]);
-                console.log(data_atm[i]["nama_lokasi"] + " " + data_atm[i]["p_terakhir"] + " " + data_atm[i]["nama_atm"] + " " + data_atm[i]["kordinator"]);
+                $("#input_atm_loct").val(data_atm[i]["atm_klien"]);
+                console.log(data_atm[i]["atm_klien"] + " " + data_atm[i]["atm_klien"] + " " + data_atm[i]["nama_atm"] + " " + data_atm[i]["kordinator"]);
             }
 
         });

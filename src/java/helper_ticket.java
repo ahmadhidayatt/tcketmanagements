@@ -162,7 +162,7 @@ public class helper_ticket extends HttpServlet {
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
                         + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = "+id_tickets;
-                out.print(code);
+          
                 stmt = conn.createStatement( );
                 rs = stmt.executeQuery(query);
                 int i = 0;
@@ -214,7 +214,7 @@ public class helper_ticket extends HttpServlet {
 //                statement.setString(7, custody);
 //                 statement.setString(7, id_ticket);
                 
-                hasil = "sukses";
+                hasil = jArray.toString();
 
             }
 

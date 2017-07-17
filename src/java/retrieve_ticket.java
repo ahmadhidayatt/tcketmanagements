@@ -77,29 +77,38 @@ public class retrieve_ticket extends HttpServlet {
         CallableStatement st;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ticket_management", "root", "indonesia");
-            PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai ");
-            rs = pst.executeQuery();
+           conn = new connection().getConn();
+            String query = "{call retrieve_ticket()}";
+            st = conn.prepareCall(query);
+            rs = st.executeQuery();
             int i = 0;
             JSONArray jArray = new JSONArray();
             while (rs.next()) {
 
-                String code = rs.getString("id_pegawai");
-                String transname = rs.getString("nik");
-                String cusname = rs.getString("nama");
-                String date = rs.getString("password");
-                String addres = rs.getString("jabatan");
-                String id = rs.getString("tanggal");
+                String id_ticket = rs.getString("id_ticket");
+                String nik = rs.getString("nik");
+                String nama = rs.getString("nama");
+                String id_atm = rs.getString("id_atm");
+                String nama_atm = rs.getString("nama_atm");
+
+                String nama_masalah = rs.getString("nama_masalah");
+                String deskripsi = rs.getString("deskripsi");
+
+                String start_time = rs.getString("start_time");
+                String end_time = rs.getString("end_time");
 
                 JSONObject arrayObj = new JSONObject();
 
-                arrayObj.put("code", code);
-                arrayObj.put("transname", transname);
-                arrayObj.put("cusname", cusname);
-                arrayObj.put("date", date);
-                arrayObj.put("addres", addres);
-                arrayObj.put("id", id);
+                arrayObj.put("id_ticket", id_ticket);
+                arrayObj.put("nik", nik);
+                arrayObj.put("nama", nama);
+                arrayObj.put("id_atm", id_atm);
+                arrayObj.put("nama_atm", nama_atm);
+                arrayObj.put("nama_masalah", nama_masalah);
+                arrayObj.put("deskripsi", deskripsi);
+
+                arrayObj.put("start_time", start_time);
+                arrayObj.put("end_time", end_time);
 
                 jArray.add(i, arrayObj);
                 i++;
@@ -108,11 +117,9 @@ public class retrieve_ticket extends HttpServlet {
 
             hasil = jArray.toString();
             out.print(hasil);
-
+            conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } catch (ClassNotFoundException cx) {
-            hasil = cx.toString();
         }
     }
 

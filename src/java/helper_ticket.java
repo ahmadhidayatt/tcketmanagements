@@ -124,6 +124,37 @@ public class helper_ticket extends HttpServlet {
                 hasil = "sukses";
            
             }
+            else if (code.equals(update_ticket)) {
+                out.print(code);
+                String id_ticket = request.getParameter("id_ticket");
+                String id_atm = request.getParameter("id_atm");
+                String id_masalah = request.getParameter("id_masalah");
+                String start_time = request.getParameter("start_time");
+                String end_time = request.getParameter("end_time");
+                 String custody = request.getParameter("custody");
+                String nik = request.getParameter("nik");
+                String satwal = request.getParameter("satwal");
+                String kartu_tertelan = request.getParameter("kartu_tertelan");
+                 String deskripsi = request.getParameter("deskripsi");
+                String status = request.getParameter("status");
+
+                String query = "update tb_ticket set id_atm=?,id_masalah=?,start_time=?,end_time=?,nik=?,satwal=?,kartu_tertelan=?,deskripsi=?,status=?,custody=? where id_ticket =?";
+                PreparedStatement statement = conn.prepareStatement(query);
+                statement.setString(1, id_atm);
+                statement.setString(2, id_masalah);
+                statement.setString(3, start_time);
+                statement.setString(4, end_time);
+                statement.setString(5, nik);
+                statement.setString(6, satwal);
+                statement.setString(7, kartu_tertelan);
+                 statement.setString(5, deskripsi);
+                statement.setString(6, status);
+                statement.setString(7, custody);
+                 statement.setString(7, id_ticket);
+                statement.executeUpdate();
+                hasil = "sukses";
+           
+            }
 
             conn.close();
         } catch (SQLException sx) {

@@ -12,12 +12,14 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="js/index.js">
         </script>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="js/page_dashboard.js">
+        </script>
+  
 
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <link rel="stylesheet" href="js/plugins/codemirror/mode/tiddlywiki/tiddlywiki.css" type="text/css">
-
+      
         <!-- EOF CSS INCLUDE -->                                    
     </head>
     <body>
@@ -45,7 +47,7 @@
                                 </li>                                        
                             </ul>                                    
                         </div>   
-                        <div class="panel-body padding-0">
+                        <div class="panel-body padding-0" id="table">
                             <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
                                 <div class="table-responsive" style="margin-left: 8px; margin-top: 10px">
                                     <table id="myTable" class="table table-striped display table" width="100%" >
@@ -60,7 +62,7 @@
                                                 <th>Masalah</th>  
                                                 <th>Start Time</th>  
                                                 <th>End Time</th> 
-                                                
+
                                             </tr>  
                                         </thead>  
                                         <tbody>
@@ -74,19 +76,33 @@
                             </div>                        
                             <!-- END WIDGET CLOCK -->
                         </div>
+                        
+                        <div style="margin-top: 10px;"  id="infotiket" class=" panel-info">
+                            <div style="margin-top: 10px" class="panel-heading">
+
+                                <h3 class="panel-title">Nomer Tiket</h3>
+                                <span class="pull-right">
+                                    <a id="reopen" name="reopen" type="button" class="btn btn-sm btn-warning">Re-Open <i class="glyphicon glyphicon-edit"></i></a>
+                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
+                                </span>
+                            </div>
+                            <div >
+                                <div class="row">
+                                    <div class=" col-md-12 col-lg-10 "> 
+                                        <table class="table table-user-information">
+                                           
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
                     </div>      
                 </div>
             </div>
-        </div>
-        <!-- END MESSAGE BOX-->
-
-        <!-- START PRELOADS -->
-        <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->                  
-
-        <!-- START SCRIPTS -->
-        <!-- START PLUGINS -->
+    
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -102,48 +118,10 @@
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-
-
-
-
-
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
-        <!-- END PLUGINS -->
-
-        <!-- START THIS PAGE PLUGINS-->        
-        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        
-        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-        <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
-
-        <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
-        <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>       
-        <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
-        <script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script>
-        <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-        <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>                
-        <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                
-        <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>                 
-
-        <script type="text/javascript" src="js/plugins/moment.min.js"></script>
-        <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- END THIS PAGE PLUGINS-->        
-
-        <!-- START TEMPLATE -->
-
-
-        <script type="text/javascript" src="js/plugins.js"></script>        
-
-        <script type="text/javascript" src="js/demo_dashboard.js"></script>
+  
 
 
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS -->         
     </body>
 </html>
-
-
-
-
-
-

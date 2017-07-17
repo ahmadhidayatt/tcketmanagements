@@ -6,7 +6,7 @@
 
 
 
-$(document).ready(function () {
+    $(document).ready(function () {
     var data_atm;
     var data_peg;
     $.post('helper_atm', {code: "0"},

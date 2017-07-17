@@ -33,6 +33,7 @@ public class helper_ticket extends HttpServlet {
 
     public final String insert_ticket = "1";
     public final String update_ticket = "2";
+    public final String retrieve_id = "3";
     private Connection conn;
 
     /**
@@ -95,7 +96,7 @@ public class helper_ticket extends HttpServlet {
         Statement stmt;
         String Kodeaut = "";
         ResultSet rs;
-        CallableStatement st;
+        Statement st;
 
         String code = request.getParameter("code");
 
@@ -106,7 +107,7 @@ public class helper_ticket extends HttpServlet {
                 String id_masalah = request.getParameter("id_masalah");
                 String atm_name = request.getParameter("atm_name");
                 String atm_klien = request.getParameter("atm_klien");
-                 String custody = request.getParameter("custody");
+                String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
@@ -122,20 +123,20 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(7, kartu_tertelan);
                 statement.executeUpdate();
                 hasil = "sukses";
-           
-            }
-            else if (code.equals(update_ticket)) {
+
+            } else if (code.equals(update_ticket)) {
                 out.print(code);
+
                 String id_ticket = request.getParameter("id_ticket");
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
                 String start_time = request.getParameter("start_time");
                 String end_time = request.getParameter("end_time");
-                 String custody = request.getParameter("custody");
+                String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
-                 String deskripsi = request.getParameter("deskripsi");
+                String deskripsi = request.getParameter("deskripsi");
                 String status = request.getParameter("status");
 
                 String query = "update tb_ticket set id_atm=?,id_masalah=?,start_time=?,end_time=?,nik=?,satwal=?,kartu_tertelan=?,deskripsi=?,status=?,custody=? where id_ticket =?";
@@ -147,19 +148,77 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);
-                 statement.setString(5, deskripsi);
+                statement.setString(5, deskripsi);
                 statement.setString(6, status);
                 statement.setString(7, custody);
-                 statement.setString(7, id_ticket);
+                statement.setString(7, id_ticket);
                 statement.executeUpdate();
                 hasil = "sukses";
-           
+
+            } else if (code.equals(retrieve_id)) {
+                String id_tickets = request.getParameter("id_ticket");
+                String query = "SELECT d.id_ticket ,a.nik,a.nama, b.id_atm,b.nama_atm,c.nama_masalah,c.deskripsi,d.start_time,d.end_time\n"
+                        + "FROM tb_ticket d\n"
+                        + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
+                        + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = ?";
+                out.print(code);
+                PreparedStatement statement = conn.prepareStatement(query);
+                statement.setString(1, id_tickets);
+                rs = statement.executeQuery();
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+
+                    String id_ticket = rs.getString("id_ticket");
+                    String nik = rs.getString("nik");
+                    String nama = rs.getString("nama");
+                    String id_atm = rs.getString("id_atm");
+                    String nama_atm = rs.getString("nama_atm");
+
+                    String nama_masalah = rs.getString("nama_masalah");
+                    String deskripsi = rs.getString("deskripsi");
+
+                    String start_time = rs.getString("start_time");
+                    String end_time = rs.getString("end_time");
+
+                    JSONObject arrayObj = new JSONObject();
+
+                    arrayObj.put("id_ticket", id_ticket);
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("nama", nama);
+                    arrayObj.put("id_atm", id_atm);
+                    arrayObj.put("nama_atm", nama_atm);
+                    arrayObj.put("nama_masalah", nama_masalah);
+                    arrayObj.put("deskripsi", deskripsi);
+
+                    arrayObj.put("start_time", start_time);
+                    arrayObj.put("end_time", end_time);
+
+                    jArray.add(i, arrayObj);
+                    i++;
+                }
+
+//                statement.setString(1, id_atm);
+//                statement.setString(2, id_masalah);
+//                statement.setString(3, start_time);
+//                statement.setString(4, end_time);
+//                statement.setString(5, nik);
+//                statement.setString(6, satwal);
+//                statement.setString(7, kartu_tertelan);
+//                 statement.setString(5, deskripsi);
+//                statement.setString(6, status);
+//                statement.setString(7, custody);
+//                 statement.setString(7, id_ticket);
+                statement.executeUpdate();
+                hasil = "sukses";
+
             }
 
             conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } 
+        }
         out.print(hasil);
     }
 

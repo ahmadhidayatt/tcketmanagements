@@ -157,7 +157,7 @@ public class helper_ticket extends HttpServlet {
 
             } else if (code.equals(retrieve_id)) {
                 String id_tickets = request.getParameter("id_ticket");
-                String query = "SELECT d.id_ticket ,a.nik,a.nama, b.id_atm,b.nama_atm,c.nama_masalah,c.deskripsi,d.start_time,d.end_time\n"
+                String query = "SELECT d.id_ticket,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
@@ -171,29 +171,33 @@ public class helper_ticket extends HttpServlet {
                 while (rs.next()) {
 
                     String id_ticket = rs.getString("id_ticket");
-                    String nik = rs.getString("nik");
-                    String nama = rs.getString("nama");
-                    String id_atm = rs.getString("id_atm");
                     String nama_atm = rs.getString("nama_atm");
-
                     String nama_masalah = rs.getString("nama_masalah");
-                    String deskripsi = rs.getString("deskripsi");
-
                     String start_time = rs.getString("start_time");
                     String end_time = rs.getString("end_time");
+
+                    String nik = rs.getString("nik");
+                    String satwal = rs.getString("satwal");
+
+                    String kartu_tertelan = rs.getString("kartu_tertelan");
+                    String deskripsi = rs.getString("deskripsi");
+                    String status = rs.getString("status");
+                    String custody = rs.getString("custody");
 
                     JSONObject arrayObj = new JSONObject();
 
                     arrayObj.put("id_ticket", id_ticket);
-                    arrayObj.put("nik", nik);
-                    arrayObj.put("nama", nama);
-                    arrayObj.put("id_atm", id_atm);
                     arrayObj.put("nama_atm", nama_atm);
                     arrayObj.put("nama_masalah", nama_masalah);
-                    arrayObj.put("deskripsi", deskripsi);
-
                     arrayObj.put("start_time", start_time);
                     arrayObj.put("end_time", end_time);
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("satwal", satwal);
+
+                    arrayObj.put("kartu_tertelan", kartu_tertelan);
+                    arrayObj.put("deskripsi", deskripsi);
+                    arrayObj.put("status", status);
+                    arrayObj.put("custody", custody);
 
                     jArray.add(i, arrayObj);
                     i++;

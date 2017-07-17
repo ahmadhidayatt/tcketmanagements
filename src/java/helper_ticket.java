@@ -161,11 +161,10 @@ public class helper_ticket extends HttpServlet {
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = ?";
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = "+id_tickets;
                 out.print(code);
-                PreparedStatement statement = conn.prepareStatement(query);
-                statement.setString(1, id_tickets);
-                rs = statement.executeQuery();
+                stmt = conn.createStatement( );
+                rs = stmt.executeQuery(query);
                 int i = 0;
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
@@ -214,7 +213,7 @@ public class helper_ticket extends HttpServlet {
 //                statement.setString(6, status);
 //                statement.setString(7, custody);
 //                 statement.setString(7, id_ticket);
-                statement.executeUpdate();
+                
                 hasil = "sukses";
 
             }

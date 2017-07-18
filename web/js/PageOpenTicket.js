@@ -16,7 +16,7 @@
                 console.log(data_atm);
                 jQuery.each(obj, function (i, val) {
                     console.log(obj[i]["id_atm"]);
-                    $('<option>').val(obj[i]["id_atm"]).text(obj[i]["id_atm"]).appendTo('#select_atm');
+                    $('<option>').val(obj[i]["id_atm"]).text(obj[i]["id_atm"]).data-subtext(obj[i]["nama_atm"]).appendTo('#select_atm');
                 });
                 ;
 
@@ -55,7 +55,7 @@
                 //nih disini 
                 $("#input_atm_name").val(data_atm[i]["nama_atm"]);
                 $("#input_atm_loct").val(data_atm[i]["atm_klien"]);
-                console.log(data_atm[i]["atm_klien"] + " " + data_atm[i]["atm_klien"] + " " + data_atm[i]["nama_atm"] + " " + data_atm[i]["kordinator"]);
+                console.log(data_atm[i]["atm_klien"] + " " + data_atm[i]["atm_klien"] + " " + data_atm[i]["nama_atm"] + " " + data_atm[i]["atm_klien"]);
             }
 
         });
@@ -70,6 +70,18 @@
                 return {
                     label: value.nik,
                     value: value.nik
+                }
+            }));
+
+        }
+    });
+    $('#select_atm').autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+            response($.map(data_atm, function (value, key) {
+                return {
+                    label: value.id_atm,
+                    value: value.id_atm
                 }
             }));
 

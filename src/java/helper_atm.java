@@ -107,7 +107,7 @@ public class helper_atm extends HttpServlet {
                     String atm_klien = rs.getString("atm_klien");
                     String nama_atm = rs.getString("nama_atm");
                     
-                    String kordinator = rs.getString("kordinator");
+                    String mesin = rs.getString("mesin");
              
 
                     JSONObject arrayObj = new JSONObject();
@@ -116,7 +116,7 @@ public class helper_atm extends HttpServlet {
                     arrayObj.put("atm_klien", atm_klien);
                     arrayObj.put("nama_atm", nama_atm);
                 
-                    arrayObj.put("kordinator", kordinator);
+                    arrayObj.put("mesin", mesin);
                  
 
                     jArray.add(i, arrayObj);

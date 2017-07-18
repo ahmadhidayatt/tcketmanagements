@@ -202,17 +202,6 @@ public class helper_ticket extends HttpServlet {
                     i++;
                 }
 
-//                statement.setString(1, id_atm);
-//                statement.setString(2, id_masalah);
-//                statement.setString(3, start_time);
-//                statement.setString(4, end_time);
-//                statement.setString(5, nik);
-//                statement.setString(6, satwal);
-//                statement.setString(7, kartu_tertelan);
-//                 statement.setString(5, deskripsi);
-//                statement.setString(6, status);
-//                statement.setString(7, custody);
-//                 statement.setString(7, id_ticket);
                 
                 hasil = jArray.toString();
 

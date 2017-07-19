@@ -34,6 +34,7 @@ public class helper_ticket extends HttpServlet {
     public final String insert_ticket = "1";
     public final String update_ticket = "2";
     public final String retrieve_id = "3";
+     public final String retrieve_status = "4";
     private Connection conn;
 
     /**
@@ -162,6 +163,57 @@ public class helper_ticket extends HttpServlet {
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
                         + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = "+id_tickets;
+          
+                stmt = conn.createStatement( );
+                rs = stmt.executeQuery(query);
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+
+                    String id_ticket = rs.getString("id_ticket");
+                    String nama_atm = rs.getString("nama_atm");
+                    String nama_masalah = rs.getString("nama_masalah");
+                    String start_time = rs.getString("start_time");
+                    String end_time = rs.getString("end_time");
+
+                    String nik = rs.getString("nik");
+                    String satwal = rs.getString("satwal");
+
+                    String kartu_tertelan = rs.getString("kartu_tertelan");
+                    String deskripsi = rs.getString("deskripsi");
+                    String status = rs.getString("status");
+                    String custody = rs.getString("custody");
+
+                    JSONObject arrayObj = new JSONObject();
+
+                    arrayObj.put("id_ticket", id_ticket);
+                    arrayObj.put("nama_atm", nama_atm);
+                    arrayObj.put("nama_masalah", nama_masalah);
+                    arrayObj.put("start_time", start_time);
+                    arrayObj.put("end_time", end_time);
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("satwal", satwal);
+
+                    arrayObj.put("kartu_tertelan", kartu_tertelan);
+                    arrayObj.put("deskripsi", deskripsi);
+                    arrayObj.put("status", status);
+                    arrayObj.put("custody", custody);
+
+                    jArray.add(i, arrayObj);
+                    i++;
+                }
+
+                
+                hasil = jArray.toString();
+
+            }
+             else if (code.equals(retrieve_status)) {
+                String statuss = request.getParameter("statuss");
+                String query = "SELECT d.id_ticket,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
+                        + "FROM tb_ticket d\n"
+                        + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
+                        + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.status = '"+statuss+"'";
           
                 stmt = conn.createStatement( );
                 rs = stmt.executeQuery(query);

@@ -88,7 +88,7 @@ public class retrieve_ticket extends HttpServlet {
                 String id_ticket = rs.getString("id_ticket");
                 String nik = rs.getString("nik");
                 String nama = rs.getString("nama");
-                String id_atm = rs.getString("id_atm");
+                String id_atm = rs.getString("mesin");
                 String nama_atm = rs.getString("nama_atm");
 
                 String nama_masalah = rs.getString("nama_masalah");
@@ -156,7 +156,7 @@ public class retrieve_ticket extends HttpServlet {
                 String id_ticket = rs.getString("id_ticket");
                 String nik = rs.getString("nik");
                 String nama = rs.getString("nama");
-                String id_atm = rs.getString("id_atm");
+                String id_atm = rs.getString("mesin");
                 String nama_atm = rs.getString("nama_atm");
 
                 String nama_masalah = rs.getString("nama_masalah");

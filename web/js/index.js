@@ -17,6 +17,9 @@ $(document).ready(function () {
     $(".profile").click(function () {
         $('#iframe').attr('src', 'pages-profile.html');
     });
+    $("#pending_ticket").click(function () {
+        $('#iframe').attr('src', 'page-pendingticket-form.html');
+    });
 
     $.get("index", function (data, status) {
         var result = $.trim(data);

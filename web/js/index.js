@@ -18,6 +18,9 @@ $(document).ready(function () {
     $(".profile").click(function () {
         $('#iframe').attr('src', 'pages-profile.html');
     });
+    $("#pending").click(function () {
+        $('#iframe').attr('src', 'pages-panding.html');
+    });
 
     $.get("index", function (data, status) {
         var result = $.trim(data);

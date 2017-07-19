@@ -20,7 +20,7 @@ public class connection {
     public connection() {
         String URL = "jdbc:mysql://localhost:3306/ticket_management";
         String USER = "root";
-        String PASSWD = "";
+        String PASSWD = "indonesia";
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();

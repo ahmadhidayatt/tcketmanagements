@@ -86,7 +86,7 @@ public class login extends HttpServlet {
         String pass = request.getParameter("password");
         conn = new connection().getConn();
         try {
-          PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nama=? and password=?");
+          PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nik=? and password=?");
             pst.setString(1, user);
             pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();

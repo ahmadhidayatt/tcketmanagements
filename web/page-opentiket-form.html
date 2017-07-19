@@ -12,7 +12,7 @@
 
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-        <link rel="stylesheet" href="js/plugins/codemirror/mode/tiddlywiki/tiddlywiki.css" type="text/css">
+
 
         <!-- EOF CSS INCLUDE -->   
         <style>
@@ -92,8 +92,8 @@
                                                 <div class='form-row'>
                                                     <div class='col-xs-12 form-group card required'>
                                                         <label class='control-label' style="margin-top: 10px">ID ATM</label>
-                                                         <input autocomplete='on'  name="select_atm" id="select_atm" class='form-control card-number' size='20' type='text'>
-                                                        
+                                                        <input autocomplete='on'  name="select_atm" id="select_atm" class='form-control card-number' size='20' type='text'>
+
                                                     </div>
                                                 </div>
                                                 <div class='form-row'>
@@ -115,11 +115,11 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class='form-row'>
                                                     <div class='col-xs-12 form-group card required'>
                                                         <label class='control-label' style="margin-top: 10px">Nik</label>
-                                                        <input autocomplete='on' id="nik" class='form-control card-number' size='20' type='text'>
+                                                        <input autocomplete='on' id="nik" class='form-control ' size='20' type='text'>
                                                     </div>
                                                 </div>
 
@@ -131,7 +131,7 @@
                                                 </div>
                                                 <div class='col-xs-12 form-group card required'></div>
                                                 <div class='form-row'>
-                                                   
+
                                                 </div>
 
 
@@ -158,11 +158,19 @@
             </div>
             <!-- END PAGE CONTENT WRAPPER -->                                
         </div>            
-   
+
+       
+     
+        <style>
+            .ui-autocomplete-loading {
+                background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+            }
+        </style>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <script type="text/javascript" src="js/PageOpenTicket.js"></script>
-     
+
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS -->         
     </body>

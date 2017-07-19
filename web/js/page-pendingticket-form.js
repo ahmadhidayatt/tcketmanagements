@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-
- $.post("helper_ticket",{code : "4",status:"reopen"} ,function (data) {
+$(document).ready(function () {
+    $.post("helper_ticket", {code: "4", statuss: "reopen"}, function (data) {
         console.log(data);
         //  var response = jQuery.parseJSON(data);
 
-        $("#myTable").dataTable({
+        $("#myTable2").dataTable({
             "processing": true,
             "data": JSON.parse(data),
             "columns": [{
@@ -34,7 +34,7 @@
         });
         var detailRows = [];
         var dt = $("#myTable").DataTable();
-        $('#myTable tbody').on('click', 'tr ', function () {
+        $('#myTable2 tbody').on('click', 'tr ', function () {
             console.log(dt.row(this).data());
             alert('You clicked on ' + dt.row(this).data().nama_atm + '\'s row');
             detailRows = dt.row(this).data().id_ticket;
@@ -44,16 +44,17 @@
 
             var tr = data;
             alert(tr);
-           
-                var tr = $('<tr/>');
 
-                // Indexing into data.report for each td element
-                $(tr).append("<td> Custody: " + dt.row(this).data().nama_atm + "</td>");
-                $(tr).append("<td> " + dt.row(this).data().nama_atm + "</td>");
-                $('.table-user-information').append(tr);
-            
+            var tr = $('<tr/>');
+
+            // Indexing into data.report for each td element
+            $(tr).append("<td> Custody: " + dt.row(this).data().nama_atm + "</td>");
+            $(tr).append("<td> " + dt.row(this).data().nama_atm + "</td>");
+            $('.table-user-information').append(tr);
+
         });
 
         // On each draw, loop over the `detailRows` array and show any child rows
 
     });
+});

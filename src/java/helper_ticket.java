@@ -208,12 +208,12 @@ public class helper_ticket extends HttpServlet {
 
             }
              else if (code.equals(retrieve_status)) {
-                String statuss = request.getParameter("status");
+                String statuss = request.getParameter("statuss");
                 String query = "SELECT d.id_ticket,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.status = "+statuss;
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.status = '"+statuss+"'";
           
                 stmt = conn.createStatement( );
                 rs = stmt.executeQuery(query);

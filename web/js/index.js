@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     $('#infotiket').hide();
+     $('#iforeepen').hide();
 
     $("#dashboard").click(function () {
         $('#iframe').attr('src', 'pages-dashboard.html');
@@ -48,60 +49,58 @@ $(document).ready(function () {
             ;
         });
     });
-
-
-    $.post("retrieve_ticket", function (data) {
-        console.log(data);
-        //  var response = jQuery.parseJSON(data);
-
-        $("#myTable").dataTable({
-            "processing": true,
-            "data": JSON.parse(data),
-            "columns": [{
-                    "data": "id_ticket"
-                }, {
-                    "data": "nik"
-                }, {
-                    "data": "nama"
-                }, {
-                    "data": "id_atm"
-                }, {
-                    "data": "nama_atm"
-                }, {
-                    "data": "nama_masalah"
-                }, {
-                    "data": "start_time"
-                }, {
-                    "data": "end_time"
-                }
-
-            ]
-        });
-        var detailRows = [];
-        var dt = $("#myTable").DataTable();
-        $('#myTable tbody').on('click', 'tr ', function () {
-            console.log(dt.row(this).data());
-            alert('You clicked on ' + dt.row(this).data().nama_atm + '\'s row');
-            detailRows = dt.row(this).data().id_ticket;
-            alert(detailRows.toString());
-            $('#table').hide();
-            $('#infotiket').show();
-
-            var tr = data;
-            alert(tr);
-           
-                var tr = $('<tr/>');
-
-                // Indexing into data.report for each td element
-                $(tr).append("<td> Custody: " + dt.row(this).data().nama_atm + "</td>");
-                $(tr).append("<td> " + dt.row(this).data().nama_atm + "</td>");
-                $('.table-user-information').append(tr);
-            
-        });
-
-        // On each draw, loop over the `detailRows` array and show any child rows
-
-    });
+//    $.post("retrieve_ticket", function (data) {
+//        console.log(data);
+//        //  var response = jQuery.parseJSON(data);
+//
+//        $("#myTable").dataTable({
+//            "processing": true,
+//            "data": JSON.parse(data),
+//            "columns": [{
+//                    "data": "id_ticket"
+//                }, {
+//                    "data": "nik"
+//                }, {
+//                    "data": "nama"
+//                }, {
+//                    "data": "id_atm"
+//                }, {
+//                    "data": "nama_atm"
+//                }, {
+//                    "data": "nama_masalah"
+//                }, {
+//                    "data": "start_time"
+//                }, {
+//                    "data": "end_time"
+//                }
+//
+//            ]
+//        });
+//        var detailRows = [];
+//        var dt = $("#myTable").DataTable();
+//        $('#myTable tbody').on('click', 'tr ', function () {
+//            console.log(dt.row(this).data());
+//            alert('You clicked on ' + dt.row(this).data().nama_atm + '\'s row');
+//            detailRows = dt.row(this).data().id_ticket;
+//            alert(detailRows.toString());
+//            $('#table').hide();
+//            $('#infotiket').show();
+//
+////            var tr = data;
+////            alert(tr);
+////           
+////                var tr = $('<tr/>');
+////
+////                // Indexing into data.report for each td element
+////                $(tr).append("<td> Custody: " + dt.row(this).data().nama_atm + "</td>");
+////                $(tr).append("<td> " + dt.row(this).data().nama_atm + "</td>");
+////                $('.table-user-information').append(tr);
+//            
+//        });
+//
+//        // On each draw, loop over the `detailRows` array and show any child rows
+//
+//    });
 
 
     if (code !== null) {

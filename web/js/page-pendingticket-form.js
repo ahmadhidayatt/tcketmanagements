@@ -13,7 +13,7 @@ $(document).ready(function () {
             "processing": true,
             "data": JSON.parse(data),
             "columns": [{
-                    "data": "id_ticket"
+                    "data": "dx e3"
                 }, {
                     "data": "nik"
                 }, {

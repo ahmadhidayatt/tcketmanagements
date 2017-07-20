@@ -34,7 +34,7 @@ public class helper_ticket extends HttpServlet {
     public final String insert_ticket = "1";
     public final String update_ticket = "2";
     public final String retrieve_id = "3";
-     public final String retrieve_status = "4";
+    public final String retrieve_status = "4";
     private Connection conn;
 
     /**
@@ -140,7 +140,7 @@ public class helper_ticket extends HttpServlet {
                 String deskripsi = request.getParameter("deskripsi");
                 String status = request.getParameter("status");
 
-                String query = "update tb_ticket set id_atm=?,id_masalah=?,start_time=?,end_time=?,nik=?,satwal=?,kartu_tertelan=?,deskripsi=?,status=?,custody=? where id_ticket =?";
+                String query = "update tb_ticket set id_atm=?,id_masalah=?,start_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),end_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),nik=?,satwal=?,kartu_tertelan=?,deskripsi=?,status=?,custody=? where id_ticket =?";
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, id_atm);
                 statement.setString(2, id_masalah);
@@ -149,28 +149,30 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);
-                statement.setString(5, deskripsi);
-                statement.setString(6, status);
-                statement.setString(7, custody);
-                statement.setString(7, id_ticket);
+                statement.setString(8, deskripsi);
+                statement.setString(9, status);
+                statement.setString(10, custody);
+                statement.setString(11, id_ticket);
                 statement.executeUpdate();
                 hasil = "sukses";
 
             } else if (code.equals(retrieve_id)) {
                 String id_tickets = request.getParameter("id_ticket");
-                String query = "SELECT d.id_ticket,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
+                String query = "SELECT d.id_ticket,b.id_atm,c.id_masalah,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = "+id_tickets;
-          
-                stmt = conn.createStatement( );
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = " + id_tickets;
+
+                stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);
                 int i = 0;
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
 
                     String id_ticket = rs.getString("id_ticket");
+                    String id_atm = rs.getString("id_atm");
+                    String id_masalah = rs.getString("id_masalah");
                     String nama_atm = rs.getString("nama_atm");
                     String nama_masalah = rs.getString("nama_masalah");
                     String start_time = rs.getString("start_time");
@@ -187,6 +189,8 @@ public class helper_ticket extends HttpServlet {
                     JSONObject arrayObj = new JSONObject();
 
                     arrayObj.put("id_ticket", id_ticket);
+                    arrayObj.put("id_atm", id_atm);
+                    arrayObj.put("id_masalah", id_masalah);
                     arrayObj.put("nama_atm", nama_atm);
                     arrayObj.put("nama_masalah", nama_masalah);
                     arrayObj.put("start_time", start_time);
@@ -203,19 +207,17 @@ public class helper_ticket extends HttpServlet {
                     i++;
                 }
 
-                
                 hasil = jArray.toString();
 
-            }
-             else if (code.equals(retrieve_status)) {
+            } else if (code.equals(retrieve_status)) {
                 String statuss = request.getParameter("statuss");
                 String query = "SELECT d.id_ticket,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.status = '"+statuss+"'";
-          
-                stmt = conn.createStatement( );
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.status = '" + statuss + "'";
+
+                stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);
                 int i = 0;
                 JSONArray jArray = new JSONArray();
@@ -238,6 +240,7 @@ public class helper_ticket extends HttpServlet {
                     JSONObject arrayObj = new JSONObject();
 
                     arrayObj.put("id_ticket", id_ticket);
+
                     arrayObj.put("nama_atm", nama_atm);
                     arrayObj.put("nama_masalah", nama_masalah);
                     arrayObj.put("start_time", start_time);
@@ -254,7 +257,6 @@ public class helper_ticket extends HttpServlet {
                     i++;
                 }
 
-                
                 hasil = jArray.toString();
 
             }

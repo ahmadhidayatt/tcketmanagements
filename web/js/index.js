@@ -21,6 +21,9 @@ $(document).ready(function () {
     $("#pending").click(function () {
         $('#iframe').attr('src', 'pages-panding.html');
     });
+    $("#monitor").click(function () {
+        $('#iframe').attr('src', 'pages-report.html');
+    });
     $("#pending_ticket").click(function () {
         $('#iframe').attr('src', 'page-pendingticket-form.html');
     });

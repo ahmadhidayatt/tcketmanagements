@@ -12,6 +12,8 @@
 
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+       
+
         <!-- EOF CSS INCLUDE -->                                     
     </head>
     <body>
@@ -55,8 +57,10 @@
                                 </ul>                                
                             </div>
                             <div class="panel-body">
-                                <button id="exportButton" style="margin-bottom: 10px" class="btn btn-lg btn-file clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
-                                <input type='date' id="date1" class="form-control" />
+                                <form style="margin-bottom: 10px;">
+                                    <input type="text" id="autoid" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
+                                    <button id="exportButton" style="margin-bottom: 10px; float: right; border-radius: 5px" class="btn btn-lg btn-file clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+                                </form> 
                                 <table class="table datatable" id="exportTable">
                                     <thead>
                                         <tr>
@@ -144,42 +148,45 @@
         <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
         <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
         <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
-        
+         <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/PageReport.js"></script>
+
         <script type="text/javascript">
-    jQuery(function ($) {
-        $("#exportButton").click(function () {
-            // parse the HTML table element having an id=exportTable
-            
-            
-            var dataSource = shield.DataSource.create({
-                data: "#exportTable",
-                schema: {
-                    type: "table",
-                    fields: {
-                        ID_Tiket :  { type: String },
-                        ID_Atm: { type: Number },
-                        Nama_Masalah: { type: String },
-                        Start_Time: { type: String },
-                        End_Time: { type: String },
-                        NIK: { type: String },
-                        Satwal: { type: String },
-                        Kartu_Tertelan: { type: String },
-                        Deskripsi: { type: String },
-                        Status: { type: String },
-                        Custody: { type: String }
-                    }
-                }
-            });
+            jQuery(function ($) {
+                $("#exportButton").click(function () {
+                    // parse the HTML table element having an id=exportTable
 
-            // when parsing is done, export the data to PDF
-            dataSource.read().then(function (data) {
-                var pdf = new shield.exp.PDFDocument({
-                    author: "PrepBootstrap",
-                    created: new Date()
-                });
 
-                pdf.addPage("a4", "portrait");
-                
+                    var dataSource = shield.DataSource.create({
+                        data: "#exportTable",
+                        schema: {
+                            type: "table",
+                            fields: {
+                                ID_Tiket: {type: String},
+                                ID_Atm: {type: Number},
+                                Nama_Masalah: {type: String},
+                                Start_Time: {type: String},
+                                End_Time: {type: String},
+                                NIK: {type: String},
+                                Satwal: {type: String},
+                                Kartu_Tertelan: {type: String},
+                                Deskripsi: {type: String},
+                                Status: {type: String},
+                                Custody: {type: String}
+                            }
+                        }
+                    });
+
+                    // when parsing is done, export the data to PDF
+                    dataSource.read().then(function (data) {
+                        var pdf = new shield.exp.PDFDocument({
+                            author: "PrepBootstrap",
+                            created: new Date()
+                        });
+
+                        pdf.addPage("a4", "portrait");
+
 //                <th>ID Tiket</th>
 //                                            <th>ID ATM</th>
 //                                            <th>Nama Masalah</th>
@@ -192,44 +199,44 @@
 //                                            <th>Status</th>
 //                                            <th>Custody</th>
 
-                pdf.table(
-                    10,
-                    10,
-                    data,
-                    [
-                        { field: "ID_Tiket", title: "ID Ticket", width: 70 },
-                        { field: "ID_Atm", title: "ID ATM", width: 70 },
-                        { field: "Nama_Masalah", title: "Nama Masalah", width: 80 },
-                        { field: "Start_Time", title: "Start Time", width: 80 },
-                        { field: "End_Time", title: "End Time", width: 70 },
-                        { field: "NIK", title: "NIK", width: 70 },
-                        { field: "Satwal", title: "Satwal", width: 70 },
-                        { field: "Kartu_Tertelan", title: "Kartu Tertelan", width: 80 },
-                        { field: "Deskripsi", title: "Deskripsi", width: 70 },
-                        { field: "Status", title: "Status", width: 70 },
-                        { field: "Custody", title: "Custody", width: 70 }
-                    ],
-                    {
-                        margins: {
-                            top: 50,
-                            left: 50
-                        }
-                    }
-                );
+                        pdf.table(
+                                10,
+                                10,
+                                data,
+                                [
+                                    {field: "ID_Tiket", title: "ID Ticket", width: 70},
+                                    {field: "ID_Atm", title: "ID ATM", width: 70},
+                                    {field: "Nama_Masalah", title: "Nama Masalah", width: 80},
+                                    {field: "Start_Time", title: "Start Time", width: 80},
+                                    {field: "End_Time", title: "End Time", width: 70},
+                                    {field: "NIK", title: "NIK", width: 70},
+                                    {field: "Satwal", title: "Satwal", width: 70},
+                                    {field: "Kartu_Tertelan", title: "Kartu Tertelan", width: 80},
+                                    {field: "Deskripsi", title: "Deskripsi", width: 70},
+                                    {field: "Status", title: "Status", width: 70},
+                                    {field: "Custody", title: "Custody", width: 70}
+                                ],
+                                {
+                                    margins: {
+                                        top: 50,
+                                        left: 50
+                                    }
+                                }
+                        );
 
-                pdf.saveAs({
-                    fileName: "PrepBootstrapPDF"
+                        pdf.saveAs({
+                            fileName: "PrepBootstrapPDF"
+                        });
+                    });
                 });
             });
-        });
-    });
-</script>
+        </script>
 
-<style>
-    #exportButton {
-        border-radius: 0;
-    }
-</style>
+        <style>
+            #exportButton {
+                border-radius: 0;
+            }
+        </style>
 
         <!-- START TEMPLATE -->
         <script type="text/javascript" src="js/settings.js"></script>
@@ -239,6 +246,66 @@
         <!-- END SCRIPTS --> 
 
     </body>
+    <style>
+        .dataTables_filter {
+            width: 50%;
+            float: right;
+            visibility: hidden;
+            padding-left: 5px;
+            padding: 0px 0px 5px;
+            border-bottom: 1px solid #E5E5E5;
+            font-size: 12px;
+        }
+
+        input[type=text] {
+            width: 130px;
+            height: 45px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+            background-image: url('img/searchicon.png');
+            background-size: 20px;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=text]:focus {
+            width: 50%;
+        }
+        .ui-autocomplete {
+            position: absolute;
+            z-index: 1000;
+            cursor: default;
+            padding: 0;
+            margin-top: 2px;
+            list-style: none;
+            background-color: #ffffff;
+            border: 1px solid #ccc
+                -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .ui-autocomplete > li {
+            padding: 3px 20px;
+        }
+        .ui-autocomplete > li.ui-state-focus {
+            background-color: #DDD;
+        }
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
+    </style>
+
+
 </html>
 
 

@@ -6,99 +6,103 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
+
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
-        
+
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->                                     
     </head>
+
     <body>
         <!-- START PAGE CONTAINER -->
-        
-            
-            <!-- END PAGE SIDEBAR -->
-            
-            <!-- PAGE CONTENT -->
-            <div class="page-content">
-                
-               <!-- START X-NAVIGATION VERTICAL -->
-                
-               <a href="ui-lists.html"></a>
-                <!-- END X-NAVIGATION VERTICAL -->                     
-                
-                <!-- START BREADCRUMB -->
-                <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>                    
-                    <li class="active">Report</li>
-                </ul>
-                <!-- END BREADCRUMB -->
 
-                <!-- PAGE TITLE -->
-                <!-- END PAGE TITLE -->                
 
-                <!-- PAGE CONTENT WRAPPER -->
-                <div class="page-content-wrap">                
-                
-                    <div class="row">
-                        <div class="col-md-12">
+        <!-- END PAGE SIDEBAR -->
 
-                            <!-- START DEFAULT DATATABLE -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">                                
-                                    <h3 class="panel-title">Default</h3>
-                                    <ul class="panel-controls">
-                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                                    </ul>                                
-                                </div>
-                                <div class="panel-body">
-                                    <table class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Tiket</th>
-                                                <th>ID ATM</th>
-                                                <th>Nama Masalah</th>
-                                                <th>Start Time</th>
-                                                <th>End Time</th>
-                                                <th>NIK</th>
-                                                <th>Satwal</th>
-                                                <th>Kartu Tertelan</th>
-                                                <th>Deskripsi</th>
-                                                <th>Status</th>
-                                                <th>Custody</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>210</td>
-                                                <td>19902020</td>
-                                                <td>CH</td>
-                                                <td>2017/09/09</td>
-                                                <td>2017/12/25</td>
-                                                <td>101140188</td>
-                                                <td>Andi</td>
-                                                <td>poto.jpg</td>
-                                                <td>Mesin lemah</td>
-                                                <td>Open</td>
-                                                <td>Anggi Kumara</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- START X-NAVIGATION VERTICAL -->
+
+            <a href="ui-lists.html"></a>
+            <!-- END X-NAVIGATION VERTICAL -->                     
+
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>                    
+                <li class="active">Report</li>
+            </ul>
+            <!-- END BREADCRUMB -->
+
+            <!-- PAGE TITLE -->
+            <!-- END PAGE TITLE -->                
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap">                
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- START DEFAULT DATATABLE -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">                                
+                                <h3 class="panel-title">Default</h3>
+                                <ul class="panel-controls">
+                                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                </ul>                                
                             </div>
-                            <!-- END DEFAULT DATATABLE -->
+                            <form>
+                                <input type="text" id="myInputTextField" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
+                            </form>
+                            <div class="panel-body">
+                                <table class="table datatable" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Tiket</th>
+                                            <th>Custody</th>
+                                            <th>ID ATM</th>
+                                            <th>Nama Masalah</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>NIK</th>
+                                            <th>Satwal</th>
+                                            <th>Kartu Tertelan</th>
+                                            <th>Deskripsi</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>210</td>
+                                            <td>Anggi Kumara</td>
+                                            <td>19902020</td>
+                                            <td>CH</td>
+                                            <td>2017/09/09</td>
+                                            <td>2017/12/25</td>
+                                            <td>101140188</td>
+                                            <td>Andi</td>
+                                            <td>poto.jpg</td>
+                                            <td>Mesin lemah</td>
+                                            <td>Open</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>                                
-                    
+                        <!-- END DEFAULT DATATABLE -->
+                    </div>
+                </div>                                
+
                 <!-- PAGE CONTENT WRAPPER -->                                
             </div>    
             <!-- END PAGE CONTENT -->
         </div>
         <!-- END PAGE CONTAINER -->       
-        
+
         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
@@ -123,8 +127,8 @@
         <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
         <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->                       
-        
-    <!-- START SCRIPTS -->
+
+        <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
@@ -134,16 +138,56 @@
         <!-- THIS PAGE PLUGINS -->
         <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
         <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-        
+
         <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>    
         <!-- END PAGE PLUGINS -->
 
         <!-- START TEMPLATE -->
         <script type="text/javascript" src="js/settings.js"></script>
-        
+
         <script type="text/javascript" src="js/plugins.js"></script>        
         <!-- END TEMPLATE -->
-    <!-- END SCRIPTS --> 
-        
+        <!-- END SCRIPTS --> 
+
     </body>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+            $('#myInputTextField').keyup(function () {
+                oTable.search($(this).val()).draw();
+            });
+        });
+    </script>
+    <style>
+        .dataTables_filter {
+            width: 50%;
+            float: right;
+            visibility: hidden;
+            padding-left: 5px;
+            padding: 0px 0px 5px;
+            border-bottom: 1px solid #E5E5E5;
+            font-size: 12px;
+        }
+
+        input[type=text] {
+            width: 130px;
+            height: 45px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+            background-image: url('img/searchicon.png');
+            background-size: 20px;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=text]:focus {
+            width: 50%;
+        }
+    </style>
 </html>

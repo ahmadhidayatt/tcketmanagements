@@ -28,6 +28,9 @@ $(document).ready(function () {
         $('#iframe').attr('src', 'page-pendingticket-form.html');
     });
 
+ $("#close_ticket_ticket").click(function () {
+        $('#iframe').attr('src', 'page-close-ticket.html');
+    });
     $.get("index", function (data, status) {
         var result = $.trim(data);
         if (result === "true") {

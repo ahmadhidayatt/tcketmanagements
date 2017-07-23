@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +78,7 @@ public class retrieve_ticket extends HttpServlet {
         CallableStatement st;
 
         try {
-           conn = new connection().getConn();
+            conn = new connection().getConn();
             String query = "{call retrieve_ticket()}";
             st = conn.prepareCall(query);
             rs = st.executeQuery();
@@ -94,8 +95,8 @@ public class retrieve_ticket extends HttpServlet {
                 String nama_masalah = rs.getString("nama_masalah");
                 String deskripsi = rs.getString("deskripsi");
 
-                String start_time = rs.getString("start_time");
-                String end_time = rs.getString("end_time");
+                Date start_time = rs.getDate("start_time");
+                Date end_time = rs.getDate("end_time");
 
                 JSONObject arrayObj = new JSONObject();
 
@@ -106,9 +107,10 @@ public class retrieve_ticket extends HttpServlet {
                 arrayObj.put("nama_atm", nama_atm);
                 arrayObj.put("nama_masalah", nama_masalah);
                 arrayObj.put("deskripsi", deskripsi);
-
-                arrayObj.put("start_time", start_time);
-                arrayObj.put("end_time", end_time);
+                java.util.Date dbSqlDateConverted = new java.util.Date(start_time.getTime());
+                java.util.Date dbSqlDateConverted2 = new java.util.Date(end_time.getTime());
+                arrayObj.put("start_time", dbSqlDateConverted);
+                arrayObj.put("end_time", dbSqlDateConverted2);
 
                 jArray.add(i, arrayObj);
                 i++;
@@ -120,7 +122,12 @@ public class retrieve_ticket extends HttpServlet {
             conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
+            out.print(hasil);
+        } catch (InternalError ex) {
+            hasil = ex.toString();
+            out.print(hasil);
         }
+
     }
 
     /**
@@ -161,12 +168,11 @@ public class retrieve_ticket extends HttpServlet {
 
                 String nama_masalah = rs.getString("nama_masalah");
                 String deskripsi = rs.getString("deskripsi");
-
-                String start_time = rs.getString("start_time");
-                String end_time = rs.getString("end_time");
-
+  
+               java.sql.Timestamp start_time = rs.getTimestamp("start_time");
+                java.sql.Timestamp end_time = rs.getTimestamp("end_time");
                 JSONObject arrayObj = new JSONObject();
-
+//                out.print(start_time);
                 arrayObj.put("id_ticket", id_ticket);
                 arrayObj.put("nik", nik);
                 arrayObj.put("nama", nama);
@@ -175,8 +181,23 @@ public class retrieve_ticket extends HttpServlet {
                 arrayObj.put("nama_masalah", nama_masalah);
                 arrayObj.put("deskripsi", deskripsi);
 
-                arrayObj.put("start_time", start_time);
-                arrayObj.put("end_time", end_time);
+//                java.util.Date dbSqlDateConverted = new java.util.Date(start_time.getTime());
+                if (start_time == null) {
+                    String a = start_time.toString();
+                    a = "";
+                    arrayObj.put("start_time", a);
+                } else {
+                    arrayObj.put("start_time", start_time.toString());
+                }
+//                java.util.Date dbSqlDateConverted2 = new java.util.Date(end_time.getTime());
+                if (end_time == null) {
+                    String a = end_time.toString();
+                    a = "";
+                    arrayObj.put("end_time", a);
+                } else {
+                    arrayObj.put("end_time", end_time.toString());
+                }
+//                out.print(end_time);
 
                 jArray.add(i, arrayObj);
                 i++;
@@ -189,6 +210,13 @@ public class retrieve_ticket extends HttpServlet {
 
         } catch (SQLException sx) {
             hasil = sx.toString();
+            out.print(hasil);
+        } catch (InternalError ex) {
+            hasil = ex.toString();
+            out.print(hasil);
+        } catch (NullPointerException ex) {
+            hasil = ex.toString();
+            out.print(hasil);
         }
 
     }

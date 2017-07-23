@@ -40,8 +40,9 @@ $(document).ready(function () {
     $.post('helper_pegawai', {code: "0"},
             function (returnedData) {
                 var obj = JSON.parse(returnedData);
-                console.log(returnedData);
+
                 data_peg = obj;
+                console.log(data_peg);
 //                jQuery.each(obj, function (i, val) {
 //                    peg_nik = obj[i]["nik"];
 ////                    console.log(obj[i]["id_masalah"]);

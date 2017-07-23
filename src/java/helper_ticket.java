@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -106,6 +107,18 @@ public class helper_ticket extends HttpServlet {
             if (code.equals(insert_ticket)) {
                 conn.setAutoCommit(false);
                 out.print(code);
+
+                String id_ticket = "";
+                String queries = "SELECT * from tb_ticket ";
+
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(queries);
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+                    id_ticket = rs.getString("id_ticket");
+                }
+
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
                 String atm_name = request.getParameter("atm_name");
@@ -115,7 +128,7 @@ public class helper_ticket extends HttpServlet {
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
 
-                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan)values(?,?,?,?,?,?,?)";
+                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan,start_time,end_time)values(?,?,?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
 
                 statement.setString(1, id_atm);
@@ -125,9 +138,12 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);
+                statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
+                statement.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
+                
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-          
-                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time)values(?,?,?,?,?,?,?)";
+
+                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
                 PreparedStatement statement2 = conn.prepareStatement(query2);
 
                 statement2.setString(1, id_atm);
@@ -135,25 +151,28 @@ public class helper_ticket extends HttpServlet {
                 statement2.setString(3, "open");
                 statement2.setString(4, custody);
                 statement2.setString(5, nik);
-                statement2.setDate(6,  java.sql.Date.valueOf( java.time.LocalDate.now()));
-                statement2.setString(7, " ");
+                statement2.setDate(6, java.sql.Date.valueOf(java.time.LocalDate.now()));
+                statement2.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
+                statement2.setString(8, id_ticket);
 
                 statement.executeUpdate();
-                statement2.executeUpdate();
-                if (statement2.executeUpdate()!= 0 ){
-                      hasil = "sukses";
-                      conn.commit();
+                int in = statement2.executeUpdate();
+                if (in != 0) {
+                    hasil = "sukses";
+                    conn.commit();
+                } else {
+                    hasil = "gagal";
+                    conn.rollback();
                 }
-              
 
             } else if (code.equals(update_ticket)) {
                 out.print(code);
-
+                conn.setAutoCommit(false);
                 String id_ticket = request.getParameter("id_ticket");
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
-                String start_time = request.getParameter("start_time");
-                String end_time = request.getParameter("end_time");
+                java.sql.Timestamp start_time =   java.sql.Timestamp.valueOf(request.getParameter("start_time"));
+                java.sql.Timestamp  end_time =  java.sql.Timestamp.valueOf(request.getParameter("end_time"));
                 String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
@@ -165,8 +184,8 @@ public class helper_ticket extends HttpServlet {
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, id_atm);
                 statement.setString(2, id_masalah);
-                statement.setString(3, start_time);
-                statement.setString(4, end_time);
+                statement.setTimestamp(3, start_time);
+                statement.setTimestamp(4, end_time);
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);
@@ -174,8 +193,28 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(9, status);
                 statement.setString(10, custody);
                 statement.setString(11, id_ticket);
+
+                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
+                PreparedStatement statement2 = conn.prepareStatement(query2);
+
+                statement2.setString(1, id_atm);
+                statement2.setString(2, id_masalah);
+                statement2.setString(3, "open");
+                statement2.setString(4, custody);
+                statement2.setString(5, nik);
+                statement2.setTimestamp(6, start_time);
+                statement2.setTimestamp(7, end_time);
+                statement2.setString(8, id_ticket);
+
                 statement.executeUpdate();
-                hasil = "sukses";
+                statement2.executeUpdate();
+                if (statement2.executeUpdate() != 0) {
+                    hasil = "sukses";
+                    conn.commit();
+                } else {
+                    hasil = "gagal";
+                    conn.rollback();
+                }
 
             } else if (code.equals(retrieve_id)) {
                 String id_tickets = request.getParameter("id_ticket");

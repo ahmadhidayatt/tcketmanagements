@@ -168,9 +168,9 @@ public class retrieve_ticket extends HttpServlet {
 
                 String nama_masalah = rs.getString("nama_masalah");
                 String deskripsi = rs.getString("deskripsi");
-  
-               java.sql.Timestamp start_time = rs.getTimestamp("start_time");
-                java.sql.Timestamp end_time = rs.getTimestamp("end_time");
+
+                java.sql.Timestamp tanggal = rs.getTimestamp("tanggal");
+                String status = rs.getString("status");
                 JSONObject arrayObj = new JSONObject();
 //                out.print(start_time);
                 arrayObj.put("id_ticket", id_ticket);
@@ -182,21 +182,15 @@ public class retrieve_ticket extends HttpServlet {
                 arrayObj.put("deskripsi", deskripsi);
 
 //                java.util.Date dbSqlDateConverted = new java.util.Date(start_time.getTime());
-                if (start_time == null) {
-                    String a = start_time.toString();
+                if (tanggal == null) {
+                    String a = tanggal.toString();
                     a = "";
-                    arrayObj.put("start_time", a);
+                    arrayObj.put("tanggal", a);
                 } else {
-                    arrayObj.put("start_time", start_time.toString());
+                    arrayObj.put("tanggal", tanggal.toString());
                 }
 //                java.util.Date dbSqlDateConverted2 = new java.util.Date(end_time.getTime());
-                if (end_time == null) {
-                    String a = end_time.toString();
-                    a = "";
-                    arrayObj.put("end_time", a);
-                } else {
-                    arrayObj.put("end_time", end_time.toString());
-                }
+                arrayObj.put("status", status);
 //                out.print(end_time);
 
                 jArray.add(i, arrayObj);

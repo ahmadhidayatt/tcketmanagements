@@ -128,7 +128,7 @@ public class helper_ticket extends HttpServlet {
                 String satwal = request.getParameter("satwal");
                 String kartu_tertelan = request.getParameter("kartu_tertelan");
 
-                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan,start_time,end_time)values(?,?,?,?,?,?,?,?,?)";
+                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan,start_time,end_time,tanggal)values(?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
 
                 statement.setString(1, id_atm);
@@ -140,6 +140,7 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(7, kartu_tertelan);
                 statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
                 statement.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
+                statement.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
                 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 

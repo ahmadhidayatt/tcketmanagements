@@ -47,9 +47,9 @@ $(document).ready(function () {
                 }, {
                     "data": "nama_masalah"
                 }, {
-                    "data": "start_time"
+                    "data": "tanggal"
                 }, {
-                    "data": "end_time"
+                    "data": "status"
                 }
 
             ]

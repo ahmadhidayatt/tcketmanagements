@@ -53,7 +53,7 @@
                                             <div class="container" style="padding-top: 10px;">
                                                 <div class="row">
                                                     <!-- left column -->
-                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
                                                         <div class="text-center">
                                                             <img src="assets/images/users/avatar.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
                                                             
@@ -61,71 +61,46 @@
                                                         </div>
                                                     </div>
                                                     <!-- edit form column -->
-                                                    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-                                                        <div class="alert alert-info alert-dismissable">
-                                                            <a class="panel-close close" data-dismiss="alert">×</a> 
-                                                            <i class="fa fa-coffee"></i>
-                                                            This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                                                        </div>
-                                                        <h3>Personal info</h3>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 personal-info">
+                                               
+                                                        <h3>Info User</h3>
                                                         <form class="form-horizontal" role="form">
                                                             <div class="form-group">
-                                                                <label class="col-lg-3 control-label">First name:</label>
+                                                                <label class="col-lg-3 control-label">Nama :</label>
                                                                 <div class="col-lg-8">
-                                                                    <input class="form-control" value="Jane" type="text">
+                                                                    <input class="form-control" id="nama"value="Rosidki" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-lg-3 control-label">Last name:</label>
+                                                                <label class="col-lg-3 control-label">Alamat:</label>
                                                                 <div class="col-lg-8">
-                                                                    <input class="form-control" value="Bishop" type="text">
+                                                                    <input class="form-control" id="alamat" value="jl.swardarma ray no 30a jakarta selatan" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-lg-3 control-label">Company:</label>
+                                                                <label class="col-lg-3 control-label">No Telp :</label>
                                                                 <div class="col-lg-8">
-                                                                    <input class="form-control" value="" type="text">
+                                                                    <input class="form-control" value="089504121938" type="text">
                                                                 </div>
                                                             </div>
+                                                            
+                                                         
                                                             <div class="form-group">
-                                                                <label class="col-lg-3 control-label">Email:</label>
-                                                                <div class="col-lg-8">
-                                                                    <input class="form-control" value="janesemail@gmail.com" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-lg-3 control-label">Time Zone:</label>
-                                                                <div class="col-lg-8">
-                                                                    <div class="ui-select">
-                                                                        <select id="user_time_zone" class="form-control">
-                                                                            <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                                                            <option value="Alaska">(GMT-09:00) Alaska</option>
-                                                                            <option value="Pacific Time (US & Canada)">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                                            <option value="Arizona">(GMT-07:00) Arizona</option>
-                                                                            <option value="Mountain Time (US & Canada)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                                            <option value="Central Time (US & Canada)" selected="selected">(GMT-06:00) Central Time (US & Canada)</option>
-                                                                            <option value="Eastern Time (US & Canada)">(GMT-05:00) Eastern Time (US & Canada)</option>
-                                                                            <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 control-label">Username:</label>
+                                                                <label class="col-md-3 control-label">Nik</label>
                                                                 <div class="col-md-8">
-                                                                    <input class="form-control" value="janeuser" type="text">
+                                                                    <input class="form-control" value="102120018" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-md-3 control-label">Password:</label>
                                                                 <div class="col-md-8">
-                                                                    <input class="form-control" value="11111122333" type="password">
+                                                                    <input class="form-control" value="********" type="password">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-md-3 control-label">Confirm password:</label>
                                                                 <div class="col-md-8">
-                                                                    <input class="form-control" value="11111122333" type="password">
+                                                                    <input class="form-control" value="********" type="password">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -157,24 +132,6 @@
             
             <!-- END PAGE CONTAINER -->
 
-            <!-- MESSAGE BOX-->
-            <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-                <div class="mb-container">
-                    <div class="mb-middle">
-                        <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-                        <div class="mb-content">
-                            <p>Are you sure you want to log out?</p>                    
-                            <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-                        </div>
-                        <div class="mb-footer">
-                            <div class="pull-right">
-                                <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
-                                <button class="btn btn-default btn-lg mb-control-close">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- END MESSAGE BOX-->
 
             <!-- START PRELOADS -->

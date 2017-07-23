@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -103,6 +104,7 @@ public class helper_ticket extends HttpServlet {
 
         try {
             if (code.equals(insert_ticket)) {
+                conn.setAutoCommit(false);
                 out.print(code);
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
@@ -115,6 +117,7 @@ public class helper_ticket extends HttpServlet {
 
                 String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan)values(?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
+
                 statement.setString(1, id_atm);
                 statement.setString(2, id_masalah);
                 statement.setString(3, "open");
@@ -122,8 +125,26 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
                 statement.setString(7, kartu_tertelan);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+          
+                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time)values(?,?,?,?,?,?,?)";
+                PreparedStatement statement2 = conn.prepareStatement(query2);
+
+                statement2.setString(1, id_atm);
+                statement2.setString(2, id_masalah);
+                statement2.setString(3, "open");
+                statement2.setString(4, custody);
+                statement2.setString(5, nik);
+                statement2.setDate(6,  java.sql.Date.valueOf( java.time.LocalDate.now()));
+                statement2.setString(7, " ");
+
                 statement.executeUpdate();
-                hasil = "sukses";
+                statement2.executeUpdate();
+                if (statement2.executeUpdate()!= 0 ){
+                      hasil = "sukses";
+                      conn.commit();
+                }
+              
 
             } else if (code.equals(update_ticket)) {
                 out.print(code);

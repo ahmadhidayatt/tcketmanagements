@@ -871,7 +871,7 @@ exists or setup the property manually. For example like this:
         </copy>
     </target>
     <target depends="init, deps-jar, -pre-pre-compile, -pre-compile, -copy-manifest, -copy-persistence-xml, -copy-webdir, library-inclusion-in-archive,library-inclusion-in-manifest" if="have.sources" name="-do-compile">
-        <webproject2:javac destdir="${build.classes.dir}" gensrcdir="${build.generated.sources.dir}"/>
+       
         <copy todir="${build.classes.dir}">
             <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
@@ -1434,7 +1434,7 @@ exists or setup the property manually. For example like this:
         <delete includeEmptyDirs="true" quiet="true">
             <fileset dir="${build.dir.to.clean}/WEB-INF/lib"/>
         </delete>
-        <delete dir="${build.dir}"/>
+       
         <available file="${build.dir.to.clean}/WEB-INF/lib" property="status.clean-failed" type="dir"/>
         <delete dir="${dist.dir}"/>
     </target>

@@ -32,6 +32,10 @@
         <servlet-name>helper_ticket</servlet-name>
         <servlet-class>helper_ticket</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getSession</servlet-name>
+        <servlet-class>getSession</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>retrieve_ticket</servlet-name>
         <url-pattern>/retrieve_ticket</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>helper_ticket</servlet-name>
         <url-pattern>/helper_ticket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getSession</servlet-name>
+        <url-pattern>/getSession</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

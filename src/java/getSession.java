@@ -6,26 +6,19 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
- * @author ahmad
+ * @author ASUS
  */
-@WebServlet(urlPatterns = {"/login"})
-public class login extends HttpServlet {
-
-    private Connection conn;
+public class getSession extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +37,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");
+            out.println("<title>Servlet getSession</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet getSession at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,8 +58,7 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Set response content type
-
+        processRequest(request, response);
     }
 
     /**
@@ -82,37 +74,27 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-        conn = new connection().getConn();
-        try {
-            PreparedStatement pst = conn.prepareStatement("Select * from tb_pegawai where nik=? and password=?");
-            pst.setString(1, user);
-            pst.setString(2, pass);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                if (rs.getString("jabatan") == "" || rs.getString("status") == "n") {
-                    out.println("account anda tidak aktif");
-                } else {
-                    String jabatan = rs.getString("jabatan").toString().trim();
-                    HttpSession session = request.getSession();
-                    session.setAttribute("nama", rs.getString("nama"));
-                    session.setAttribute("nik", rs.getString("nik"));
-                    session.setAttribute("status", rs.getString("status"));
-                    session.setAttribute("tanggal", rs.getString("tanggal"));
-                    session.setAttribute("alamat", rs.getString("alamat"));
-                    session.setAttribute("jabatan", rs.getString("jabatan"));
-                    session.setAttribute("no_telp", rs.getString("no_telp"));
-                    session.setAttribute("regional", rs.getString("regional"));
-                    out.println(jabatan);
-                }
+        HttpSession session = request.getSession(false);
+        String nama = (String) session.getAttribute("nama");
+        String nik = (String) session.getAttribute("nik");
 
-            } else {
-                out.println("Kesalahan Login");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String tanggal = (String) session.getAttribute("tanggal");
+        String alamat = (String) session.getAttribute("alamat");
+        String jabatan = (String) session.getAttribute("jabatan");
+        String no_telp = (String) session.getAttribute("no_telp");
+        String regional = (String) session.getAttribute("regional");
+        JSONArray jArray = new JSONArray();
+        JSONObject arrayObj = new JSONObject();
+        arrayObj.put("nama", nama);
+        arrayObj.put("nik", nik);
+        arrayObj.put("tanggal", tanggal);
+        arrayObj.put("alamat", alamat);
+        arrayObj.put("jabatan", jabatan);
+        arrayObj.put("no_telp", no_telp);
+        arrayObj.put("regional", regional);
+
+        jArray.add(0, arrayObj);
+        out.print(jArray.toString());
     }
 
     /**

@@ -61,6 +61,8 @@ public class index extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String name = (String) session.getAttribute("nama");
+            String nik = (String) session.getAttribute("nik");
+            
             out.print("true");
         } else {
             out.print("Mohon Login Terlebih Dahulu");

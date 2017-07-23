@@ -1,7 +1,7 @@
 $(document).ready(function () {
-
+    var nik;
     $('#infotiket').hide();
-     $('#iforeepen').hide();
+    $('#iforeepen').hide();
 
     $("#dashboard").click(function () {
         $('#iframe').attr('src', 'pages-dashboard.html');
@@ -38,6 +38,17 @@ $(document).ready(function () {
         }
         ;
     });
+    $.post("getSession", function (returnedData) {
+        var obj = JSON.parse(returnedData);
+        console.log(returnedData);
+        jQuery.each(obj, function (i, val) {
+
+            $("#nama_img").alt = obj[i]["nama"];
+            $("#nik").text(obj[i]["nik"]);
+            $("#namas").text(obj[i]["nama"]);
+
+        });
+    });
 
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var code = getURLParameter(url, 'code');
@@ -49,6 +60,7 @@ $(document).ready(function () {
             alert("Data: " + data.length + data + "\nStatus: " + status);
             var result = $.trim(data);
             if (result === "true") {
+
                 alert(result);
                 window.location.href = "pages-login.html";
             } else {
@@ -117,6 +129,8 @@ $(document).ready(function () {
             return;
         } else if (code === "client") {
             document.getElementById("open_ticket").style.display = "none";
+            document.getElementById("enginer").style.display = "none";
+            document.getElementById("monitor").style.display = "none";
             return;
         } else {
             alert("tidak ada jabatan harap login dahulu");

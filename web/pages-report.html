@@ -12,7 +12,9 @@
 
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-       
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+
+
 
         <!-- EOF CSS INCLUDE -->                                     
     </head>
@@ -58,8 +60,9 @@
                             </div>
                             <div class="panel-body">
                                 <form style="margin-bottom: 10px;">
-                                    <input type="text" id="autoid" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
+                                    <input type="text" id="autoid" class="inputatm" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
                                     <button id="exportButton" style="margin-bottom: 10px; float: right; border-radius: 5px" class="btn btn-lg btn-file clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+                                    <br><input type="datetime" style="margin-left: 10px; margin-top: 10px;" class="inputdate"  id="datepicker">
                                 </form> 
                                 <table class="table datatable" id="exportTable">
                                     <thead>
@@ -148,12 +151,36 @@
         <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
         <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
         <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
-         <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+        <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="js/PageReport.js"></script>
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script src="js/build/jquery.datetimepicker.full.js"></script>
+
         <script type="text/javascript">
             jQuery(function ($) {
+                $.datetimepicker.setLocale('en');
+
+                $("#datepicker").datetimepicker({value: '2015/04/15 05:03',
+
+                    format: $("#datetimepicker_format_value").val()});
+
+                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+
+
+                function getFormattedDate(date) {
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear().toString().slice(2);
+                    return day + '-' + month + '-' + year;
+                }
                 $("#exportButton").click(function () {
                     // parse the HTML table element having an id=exportTable
 
@@ -177,16 +204,13 @@
                             }
                         }
                     });
-
                     // when parsing is done, export the data to PDF
                     dataSource.read().then(function (data) {
                         var pdf = new shield.exp.PDFDocument({
                             author: "PrepBootstrap",
                             created: new Date()
                         });
-
                         pdf.addPage("a4", "portrait");
-
 //                <th>ID Tiket</th>
 //                                            <th>ID ATM</th>
 //                                            <th>Nama Masalah</th>
@@ -223,13 +247,13 @@
                                     }
                                 }
                         );
-
                         pdf.saveAs({
                             fileName: "PrepBootstrapPDF"
                         });
                     });
                 });
-            });
+            }
+            );
         </script>
 
         <style>
@@ -257,7 +281,7 @@
             font-size: 12px;
         }
 
-        input[type=text] {
+        .inputatm {
             width: 130px;
             height: 45px;
             box-sizing: border-box;
@@ -274,7 +298,24 @@
             transition: width 0.4s ease-in-out;
         }
 
-        input[type=text]:focus {
+        .inputdate {
+            width: 170px;
+            height: 45px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+            background-image: url('img/calendar.png');
+            background-size: 20px;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .inputatm:focus {
             width: 50%;
         }
         .ui-autocomplete {
@@ -285,8 +326,8 @@
             margin-top: 2px;
             list-style: none;
             background-color: #ffffff;
-            border: 1px solid #ccc
-                -webkit-border-radius: 5px;
+            border: 1px solid #ccc;
+            -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             border-radius: 5px;
             -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);

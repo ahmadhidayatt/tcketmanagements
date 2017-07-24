@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var dataticket;
-
+    var id_atm;
+    var id_masalah;
     $("#reopen").click(function () {
         alert("test");
         $('#infotiket').hide();
@@ -77,7 +78,7 @@ $(document).ready(function () {
                     function (returnedData2) {
                         var obj = JSON.parse(returnedData2);
                         data_atm = JSON.parse(returnedData2);
-                         dataticket = JSON.parse(returnedData2);
+                        dataticket = JSON.parse(returnedData2);
                         console.log(data_atm);
                         var tr = $('<tr/>');
                         jQuery.each(obj, function (i, val) {
@@ -88,13 +89,14 @@ $(document).ready(function () {
                             $("#input_nik").val(obj[i]["nik"]);
                             $("#input_start").val(obj[i]["start_time"]);
                             $("#input_end").val(obj[i]["end_time"]);
-                            $("#input_nama").val(obj[i]["nama"]);
+                            $("#input_cuss").val(obj[i]["custody"]);
                             $("#input_masalah").val(obj[i]["nama_masalah"]);
                             $("#input_desk").val(obj[i]["deskripsi"]);
                             $("#input_status").val(obj[i]["status"]);
                             $("#input_satwal").val(obj[i]["satwal"]);
                             $("#input_kartel").val(obj[i]["kartu_tertelan"]);
-
+                            id_atm = dataticket[i]["id_atm"];
+                            id_masalah = dataticket[i]["id_masalah"];
                             $('.table-user-information').append(tr);
                             alert(obj[i]["id_ticket"]);
                         });
@@ -104,6 +106,46 @@ $(document).ready(function () {
             });
 
 
+        });
+        $("#submitreopen").click(function () {
+            alert("kontol");
+            $.post("helper_ticket", {code: "2",
+                id_ticket: $("#input_atm_name").val(),
+                id_atm: id_atm,
+                id_masalah: id_masalah,
+                nama_atm: $("#input_nama_atm2").val(),
+                start_time: $("#input_start").val(),
+                end_time: $("#input_end").val(),
+                custody: $("#input_cuss").val(),
+                nik: $("#input_nik").val(),
+                satwal: $("#input_satwal").val(),
+                kartu_tertelan: $("#input_kartel").val(),
+                deskripsi: $("#input_desk").val(),
+                status: "reopen"
+            }, function (data) {
+                alert(data);
+
+            });
+        });
+        $("#btn_close").click(function () {
+            alert("aaaa");
+            $.post("helper_ticket", {code: "2",
+                id_ticket: $("#input_atm_name").val(),
+                id_atm: id_atm,
+                id_masalah: id_masalah,
+                nama_atm: $("#input_nama_atm").val(),
+                start_time: $("#input_start").val(),
+                end_time: $("#input_end").val(),
+                custody: $("#input_cuss").val(),
+                nik: $("#input_nik").val(),
+                satwal: $("#input_satwal").val(),
+                kartu_tertelan: $("#input_kartel").val(),
+                deskripsi: $("#input_desk").val(),
+                status: "close"
+            }, function (data) {
+                alert(data);
+
+            });
         });
         // On each draw, loop over the `detailRows` array and show any child rows
 

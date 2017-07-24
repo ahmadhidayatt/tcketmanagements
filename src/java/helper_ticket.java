@@ -141,7 +141,7 @@ public class helper_ticket extends HttpServlet {
                 statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
                 statement.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
                 statement.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
-                
+
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
                 String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
@@ -172,8 +172,25 @@ public class helper_ticket extends HttpServlet {
                 String id_ticket = request.getParameter("id_ticket");
                 String id_atm = request.getParameter("id_atm");
                 String id_masalah = request.getParameter("id_masalah");
-                java.sql.Timestamp start_time =   java.sql.Timestamp.valueOf(request.getParameter("start_time"));
-                java.sql.Timestamp  end_time =  java.sql.Timestamp.valueOf(request.getParameter("end_time"));
+
+                java.sql.Timestamp start_time = null;
+                java.sql.Timestamp end_time = null;
+
+                java.sql.Timestamp start_times = java.sql.Timestamp.valueOf(request.getParameter("start_time"));
+                java.sql.Timestamp end_times = java.sql.Timestamp.valueOf(request.getParameter("end_time"));
+                if (start_times == null) {
+                    String a = "";
+                    start_time = Timestamp.valueOf(a);
+                } else {
+                    start_time = start_times;
+                }
+                  if (end_times == null) {
+                    String a = "";
+                    end_time = Timestamp.valueOf(a);
+                } else {
+                    end_time = start_times;
+                }
+
                 String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");

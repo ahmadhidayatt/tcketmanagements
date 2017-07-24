@@ -88,7 +88,7 @@
                                 <h3 class="panel-title">Nomer Tiket</h3>
                                 <span class="pull-right">
                                     <a id="reopen" name="reopen" type="button" class="btn btn-sm btn-warning">Re-Open <i class="glyphicon glyphicon-edit"></i></a>
-                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
+                                    <a data-original-title="Remove this user" id="btn_close" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
                                 </span>
                             </div>
                             <div >
@@ -155,7 +155,7 @@
                                                 <input autocomplete='off' id="input_masalah" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
-                                      
+
 
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
@@ -187,13 +187,13 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div style="margin-top: 10px;"  id="iforeepen" class=" panel-info">
                             <div style="margin-top: 10px" class="panel-heading">
 
                                 <h3 class="panel-title">Reopen-ATM Form</h3>
                                 <span class="pull-right">
-                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
+                                    <a data-original-title="Submit" data-toggle="tooltip" type="button" id="submitreopen" class="btn btn-sm btn-success">Submit <i class="glyphicon glyphicon-save"></i></a>
                                 </span>
                             </div>
                             <div >
@@ -228,7 +228,7 @@
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Start Time</label>
                                                 <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' id="input_start" readonly="true" class="form-control" />
+                                                    <input type='text' id="input_start2" readonly="true" class="form-control" />
                                                     <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
@@ -239,7 +239,7 @@
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">End Time</label>
                                                 <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' id="input_end" class="form-control" readonly="true" />
+                                                    <input type='text' id="input_end2" class="form-control" readonly="true" />
                                                     <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
@@ -250,46 +250,41 @@
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Custody</label>
-                                                <input autocomplete='off' id="input_cuss" readonly="true" class='form-control card-number' size='20' type='text'>
+                                                <input autocomplete='off' id="input_cuss2" readonly="true" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
 
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Masalah</label>
-                                                <input autocomplete='off' id="input_masalah" readonly="true" class='form-control card-number' size='20' type='text'>
+                                                <input autocomplete='off' id="input_masalah2" readonly="true" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Masalah</label>
-                                                <input autocomplete='off' id="input_masalah" readonly="true" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
+
 
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Deskripsi</label>
-                                                <input autocomplete='off' id="input_desk" readonly="true" class='form-control card-number' size='20' type='text'>
+                                                <input autocomplete='off' id="input_desk2" readonly="true" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
 
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Status</label>
-                                                <input autocomplete='off' id="input_status" readonly="true" class='form-control card-number' size='20' type='text'>
+                                                <input autocomplete='off' id="input_status2" readonly="true" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Satwal</label>
-                                                <input autocomplete='off' id="input_satwal" readonly="true" class='form-control card-number' size='20' type='text'>
+                                                <input autocomplete='off' id="input_satwal2" readonly="true" class='form-control card-number' size='20' type='text'>
                                             </div>
                                         </div>
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Kartu Tertelan</label>
-                                                <input id="input_kartel" type="file" readonly="true"  class="well well-sm">
+                                                <input id="input_kartel2" type="file" readonly="true"  class="well well-sm">
                                             </div>
                                         </div>
 
@@ -306,10 +301,10 @@
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<!--
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">-->
+        <!--
+                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+                <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">-->
 
 
 

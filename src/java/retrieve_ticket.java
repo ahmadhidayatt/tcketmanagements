@@ -183,8 +183,7 @@ public class retrieve_ticket extends HttpServlet {
 
 //                java.util.Date dbSqlDateConverted = new java.util.Date(start_time.getTime());
                 if (tanggal == null) {
-                    String a = tanggal.toString();
-                    a = "";
+                    String a = "";
                     arrayObj.put("tanggal", a);
                 } else {
                     arrayObj.put("tanggal", tanggal.toString());

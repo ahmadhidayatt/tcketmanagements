@@ -167,7 +167,7 @@ $(document).ready(function () {
             id_ticket: $("#input_atm_name").val(),
             id_atm: id_atm,
             id_masalah: id_masalah,
-            nama_atm: $("#input_nama_atm2").val(),
+            nama_atm: $("#input_nama_atm").val(),
             start_time: $("#input_start").val(),
             end_time: $("#input_end").val(),
             custody: $("#input_cuss").val(),

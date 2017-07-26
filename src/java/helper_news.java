@@ -6,20 +6,13 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +24,12 @@ import org.json.simple.JSONObject;
  *
  * @author ahmad
  */
-public class helper_ticket extends HttpServlet {
+public class helper_news extends HttpServlet {
 
-    public final String insert_ticket   = "1";
-    public final String update_ticket   = "2";
-    public final String retrieve_id     = "3";
+    public final String retrieve_news = "0";
+    public final String insert_news = "1";
+    public final String update_news = "2";
+    public final String retrieve_id = "3";
     public final String retrieve_status = "4";
     private Connection conn;
 
@@ -56,10 +50,10 @@ public class helper_ticket extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ticket_helper</title>");
+            out.println("<title>Servlet helper_news</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ticket_helper at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet helper_news at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -104,69 +98,55 @@ public class helper_ticket extends HttpServlet {
         String code = request.getParameter("code");
 
         try {
-            if (code.equals(insert_ticket)) {
-                conn.setAutoCommit(false);
+            if (code.equals(insert_news)) {
+//                conn.setAutoCommit(false);
                 out.print(code);
 
-                String id_ticket = "";
-                String queries = "SELECT * from tb_ticket ";
+//                String id_ticket = "";
+//                String queries = "SELECT * from tb_ticket ";
+//
+//                stmt = conn.createStatement();
+//                rs = stmt.executeQuery(queries);
+//                int i = 0;
+//                JSONArray jArray = new JSONArray();
+//                while (rs.next()) {
+//                    id_ticket = rs.getString("id_ticket");
+//                }
+                String deskripsi = request.getParameter("deskripsi");
+                String nama = request.getParameter("nama");
+                String subject = request.getParameter("subject");
+                String kordinator = request.getParameter("kordinator");
 
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(queries);
-                int i = 0;
-                JSONArray jArray = new JSONArray();
-                while (rs.next()) {
-                    id_ticket = rs.getString("id_ticket");
-                }
-
-                String id_atm = request.getParameter("id_atm");
-                String id_masalah = request.getParameter("id_masalah");
-                String atm_name = request.getParameter("atm_name");
-                String atm_klien = request.getParameter("atm_klien");
-                String custody = request.getParameter("custody");
-                String nik = request.getParameter("nik");
-                String satwal = request.getParameter("satwal");
-                String kartu_tertelan = request.getParameter("kartu_tertelan");
-
-                String query = "insert into tb_ticket(id_atm,id_masalah,status,custody,nik,satwal,kartu_tertelan,start_time,end_time,tanggal)values(?,?,?,?,?,?,?,?,?,?)";
+                String query = "insert into tb_news(deskripsi,nama,subject,kordinator)values(?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
 
-                statement.setString(1, id_atm);
-                statement.setString(2, id_masalah);
-                statement.setString(3, "open");
-                statement.setString(4, custody);
-                statement.setString(5, nik);
-                statement.setString(6, satwal);
-                statement.setString(7, kartu_tertelan);
-                statement.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
-                statement.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
-                statement.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
+                statement.setString(1, deskripsi);
+                statement.setString(2, nama);
+                statement.setString(3, subject);
+                statement.setString(4, kordinator);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
-                PreparedStatement statement2 = conn.prepareStatement(query2);
-
-                statement2.setString(1, id_atm);
-                statement2.setString(2, id_masalah);
-                statement2.setString(3, "open");
-                statement2.setString(4, custody);
-                statement2.setString(5, nik);
-                statement2.setDate(6, java.sql.Date.valueOf(java.time.LocalDate.now()));
-                statement2.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
-                statement2.setString(8, id_ticket);
-
+//                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
+//                PreparedStatement statement2 = conn.prepareStatement(query2);
+//
+//                statement2.setString(1, id_atm);
+//                statement2.setString(2, id_masalah);
+//                statement2.setString(3, "open");
+//                statement2.setString(4, custody);
+//                statement2.setString(5, nik);
+//                statement2.setDate(6, java.sql.Date.valueOf(java.time.LocalDate.now()));
+//                statement2.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
+//                statement2.setString(8, id_ticket);
                 statement.executeUpdate();
-                int in = statement2.executeUpdate();
-                if (in != 0) {
-                    hasil = "sukses";
-                    conn.commit();
-                } else {
-                    hasil = "gagal";
-                    conn.rollback();
-                }
-
-            } else if (code.equals(update_ticket)) {
+//                int in = statement2.executeUpdate();
+//                if (in != 0) {
+//                    hasil = "sukses";
+//                    conn.commit();
+//                } else {
+//                    hasil = "gagal";
+//                    conn.rollback();
+//                }
+                hasil = "sukses";
+            } else if (code.equals(update_news)) {
                 out.print(code);
                 conn.setAutoCommit(false);
                 String id_ticket = request.getParameter("id_ticket");
@@ -184,7 +164,7 @@ public class helper_ticket extends HttpServlet {
                 } else {
                     start_time = start_times;
                 }
-                  if (end_times == null) {
+                if (end_times == null) {
                     String a = "";
                     end_time = Timestamp.valueOf(a);
                 } else {

@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,7 +95,7 @@ public class helper_news extends HttpServlet {
         String Kodeaut = "";
         ResultSet rs;
         Statement st;
-
+        CallableStatement sta;
         String code = request.getParameter("code");
 
         try {
@@ -146,6 +147,45 @@ public class helper_news extends HttpServlet {
 //                    conn.rollback();
 //                }
                 hasil = "sukses";
+            } else if (code.equals(retrieve_news)) {
+
+                String query = "{call retrieve_pegawai()}";
+                sta = conn.prepareCall(query);
+                rs = sta.executeQuery();
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+
+                    String nik = rs.getString("nik");
+                    String nama = rs.getString("nama");
+                    String status = rs.getString("status");
+                    String tanggal = rs.getString("tanggal");
+                    String alamat = rs.getString("alamat");
+                    String jabatan = rs.getString("jabatan");
+                    String no_telp = rs.getString("no_telp");
+                    String regional = rs.getString("regional");
+                    String foto = rs.getString("foto");
+
+                    JSONObject arrayObj = new JSONObject();
+
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("nama", nama);
+                    arrayObj.put("status", status);
+                    arrayObj.put("tanggal", tanggal);
+                    arrayObj.put("alamat", alamat);
+                    arrayObj.put("jabatan", jabatan);
+                    arrayObj.put("no_telp", no_telp);
+                    arrayObj.put("regional", regional);
+                    arrayObj.put("foto", foto);
+
+                    jArray.add(i, arrayObj);
+                    i++;
+                }
+                rs.close();
+
+                hasil = jArray.toString();
+                out.print(hasil);
+
             } else if (code.equals(update_news)) {
                 out.print(code);
                 conn.setAutoCommit(false);

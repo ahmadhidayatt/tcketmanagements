@@ -9,15 +9,16 @@
 
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
-
+        <script type="text/javascript" src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+
 
 
 
         <!-- EOF CSS INCLUDE -->                                     
     </head>
+
     <body>
         <!-- START PAGE CONTAINER -->
 
@@ -58,41 +59,28 @@
                                     <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                                 </ul>                                
                             </div>
+                            <form>
+                                <input type="text" id="myInputTextField" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
+                            </form>
                             <div class="panel-body">
-                                <form style="margin-bottom: 10px;">
-                                    <input type="text" id="autoid" class="inputatm" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
-                                    <button id="exportButton" style="margin-bottom: 10px; float: right; border-radius: 5px" class="btn btn-lg btn-file clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
-                                    <br><input type="datetime" style="margin-left: 10px; margin-top: 10px;" class="inputdate"  id="datepicker">
-                                </form> 
-                                <table class="table datatable" id="exportTable">
+                                <table class="table table-striped display table" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>ID_Tiket</th>
-                                            <th>ID_ATM</th>
-                                            <th>Nama_Masalah</th>
-                                            <th>Start_Time</th>
-                                            <th>End_Time</th>
                                             <th>NIK</th>
-                                            <th>Satwal</th>
-                                            <th>Kartu_Tertelan</th>
-                                            <th>Deskripsi</th>
-                                            <th>Status</th>
                                             <th>Custody</th>
+                                            <th>Mesin</th>
+                                            <th>Nama ATM</th>
+                                            <th>Nama Masalah</th>
+                                            <th>Deskripsi</th>
+                                            <th>Start Time</th>
+                                            <th>End_Time</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>210</td>
-                                            <td>19902020</td>
-                                            <td>CH</td>
-                                            <td>2017/09/09</td>
-                                            <td>2017/12/25</td>
-                                            <td>101140188</td>
-                                            <td>Andi</td>
-                                            <td>poto.jpg</td>
-                                            <td>Mesin lemah</td>
-                                            <td>Open</td>
-                                            <td>Anggi Kumara</td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -127,149 +115,31 @@
             </div>
         </div>
         <!-- END MESSAGE BOX-->
-
-        <!-- START PRELOADS -->
-        <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->                       
-
-        <!-- START SCRIPTS -->
-        <!-- START PLUGINS -->
-        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
-        <!-- END PLUGINS -->                
-
-        <!-- THIS PAGE PLUGINS -->
-        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-
-        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>    
-        <!-- END PAGE PLUGINS -->
-
-        <!-- you need to include the shieldui css and js assets in order for the components to work -->
-        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
-        <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/PageReport.js"></script>
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-        <script src="js/build/jquery.datetimepicker.full.js"></script>
-
-        <script type="text/javascript">
-            jQuery(function ($) {
-                $.datetimepicker.setLocale('en');
-
-                $("#datepicker").datetimepicker({value: '2015/04/15 05:03',
-
-                    format: $("#datetimepicker_format_value").val()});
-
-                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+        <script src="js/import/ajax.googleapis.com-ajax-libs-jquery-1.7.1-jquery.min.js"></script>
+        <link rel="stylesheet" href="js/import/maxcd.bootsratpcdn.com-bootstrap-3.37-css-bootsrtap.min.css">
+        <link rel="stylesheet" href="js/import/cdn.datatables.net-1.10.15-css-dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="js/import/cdn.datatables.net-responsive-2.1.1-css-responsive.bootstrap.min.css">
 
 
 
-                function getFormattedDate(date) {
-                    var day = date.getDate();
-                    var month = date.getMonth() + 1;
-                    var year = date.getFullYear().toString().slice(2);
-                    return day + '-' + month + '-' + year;
-                }
-                $("#exportButton").click(function () {
-                    // parse the HTML table element having an id=exportTable
+        <script type="text/javascript" src="js/import//cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-responsive.bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/page_report.js"></script>
+         
 
-
-                    var dataSource = shield.DataSource.create({
-                        data: "#exportTable",
-                        schema: {
-                            type: "table",
-                            fields: {
-                                ID_Tiket: {type: String},
-                                ID_Atm: {type: Number},
-                                Nama_Masalah: {type: String},
-                                Start_Time: {type: String},
-                                End_Time: {type: String},
-                                NIK: {type: String},
-                                Satwal: {type: String},
-                                Kartu_Tertelan: {type: String},
-                                Deskripsi: {type: String},
-                                Status: {type: String},
-                                Custody: {type: String}
-                            }
-                        }
-                    });
-                    // when parsing is done, export the data to PDF
-                    dataSource.read().then(function (data) {
-                        var pdf = new shield.exp.PDFDocument({
-                            author: "PrepBootstrap",
-                            created: new Date()
-                        });
-                        pdf.addPage("a4", "portrait");
-//                <th>ID Tiket</th>
-//                                            <th>ID ATM</th>
-//                                            <th>Nama Masalah</th>
-//                                            <th>Start Time</th>
-//                                            <th>End Time</th>
-//                                            <th>NIK</th>
-//                                            <th>Satwal</th>
-//                                            <th>Kartu Tertelan</th>
-//                                            <th>Deskripsi</th>
-//                                            <th>Status</th>
-//                                            <th>Custody</th>
-
-                        pdf.table(
-                                10,
-                                10,
-                                data,
-                                [
-                                    {field: "ID_Tiket", title: "ID Ticket", width: 70},
-                                    {field: "ID_Atm", title: "ID ATM", width: 70},
-                                    {field: "Nama_Masalah", title: "Nama Masalah", width: 80},
-                                    {field: "Start_Time", title: "Start Time", width: 80},
-                                    {field: "End_Time", title: "End Time", width: 70},
-                                    {field: "NIK", title: "NIK", width: 70},
-                                    {field: "Satwal", title: "Satwal", width: 70},
-                                    {field: "Kartu_Tertelan", title: "Kartu Tertelan", width: 80},
-                                    {field: "Deskripsi", title: "Deskripsi", width: 70},
-                                    {field: "Status", title: "Status", width: 70},
-                                    {field: "Custody", title: "Custody", width: 70}
-                                ],
-                                {
-                                    margins: {
-                                        top: 50,
-                                        left: 50
-                                    }
-                                }
-                        );
-                        pdf.saveAs({
-                            fileName: "PrepBootstrapPDF"
-                        });
-                    });
-                });
-            }
-            );
-        </script>
-
-        <style>
-            #exportButton {
-                border-radius: 0;
-            }
-        </style>
-
-        <!-- START TEMPLATE -->
-        <script type="text/javascript" src="js/settings.js"></script>
-
-        <script type="text/javascript" src="js/plugins.js"></script>        
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS --> 
 
     </body>
+    <script type="text/javascript">
+//        jQuery(function ($) {
+//            oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+//            $('#myInputTextField').keyup(function () {
+//                oTable.search($(this).val()).draw();
+//            });
+//        });
+    </script>
     <style>
         .dataTables_filter {
             width: 50%;
@@ -281,7 +151,7 @@
             font-size: 12px;
         }
 
-        .inputatm {
+        input[type=text] {
             width: 130px;
             height: 45px;
             box-sizing: border-box;
@@ -298,59 +168,8 @@
             transition: width 0.4s ease-in-out;
         }
 
-        .inputdate {
-            width: 170px;
-            height: 45px;
-            box-sizing: border-box;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            font-size: 12px;
-            background-color: white;
-            background-image: url('img/calendar.png');
-            background-size: 20px;
-            background-position: 10px 10px; 
-            background-repeat: no-repeat;
-            padding: 12px 20px 12px 40px;
-            -webkit-transition: width 0.4s ease-in-out;
-            transition: width 0.4s ease-in-out;
-        }
-
-        .inputatm:focus {
+        input[type=text]:focus {
             width: 50%;
         }
-        .ui-autocomplete {
-            position: absolute;
-            z-index: 1000;
-            cursor: default;
-            padding: 0;
-            margin-top: 2px;
-            list-style: none;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-        .ui-autocomplete > li {
-            padding: 3px 20px;
-        }
-        .ui-autocomplete > li.ui-state-focus {
-            background-color: #DDD;
-        }
-        .ui-helper-hidden-accessible {
-            display: none;
-        }
-
     </style>
-
-
 </html>
-
-
-
-
-
-

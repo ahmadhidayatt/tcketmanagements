@@ -36,6 +36,14 @@
         <servlet-name>getSession</servlet-name>
         <servlet-class>getSession</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>helper_news</servlet-name>
+        <servlet-class>helper_news</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>helper_report</servlet-name>
+        <servlet-class>helper_report</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>retrieve_ticket</servlet-name>
         <url-pattern>/retrieve_ticket</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>getSession</servlet-name>
         <url-pattern>/getSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>helper_news</servlet-name>
+        <url-pattern>/helper_news</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>helper_report</servlet-name>
+        <url-pattern>/helper_report</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

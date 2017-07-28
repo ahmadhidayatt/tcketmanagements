@@ -28,7 +28,7 @@ $(document).ready(function () {
         $('#iframe').attr('src', 'page-pendingticket-form.html');
     });
 
- $("#close_ticket_ticket").click(function () {
+    $("#close_ticket_ticket").click(function () {
         $('#iframe').attr('src', 'page-close-ticket.html');
     });
     $.get("index", function (data, status) {
@@ -48,6 +48,8 @@ $(document).ready(function () {
 
             $("#nama_img").alt = obj[i]["nama"];
             $("#nik").text(obj[i]["nik"]);
+            nik = obj[i]["nik"];
+            getnotif(nik);
             $("#namas").text(obj[i]["nama"]);
 
         });
@@ -141,9 +143,34 @@ $(document).ready(function () {
         }
     }
 
-
 });
+function getnotif(nik) {
+    console.log(nik);
+    $.post("helper_ticket", {code: "5",
+        nik: nik
+    }, function (returnedData) {
+        var obj = JSON.parse(returnedData);
+        console.log(returnedData);
+        jQuery.each(obj, function (i, val) {
+            console.log(obj[i]);
+            var $response = "  <a class='list-group-item' id='notif_container" + obj[i]["id_ticket"] + "' style='cursor:pointer'>" +
+                    "<div class='list-group-status status-online'></div>" +
+                    "<img src='assets/images/users/user2.jpg' class='pull-left' alt='" + obj[i]["custody"] + "'>" +
+                    "<span class='contacts-title'>" + obj[i]["id_ticket"] + "</span>" +
+                    "<p>" + obj[i]["nama_atm"] + "</p>" +
+                    "</a>";
+            $('#mCSB_2_container').append($response);
+            $('#counter').text(i + 1);
+            $('#counter_container').text(i + 1 + " pemberitahuan");
+            $('#notif_container' + obj[i]["id_ticket"]).click(function () {
+                $('#iframe').attr('src', 'page_view_ticket.html?id_ticket=' + obj[i]["id_ticket"]);
 
+            });
+
+        });
+
+    });
+}
 function getURLParameter(url, name) {
     return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
 }

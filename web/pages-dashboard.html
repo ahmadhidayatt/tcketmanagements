@@ -10,8 +10,7 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="js/index.js">
-        </script>
+      
         <script src="js/page_dashboard.js">
         </script>
 
@@ -83,109 +82,116 @@
                         </div>
 
                         <div style="margin-top: 10px;"  id="infotiket" class=" panel-info">
-                            <div style="margin-top: 10px" class="panel-heading">
+                            <form id ="myform" enctype="multipart/form-data">
+                                <div style="margin-top: 10px" class="panel-heading">
 
-                                <h3 class="panel-title">Nomer Tiket</h3>
-                                <span class="pull-right">
-                                    <a id="reopen" name="reopen" type="button" class="btn btn-sm btn-warning">Re-Open <i class="glyphicon glyphicon-edit"></i></a>
-                                    <a data-original-title="Remove this user" id="btn_close" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
-                                </span>
-                            </div>
-                            <div >
-                                <div class="row">
-                                    <div class=" col-md-12 col-lg-10 "> 
-                                        <!--                                        <table class="table table-user-information">
-                                                                                   
-                                                                                </table>-->
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">ID Ticket</label>
-                                                <input autocomplete='off' id="input_atm_name" class='form-control card-number' size='20' type='text' readonly="true">
+                                    <h3 class="panel-title">Nomer Tiket</h3>
+                                    <span class="pull-right">
+                                        <a id="reopen" name="reopen" type="button" class="btn btn-sm btn-warning">Re-Open <i class="glyphicon glyphicon-edit"></i></a>
+                                        <a data-original-title="Remove this user" id="btn_close" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">Close <i class="glyphicon glyphicon-remove"></i></a>
+                                    </span>
+                                </div>
+                                <div >
+                                    <div class="row">
+                                        <div class=" col-md-12 col-lg-10 "> 
+                                            <!--                                        <table class="table table-user-information">
+                                                                                       
+                                                                                    </table>-->
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">ID Ticket</label>
+                                                    <input autocomplete='off' id="input_atm_name" name="input_atm_name" class='form-control card-number' size='20' type='text' readonly="true">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Nama ATM</label>
-                                                <input autocomplete='off' id="input_nama_atm" class='form-control card-number' size='20' type='text'>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Nama ATM</label>
+                                                    <input autocomplete='off' id="input_nama_atm"  name="input_nama_atm" class='form-control card-number' size='20' type='text'>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">NIK</label>
-                                                <input autocomplete='off' id="input_nik" class='form-control card-number' size='20' type='text'>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">NIK</label>
+                                                    <input autocomplete='off' id="input_nik"  name="input_nik"  class='form-control card-number' size='20' type='text'>
+                                                </div>
                                             </div>
-                                        </div>
 
 
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Start Time</label>
-                                                <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' id="input_start" class="form-control" />
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Start Time</label>
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input type='text' id="input_start"  name="input_start" class="form-control" />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">End Time</label>
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input type='text' id="input_end" name="input_end" class="form-control" />
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Custody</label>
+                                                    <input autocomplete='off' id="input_cuss" name="input_cuss" class='form-control card-number' size='20' type='text'>
+                                                </div>
+                                            </div>
+
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Masalah</label>
+                                                    <input autocomplete='off' id="input_masalah" name="input_masalah" class='form-control card-number' size='20' type='text'>
+                                                </div>
+                                            </div>
+
+
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Deskripsi</label>
+                                                    <input autocomplete='off' id="input_desk" name="input_desk" class='form-control card-number' size='20' type='text'>
+                                                </div>
+                                            </div>
+
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Status</label>
+                                                    <input autocomplete='off' id="input_status" name="input_status" class='form-control card-number' size='20' type='text'>
+                                                </div>
+                                            </div>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Satwal</label>
+                                                    <input autocomplete='off' id="input_satwal" name="input_satwal" class='form-control card-number' size='20' type='text'>
+                                                </div>
+                                            </div>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group card required'>
+                                                    <label class='control-label' style="margin-top: 10px">Kartu Tertelan</label>
+                                                    <input id="input_kartel" type="file"  name="input_kartel" class="well well-sm">
+                                                </div>
+
+                                            </div>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12 form-group  required'>
+                                                    <img id="preview_img" name="preview_img" src="noimage.png" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">End Time</label>
-                                                <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' id="input_end" class="form-control" />
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Custody</label>
-                                                <input autocomplete='off' id="input_cuss" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
-
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Masalah</label>
-                                                <input autocomplete='off' id="input_masalah" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
-
-
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Deskripsi</label>
-                                                <input autocomplete='off' id="input_desk" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
-
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Status</label>
-                                                <input autocomplete='off' id="input_status" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Satwal</label>
-                                                <input autocomplete='off' id="input_satwal" class='form-control card-number' size='20' type='text'>
-                                            </div>
-                                        </div>
-                                        <div class='form-row'>
-                                            <div class='col-xs-12 form-group card required'>
-                                                <label class='control-label' style="margin-top: 10px">Kartu Tertelan</label>
-                                                <input id="input_kartel" type="file"  class="well well-sm">
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div style="margin-top: 10px;"  id="iforeepen" class=" panel-info">
@@ -284,7 +290,12 @@
                                         <div class='form-row'>
                                             <div class='col-xs-12 form-group card required'>
                                                 <label class='control-label' style="margin-top: 10px">Kartu Tertelan</label>
-                                                <input id="input_kartel2" type="file" readonly="true"  class="well well-sm">
+                                                <input id="input_kartel2" type="file" readonly="true"  class="well well-sm hidden">
+                                            </div>
+                                        </div>
+                                        <div class='form-row'>
+                                            <div class='col-xs-12 form-group  required'>
+                                                <img id="preview_img2" src="noimage.png" />
                                             </div>
                                         </div>
 

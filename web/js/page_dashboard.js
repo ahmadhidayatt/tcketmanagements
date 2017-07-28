@@ -1,7 +1,19 @@
 $(document).ready(function () {
+    $('#infotiket').hide();
+    $('#iforeepen').hide();
     var dataticket;
     var id_atm;
     var id_masalah;
+    var nik;
+
+    $.post("getSession", function (returnedData) {
+        var obj = JSON.parse(returnedData);
+        console.log(returnedData);
+        jQuery.each(obj, function (i, val) {
+            nik = obj[i]["nik"];
+        });
+    });
+
     $("#reopen").click(function () {
         alert("test");
         $('#infotiket').hide();
@@ -9,17 +21,22 @@ $(document).ready(function () {
 
         jQuery.each(dataticket, function (i, val) {
             alert(dataticket[i]["nama_atm"]);
-            $("#input_atm_name2").val(dataticket[i]["id_ticket"]);
-            $("#input_nama_atm2").val(dataticket[i]["nama_atm"]);
-            $("#input_nik2").val(dataticket[i]["nik"]);
-            $("#input_start2").val(dataticket[i]["start_time"]);
-            $("#input_end2").val(dataticket[i]["end_time"]);
-            $("#input_cuss2").val(dataticket[i]["custody"]);
-            $("#input_masalah2").val(dataticket[i]["nama_masalah"]);
-            $("#input_desk2").val(dataticket[i]["deskripsi"]);
-            $("#input_status2").val(dataticket[i]["status"]);
-            $("#input_satwal2").val(dataticket[i]["satwal"]);
-            $("#input_kartel2").val(dataticket[i]["kartu_tertelan"]);
+            $("#input_atm_name2").val($("#input_atm_name").val());
+            $("#input_nama_atm2").val($("#input_nama_atm").val());
+            $("#input_nik2").val($("#input_nik").val());
+            $("#input_start2").val($("#input_start").val());
+            $("#input_end2").val($("#input_end").val());
+            $("#input_cuss2").val($("#input_cuss").val());
+            $("#input_masalah2").val($("#input_masalah").val());
+            $("#input_desk2").val($("#input_desk").val());
+            $("#input_status2").val($("#input_status").val());
+            $("#input_satwal2").val($("#input_satwal").val());
+//            $("#input_kartel2").value($("#input_kartel").value());
+//
+//
+//            $('#preview_img2').attr('src', $("#input_kartel").src());
+//            $('#preview_img2').attr('width', '250px');
+//            $('#preview_img2').attr('height', '250px');
             id_atm = dataticket[i]["id_atm"];
             id_masalah = dataticket[i]["id_masalah"];
 
@@ -60,6 +77,9 @@ $(document).ready(function () {
         $('#myTable tbody').on('click', 'tr ', function () {
             console.log(dt.row(this).data());
             alert('You clicked on ' + dt.row(this).data().nama_atm + '\'s row');
+//            if(dt.row(this).data().nik !== nik){
+//                return;
+//            }
             detailRows = dt.row(this).data().id_ticket;
             alert(detailRows.toString());
             $('#table').hide();
@@ -108,7 +128,9 @@ $(document).ready(function () {
 
         });
         $("#submitreopen").click(function () {
-            alert("kontol");
+            var file = document.getElementById('input_kartel').files[0];
+            console.log($('#myform').serializeArray());
+
             $.post("helper_ticket", {code: "2",
                 id_ticket: $("#input_atm_name").val(),
                 id_atm: id_atm,
@@ -150,4 +172,25 @@ $(document).ready(function () {
         // On each draw, loop over the `detailRows` array and show any child rows
 
     });
+    $('body').on("change", "#input_kartel", function (event) {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            console.log($("#input_kartel").val());
+            reader.onload = function (e) {
+                $('#preview_img').attr('src', e.target.result);
+                $('#preview_img').attr('width', '250px');
+                $('#preview_img').attr('height', '250px');
+
+//                $("#input_kartel2").val($("#input_kartel").val());
+
+
+                $('#preview_img2').attr('src', e.target.result);
+                $('#preview_img2').attr('width', '250px');
+                $('#preview_img2').attr('height', '250px');
+
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
 });

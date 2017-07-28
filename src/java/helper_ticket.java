@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,9 +24,11 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -31,12 +36,14 @@ import org.json.simple.JSONObject;
  *
  * @author ahmad
  */
+@MultipartConfig
 public class helper_ticket extends HttpServlet {
 
-    public final String insert_ticket   = "1";
-    public final String update_ticket   = "2";
-    public final String retrieve_id     = "3";
+    public final String insert_ticket = "1";
+    public final String update_ticket = "2";
+    public final String retrieve_id = "3";
     public final String retrieve_status = "4";
+    public final String retrieve_nik = "5";
     private Connection conn;
 
     /**
@@ -184,7 +191,7 @@ public class helper_ticket extends HttpServlet {
                 } else {
                     start_time = start_times;
                 }
-                  if (end_times == null) {
+                if (end_times == null) {
                     String a = "";
                     end_time = Timestamp.valueOf(a);
                 } else {
@@ -194,7 +201,11 @@ public class helper_ticket extends HttpServlet {
                 String custody = request.getParameter("custody");
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
-                String kartu_tertelan = request.getParameter("kartu_tertelan");
+//                File imgfile = new File("pic.jpg");
+                Part kartu_tertelan = request.getPart("kartu_tertelan");
+                InputStream kartu_tertelana = kartu_tertelan.getInputStream();
+//                double kartu_tertelan = Double.parseDouble(request.getParameter("kartu_tertelan"));
+//                File kartu_tertelan = request.getParameter("kartu_tertelan");
                 String deskripsi = request.getParameter("deskripsi");
                 String status = request.getParameter("status");
 
@@ -206,7 +217,7 @@ public class helper_ticket extends HttpServlet {
                 statement.setTimestamp(4, end_time);
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
-                statement.setString(7, kartu_tertelan);
+                statement.setBlob(7, (Blob) kartu_tertelana);
                 statement.setString(8, deskripsi);
                 statement.setString(9, status);
                 statement.setString(10, custody);
@@ -240,7 +251,60 @@ public class helper_ticket extends HttpServlet {
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where id_ticket = " + id_tickets;
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.id_ticket = " + id_tickets;
+
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+
+                    String id_ticket = rs.getString("id_ticket");
+                    String id_atm = rs.getString("id_atm");
+                    String id_masalah = rs.getString("id_masalah");
+                    String nama_atm = rs.getString("nama_atm");
+                    String nama_masalah = rs.getString("nama_masalah");
+                    String start_time = rs.getString("start_time");
+                    String end_time = rs.getString("end_time");
+
+                    String nik = rs.getString("nik");
+                    String satwal = rs.getString("satwal");
+
+                    String kartu_tertelan = rs.getString("kartu_tertelan");
+                    String deskripsi = rs.getString("deskripsi");
+                    String status = rs.getString("status");
+                    String custody = rs.getString("custody");
+
+                    JSONObject arrayObj = new JSONObject();
+
+                    arrayObj.put("id_ticket", id_ticket);
+                    arrayObj.put("id_atm", id_atm);
+                    arrayObj.put("id_masalah", id_masalah);
+                    arrayObj.put("nama_atm", nama_atm);
+                    arrayObj.put("nama_masalah", nama_masalah);
+                    arrayObj.put("start_time", start_time);
+                    arrayObj.put("end_time", end_time);
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("satwal", satwal);
+
+                    arrayObj.put("kartu_tertelan", kartu_tertelan);
+                    arrayObj.put("deskripsi", deskripsi);
+                    arrayObj.put("status", status);
+                    arrayObj.put("custody", custody);
+
+                    jArray.add(i, arrayObj);
+                    i++;
+                }
+
+                hasil = jArray.toString();
+
+            } else if (code.equals(retrieve_nik)) {
+                String niks = request.getParameter("nik");
+                String query = "SELECT d.id_ticket,b.id_atm,c.id_masalah,b.nama_atm,c.nama_masalah,d.start_time,d.end_time,d.nik,d.satwal,d.kartu_tertelan,d.deskripsi,d.status,d.custody\n"
+                        + "FROM tb_ticket d\n"
+                        + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
+                        + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.nik = " + niks;
 
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);

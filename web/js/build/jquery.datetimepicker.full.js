@@ -1224,7 +1224,7 @@ var DateFormatter;
 		mask: false,
 		validateOnBlur: true,
 		allowBlank: true,
-		yearStart: 1950,
+		yearStart: 2013,
 		yearEnd: 2050,
 		monthStart: 0,
 		monthEnd: 11,

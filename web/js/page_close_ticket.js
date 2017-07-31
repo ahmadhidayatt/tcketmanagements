@@ -2,6 +2,10 @@ $(document).ready(function () {
     var dataticket;
     var id_atm;
     var id_masalah;
+    
+    $("#refresh_close").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
 //
     $("#reopen").click(function () {
 //        alert("test");

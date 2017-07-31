@@ -117,74 +117,51 @@ public class helper_news extends HttpServlet {
                 String nama = request.getParameter("nama");
                 String subject = request.getParameter("subject");
                 String kordinator = request.getParameter("kordinator");
-
-                String query = "insert into tb_news(deskripsi,nama,subject,kordinator)values(?,?,?,?)";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                String query = "insert into tb_news(deskripsi,nama,subject,id_kordinator,tanggal)values(?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(query);
 
                 statement.setString(1, deskripsi);
                 statement.setString(2, nama);
                 statement.setString(3, subject);
                 statement.setString(4, kordinator);
+                statement.setTimestamp(5,new Timestamp(System.currentTimeMillis()));
 
-//                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
-//                PreparedStatement statement2 = conn.prepareStatement(query2);
-//
-//                statement2.setString(1, id_atm);
-//                statement2.setString(2, id_masalah);
-//                statement2.setString(3, "open");
-//                statement2.setString(4, custody);
-//                statement2.setString(5, nik);
-//                statement2.setDate(6, java.sql.Date.valueOf(java.time.LocalDate.now()));
-//                statement2.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
-//                statement2.setString(8, id_ticket);
                 statement.executeUpdate();
-//                int in = statement2.executeUpdate();
-//                if (in != 0) {
-//                    hasil = "sukses";
-//                    conn.commit();
-//                } else {
-//                    hasil = "gagal";
-//                    conn.rollback();
-//                }
+
                 hasil = "sukses";
             } else if (code.equals(retrieve_news)) {
 
-                String query = "{call retrieve_pegawai()}";
-                sta = conn.prepareCall(query);
-                rs = sta.executeQuery();
+                String query = "SELECT a.id_news,a.deskripsi,a.id_kordinator,a.tanggal,b.nama,a.subject FROM tb_news a INNER JOIN tb_pegawai b ON a.id_kordinator = b.nik";
+                PreparedStatement statement = conn.prepareStatement(query);
+//                st = conn.prepareCall(query);
+                rs = statement.executeQuery();
                 int i = 0;
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
 
-                    String nik = rs.getString("nik");
-                    String nama = rs.getString("nama");
-                    String status = rs.getString("status");
+                    String id_news = rs.getString("id_news");
+                    String deskripsi = rs.getString("deskripsi");
+                    String subject = rs.getString("subject");
+                    String id_kordinator = rs.getString("id_kordinator");
                     String tanggal = rs.getString("tanggal");
-                    String alamat = rs.getString("alamat");
-                    String jabatan = rs.getString("jabatan");
-                    String no_telp = rs.getString("no_telp");
-                    String regional = rs.getString("regional");
-                    String foto = rs.getString("foto");
+                    String nama = rs.getString("nama");
 
                     JSONObject arrayObj = new JSONObject();
 
-                    arrayObj.put("nik", nik);
-                    arrayObj.put("nama", nama);
-                    arrayObj.put("status", status);
+                    arrayObj.put("id_news", id_news);
+                    arrayObj.put("deskripsi", deskripsi);
+                    arrayObj.put("subject", subject);
+                    arrayObj.put("id_kordinator", id_kordinator);
                     arrayObj.put("tanggal", tanggal);
-                    arrayObj.put("alamat", alamat);
-                    arrayObj.put("jabatan", jabatan);
-                    arrayObj.put("no_telp", no_telp);
-                    arrayObj.put("regional", regional);
-                    arrayObj.put("foto", foto);
-
+                    arrayObj.put("nama", nama);
                     jArray.add(i, arrayObj);
                     i++;
                 }
                 rs.close();
 
                 hasil = jArray.toString();
-                out.print(hasil);
+//                out.print(hasil);
 
             } else if (code.equals(update_news)) {
                 out.print(code);

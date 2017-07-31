@@ -12,40 +12,30 @@ $(document).ready(function () {
             searching: false,
             retrieve: true,
             columns: [{
-                    "data": "id_ticket"
-                }, {
                     "data": "nik"
                 }, {
-                    "data": "nama"
+                    "data": "custody"
                 }, {
                     "data": "mesin"
                 }, {
                     "data": "nama_atm"
                 }, {
-                    "data": "nama_masalah"
-                }, {
-                    "data": "deskripsi"
-                }, {
                     "data": "start_time"
                 }, {
                     "data": "end_time"
                 }, {
+                    "data": "satwal"
+                }, {
+                    "data": "id_ticket"
+                }, {
+                    "data": "nama_masalah"
+                }, {
+                    "data": "deskripsi"
+                }, {
                     "data": "status"
                 }
-            ], "dom": 'lBfrtip',
-            "buttons": [
-                {
-                    extend: 'collection',
-                    text: 'Export',
-                    buttons: [
-                        'copy',
-                        'excel',
-                        'csv',
-                        'pdf',
-                        'print'
-                    ]
-                }
             ]
+           
         });
 
         var detailRows = [];

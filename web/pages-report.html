@@ -2,23 +2,23 @@
 <html lang="en">
     <head>        
         <!-- META SECTION -->
-        <title>Fitness Center</title>            
+        <title>Report</title>            
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
-        <script type="text/javascript" src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+        <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+        <script src="js/page_report.js">
+        </script>
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-
-
+        <link rel="stylesheet" href="js/plugins/codemirror/mode/tiddlywiki/tiddlywiki.css" type="text/css">
 
 
         <!-- EOF CSS INCLUDE -->                                     
     </head>
-
     <body>
         <!-- START PAGE CONTAINER -->
 
@@ -53,34 +53,41 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">                                
                                 <h3 class="panel-title">Default</h3>
-                                <ul class="panel-controls">
-                                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                                </ul>                                
+                                <ul class="panel-controls" style="margin-top: 2px;">
+                                    <li><a href="#" id="refresh_report" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                                        </ul>                                        
+                                    </li>                                        
+                                </ul>                                 
                             </div>
-                            <form>
-                                <input type="text" id="myInputTextField" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
-                            </form>
                             <div class="panel-body">
-                                <table class="table table-striped display table" id="myTable">
+                                <form style="margin-bottom: 10px;">
+                                    <input type="text" id="autoid" class="inputatm" style="margin-left: 10px; margin-top: 10px;" name="search" placeholder="Search..">
+                                    <button id="exportButton" style="margin-bottom: 10px; float: right; border-radius: 5px" class="btn btn-lg btn-file clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+                                    <br><input type="datetime" style="margin-left: 10px; margin-top: 10px;" class="inputdate"  id="datepicker">
+                                    <label>To :</label><input type="datetime" style="margin-left: 10px; margin-top: 10px;" class="inputdate"  id="datepicker2">
+                                </form> 
+                                <table class="table datatable" id="myTable">
                                     <thead>
                                         <tr>
                                             <th>ID_Tiket</th>
                                             <th>NIK</th>
                                             <th>Custody</th>
-                                            <th>Mesin</th>
-                                            <th>Nama ATM</th>
-                                            <th>Nama Masalah</th>
+                                            <th>MESIN</th>
+                                            <th>Nama_ATM</th>
+                                            <th>Nama_Masalah</th>
                                             <th>Deskripsi</th>
-                                            <th>Start Time</th>
+                                            <th>Start_Time</th>
                                             <th>End_Time</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -114,32 +121,45 @@
                 </div>
             </div>
         </div>
-        <!-- END MESSAGE BOX-->
+        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+
         <script src="js/import/ajax.googleapis.com-ajax-libs-jquery-1.7.1-jquery.min.js"></script>
+
+
         <link rel="stylesheet" href="js/import/maxcd.bootsratpcdn.com-bootstrap-3.37-css-bootsrtap.min.css">
-        <link rel="stylesheet" href="js/import/cdn.datatables.net-1.10.15-css-dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/>">
         <link rel="stylesheet" href="js/import/cdn.datatables.net-responsive-2.1.1-css-responsive.bootstrap.min.css">
 
 
 
         <script type="text/javascript" src="js/import//cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script> 
+
+        <!--        <script type="text/javascript" src="js/import/cdn.datatables.net-buttons-1.3.1-js-dataTables.buttons.min.js"></script>
+        
+                <script type="text/javascript" src="js/import/cdnjs.cloudflare.com-ajax-libs-jszip-3.1.3-jszip.min.js"></script>
+                <script type="text/javascript" src="js/import/cdn.rawgit.com-bpampuch-pdfmake-0.1.27-build-pdfmake.min.js"></script>
+        
+                <script type="text/javascript" src="js/import/cdn.rawgit.com-bpampuch-pdfmake-0.1.27-build-vfs_fonts.js"></script>
+                <script type="text/javascript" src="js/import/cdn.datatables.net-buttons-1.3.1-js-buttons.html5.min.js"></script>
+        
+                
+                
+        -->
+        <script type="text/javascript" src="js/import/maxcdn.bootstrapcdn.com-bootstrap-3.2.0-js-bootstrap.min.js"></script>
         <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-responsive.bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/page_report.js"></script>
-         
 
-        <!-- END TEMPLATE -->
-        <!-- END SCRIPTS --> 
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+        <script src="js/build/jquery.datetimepicker.full.js"></script>
+        <script src="js/build/jquery.datetimepicker.min.js"></script>
+        <script src="js/build/jquery.datetimepicker.full.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>
+
 
     </body>
-    <script type="text/javascript">
-//        jQuery(function ($) {
-//            oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
-//            $('#myInputTextField').keyup(function () {
-//                oTable.search($(this).val()).draw();
-//            });
-//        });
-    </script>
     <style>
         .dataTables_filter {
             width: 50%;
@@ -151,7 +171,7 @@
             font-size: 12px;
         }
 
-        input[type=text] {
+        .inputatm {
             width: 130px;
             height: 45px;
             box-sizing: border-box;
@@ -168,8 +188,85 @@
             transition: width 0.4s ease-in-out;
         }
 
-        input[type=text]:focus {
+        .inputdate {
+            width: 170px;
+            height: 45px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+            background-color: white;
+            background-image: url('img/calendar.png');
+            background-size: 20px;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .inputatm:focus {
             width: 50%;
         }
+        .ui-autocomplete {
+            position: absolute;
+            z-index: 1000;
+            cursor: default;
+            padding: 0;
+            margin-top: 2px;
+            list-style: none;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .ui-autocomplete > li {
+            padding: 3px 20px;
+        }
+        .ui-autocomplete > li.ui-state-focus {
+            background-color: #DDD;
+        }
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
     </style>
+    <script type="text/javascript">
+            jQuery(function ($) {
+                $.datetimepicker.setLocale('id');
+
+                $("#datepicker").datetimepicker({value: '',
+
+                    format: $("#datetimepicker_format_value").val()});
+
+                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+                $("#datepicker2").datetimepicker({value: 'now()',
+
+                    format: $("#datetimepicker_format_value").val()});
+
+                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+
+
+                function getFormattedDate(date) {
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear().toString().slice(2);
+                    return day + '-' + month + '-' + year;
+                }
+
+            });
+    </script>
+
 </html>
+
+
+
+
+
+

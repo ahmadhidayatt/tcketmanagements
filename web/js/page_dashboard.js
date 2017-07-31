@@ -50,7 +50,7 @@ $(document).ready(function () {
         //  var response = jQuery.parseJSON(data);
 
         $("#myTable").dataTable({
-            "processing": true,
+          
             "data": JSON.parse(data),
             "columns": [{
                     "data": "id_ticket"

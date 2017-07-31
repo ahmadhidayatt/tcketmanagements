@@ -168,7 +168,7 @@ function getnotif(nik) {
             });
 
         });
-
+        $('#mCSB_2').attr('style', 'overflow: scroll;');
     });
 }
 function getURLParameter(url, name) {

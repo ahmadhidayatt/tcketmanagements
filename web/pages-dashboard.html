@@ -9,8 +9,8 @@
 
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      
+         <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+
         <script src="js/page_dashboard.js">
         </script>
 
@@ -18,14 +18,13 @@
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <link rel="stylesheet" href="js/plugins/codemirror/mode/tiddlywiki/tiddlywiki.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
 
-        <!-- EOF CSS INCLUDE -->                                    
+        <!-- EOF CSS INCLUDE -->  
+
+
     </head>  
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
-        });
-    </script>
+
     <body>
 
         <!-- PAGE CONTENT WRAPPER -->
@@ -123,7 +122,7 @@
                                                 <div class='col-xs-12 form-group card required'>
                                                     <label class='control-label' style="margin-top: 10px">Start Time</label>
                                                     <div class='input-group date' id='datetimepicker1'>
-                                                        <input type='text' id="input_start"  name="input_start" class="form-control" />
+                                                        <input type='text' id="input_start" name="input_start" class="form-control" />
                                                         <span class="input-group-addon">
                                                             <span class="glyphicon glyphicon-calendar"></span>
                                                         </span>
@@ -308,24 +307,41 @@
                 </div>      
             </div>
         </div>
-
-        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <!--
-                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-                <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">-->
+        <script  type="text/javascript" src="js/build/jquery.datetimepicker.full.js"></script>
+        <script src="js/import/ajax.googleapis.com-ajax-libs-jquery-1.7.1-jquery.min.js"></script>
 
 
+       <link rel="stylesheet" href="js/import/maxcd.bootsratpcdn.com-bootstrap-3.37-css-bootsrtap.min.css">
+        <!--<link rel="stylesheet" href="js/import/cdn.datatables.net-1.10.15-css-dataTables.bootstrap.min.css">-->
+        <link rel="stylesheet" href="js/import/cdn.datatables.net-responsive-2.1.1-css-responsive.bootstrap.min.css">
 
-        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+
+
+        <script type="text/javascript" src="js/import//cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/import/maxcdn.bootstrapcdn.com-bootstrap-3.2.0-js-bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-responsive.bootstrap.min.js"></script>
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $.datetimepicker.setLocale('id');
+
+                $("#input_start").datetimepicker({
+
+                    format: $("#datetimepicker_format_value").val()});
+
+                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+                $("#input_end").datetimepicker({
+
+                    format: $("#datetimepicker_format_value").val()});
+
+                console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+            });
+        </script>
 
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS -->         

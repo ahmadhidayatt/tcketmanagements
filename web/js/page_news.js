@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var nama;
     var kordinator;
+    var jabatan;
     console.log(kordinator);
     $.post("getSession", function (returnedData) {
         var obj = JSON.parse(returnedData);
@@ -9,43 +10,48 @@ $(document).ready(function () {
         jQuery.each(obj, function (i, val) {
             nama = obj[i]["nama"];
             kordinator = obj[i]["nik"];
+            jabatan = obj[i]["jabatan"];
 
-
+            if (jabatan === 'client') {
+                $("#berita").hide();
+            }
         });
     });
     $.post('helper_news', {code: "0"},
             function (returnedData) {
-//                var obj = JSON.parse(returnedData);
-//                console.log(returnedData);
-//                jQuery.each(obj, function (i, val) {
-                  
-                    var $response = " <div style='margin-top: 35px; margin-bottom: 10px'>"+
-                                            "<div class='form-row'>"+
-                                               " <div  class='[ col-xs-12  col-sm-12 col-md-12]'>"+
-                                                    "<div style='margin-top: 20px;' class='[ panel panel-default ] panel-google-plus'>"+
-                                                        "<div class='dropdown'>"+
-                                                            "<span class='dropdown-toggle' type='button' data-toggle='dropdown'>"+
-                                                               " <span class='[ glyphicon glyphicon-chevron-down ]'></span>"+
-                                                            "</span>"+
-                                                            "<ul class='dropdown-menu' role='menu'>"+
-                                                                "<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>info</a></li>"+
-                                                           " </ul>"+
-                                                      "  </div>"+
-                                                       " <div class='panel-heading'>"+
-                                                           " <img class='[ img-circle pull-left ]' src='https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg' alt='Mouse0270' />"+
-                                                           " <h3>Ahmad Hidayat aaaaaaaaa</h3>"+
-                                                            "<h5> <span>Jun 27, 2017</span> </h5>"+
-                                                       " </div>"+
-                                                       " <div class='panel-body'>"+
-                                                           " <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>"+
-                                                       " </div>"+
-                                                  "  </div>"+
-                                              "  </div>"+
-                                          "  </div>"+
-                                        "</div>";
-                                $('#dashboards').append($response);
-//                });
+                var obj = JSON.parse(returnedData);
+                console.log(returnedData);
+                jQuery.each(obj, function (i, val) {
+                    nik = obj[i]["nik"];
 
+
+                    var $response = " <div style='margin-top: 35px; margin-bottom: 10px'>" +
+                            "<div class='form-row'>" +
+                            " <div  class='[ col-xs-12  col-sm-12 col-md-12]'>" +
+                            "<div style='margin-top: 20px;' class='[ panel panel-default ] panel-google-plus'>" +
+                            "<div class='dropdown'>" +
+                            "<span class='dropdown-toggle' type='button' data-toggle='dropdown'>" +
+                            " <span class='[ glyphicon glyphicon-chevron-down ]'></span>" +
+                            "</span>" +
+                            "<ul class='dropdown-menu' role='menu'>" +
+                            "<li role='presentation'><a role='menuitem' tabindex='-1' href='#'>info</a></li>" +
+                            " </ul>" +
+                            "  </div>" +
+                            " <div class='panel-heading'>" +
+                            " <img class='[ img-circle pull-left ]' src='https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg' alt='Mouse0270' />" +
+                            " <h3>"+obj[i]["subject"]+"</h3>" +
+                            "<h5><span>"+obj[i]["nama"]+"</span>      <span>"+obj[i]["tanggal"]+"</span> </h5>" +
+                            " </div>" +
+                            " <div class='panel-body'>" +
+                            " <p>"+obj[i]["deskripsi"]+"</p>" +
+                            " </div>" +
+                            "  </div>" +
+                            "  </div>" +
+                            "  </div>" +
+                            "</div>";
+                    $('#dashboards').append($response);
+
+                });
 
             }).fail(function () {
         console.log("error");
@@ -189,7 +195,7 @@ $(document).ready(function () {
 //    });
     $("#post_news").click(function () {
         var subject = document.getElementById("input_subject").value;
-        var deskripsi = document.getElementById("input_deskripsi").value;
+        var deskripsi = document.getElementById("status_message").value;
 
 
         console.log(subject + " " + deskripsi + " " + kordinator);
@@ -201,9 +207,9 @@ $(document).ready(function () {
             kordinator: kordinator
         },
                 function (returnedData) {
-                    alert("transaksi anda berhasil");
+                    alert("transaksi anda berhasil" + returnedData);
 
-                 
+
 //                parent.document.getElementById('iframe').contentWindow.location.reload();
                 }).fail(function () {
             console.log("error");

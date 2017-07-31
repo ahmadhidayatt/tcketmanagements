@@ -183,7 +183,7 @@ public class helper_report extends HttpServlet {
                 rs.close();
 
                 hasil = jArray.toString();
-                out.print(hasil);
+                
 
             } else if (code.equals(update_report)) {
                 out.print(code);

@@ -159,8 +159,8 @@ public class helper_ticket extends HttpServlet {
                 statement2.setString(3, "open");
                 statement2.setString(4, custody);
                 statement2.setString(5, nik);
-                statement2.setDate(6, java.sql.Date.valueOf(java.time.LocalDate.now()));
-                statement2.setDate(7, java.sql.Date.valueOf(java.time.LocalDate.now()));
+                statement2.setTimestamp(6,new Timestamp(System.currentTimeMillis()));
+                statement2.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
                 statement2.setString(8, id_ticket);
 
                 statement.executeUpdate();
@@ -223,7 +223,7 @@ public class helper_ticket extends HttpServlet {
                 statement.setString(10, custody);
                 statement.setString(11, id_ticket);
 
-                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,?,?,?)";
+                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),end_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),id_ticket)values(?,?,?,?,?,?,?,?)";
                 PreparedStatement statement2 = conn.prepareStatement(query2);
 
                 statement2.setString(1, id_atm);

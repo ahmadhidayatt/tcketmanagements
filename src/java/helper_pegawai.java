@@ -5,16 +5,22 @@
  */
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -22,11 +28,14 @@ import org.json.simple.JSONObject;
  *
  * @author ahmad
  */
+@MultipartConfig
 public class helper_pegawai extends HttpServlet {
-  public final String retrieve_pegawai = "0";
+
+    public final String retrieve_pegawai = "0";
     public final String insert_pegawai = "1";
     public final String update_pegawai = "2";
     private Connection conn;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +53,7 @@ public class helper_pegawai extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet helper_pegawai</title>");            
+            out.println("<title>Servlet helper_pegawai</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet helper_pegawai at " + request.getContextPath() + "</h1>");
@@ -118,22 +127,47 @@ public class helper_pegawai extends HttpServlet {
                     arrayObj.put("tanggal", tanggal);
                     arrayObj.put("alamat", alamat);
                     arrayObj.put("jabatan", jabatan);
-                     arrayObj.put("no_telp", no_telp);
+                    arrayObj.put("no_telp", no_telp);
                     arrayObj.put("regional", regional);
                     arrayObj.put("foto", foto);
 
                     jArray.add(i, arrayObj);
                     i++;
+
                 }
                 rs.close();
-
                 hasil = jArray.toString();
-                out.print(hasil);
+            } else if (code.equals(update_pegawai)) {
+
+                Part foto = request.getPart("foto");
+                InputStream fotos = foto.getInputStream();
+                String nama = request.getParameter("nama");
+                String alamat = request.getParameter("alamat");
+                String no_telp = request.getParameter("no_telp");
+                String nik = request.getParameter("nik");
+
+                String query = "update tb_pegawai set nama=?,alamat=?,no_telp=?,foto=? where nik = ?";
+                PreparedStatement statement = conn.prepareStatement(query);
+
+                statement.setString(1, nama);
+                statement.setString(2, alamat);
+                statement.setString(3, no_telp);
+                statement.setBlob(4, fotos);
+                statement.setString(5, nik);
+
+                statement.executeUpdate();
+
+                hasil = "sukses";
+
             }
+
+            out.print(hasil);
+
             conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
-        } 
+            out.print(hasil);
+        }
     }
 
     /**

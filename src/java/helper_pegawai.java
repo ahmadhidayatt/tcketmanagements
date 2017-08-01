@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +39,7 @@ public class helper_pegawai extends HttpServlet {
     public final String retrieve_pegawai = "0";
     public final String insert_pegawai = "1";
     public final String update_pegawai = "2";
+    public final String retrieve_foto = "3";
     private Connection conn;
 
     /**
@@ -88,9 +94,7 @@ public class helper_pegawai extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
 
-        PrintWriter out = response.getWriter();
         String hasil = null;
         Connection con;
         Statement stmt;
@@ -102,6 +106,9 @@ public class helper_pegawai extends HttpServlet {
         conn = new connection().getConn();
         try {
             if (code.equals(retrieve_pegawai)) {
+                response.setContentType("text/html");
+
+                PrintWriter out = response.getWriter();
                 String query = "{call retrieve_pegawai()}";
                 st = conn.prepareCall(query);
                 rs = st.executeQuery();
@@ -137,7 +144,11 @@ public class helper_pegawai extends HttpServlet {
                 }
                 rs.close();
                 hasil = jArray.toString();
+                out.print(hasil);
             } else if (code.equals(update_pegawai)) {
+                response.setContentType("text/html");
+
+                PrintWriter out = response.getWriter();
 
                 Part foto = request.getPart("foto");
                 InputStream fotos = foto.getInputStream();
@@ -158,10 +169,54 @@ public class helper_pegawai extends HttpServlet {
                 statement.executeUpdate();
 
                 hasil = "sukses";
+                out.print(hasil);
+            } else if (code.equals(retrieve_foto)) {
+                String nik = request.getParameter("nik");
+                String query = "SELECT nik,foto FROM tb_pegawai where nik = " + nik;
 
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+                    String fileName = rs.getString("nik");
+                    Blob blob = rs.getBlob("foto");
+                    InputStream inputStream = blob.getBinaryStream();
+                    int fileLength = inputStream.available();
+
+//                    System.out.println("fileLength = " + fileLength);
+
+                    ServletContext context = getServletContext();
+
+                    // sets MIME type for the file download
+                    String mimeType = context.getMimeType(fileName);
+                    if (mimeType == null) {
+                        mimeType = "application/octet-stream";
+                    }
+
+                    // set content properties and header attributes for the response
+                    response.setContentType(mimeType);
+                    response.setContentLength(fileLength);
+                    String headerKey = "Content-Disposition";
+                    String headerValue = String.format("attachment; filename=\"%s\"", fileName);
+                    response.setHeader(headerKey, headerValue);
+
+                    // writes the file to the client
+                    OutputStream outStream = response.getOutputStream();
+
+                    byte[] buffer = new byte[fileLength];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outStream.write(buffer, 0, bytesRead);
+                    }
+
+                    inputStream.close();
+                    outStream.close();
+                }
+
+//                hasil = jArray.toString();
             }
-
-            out.print(hasil);
 
             conn.close();
         } catch (SQLException sx) {

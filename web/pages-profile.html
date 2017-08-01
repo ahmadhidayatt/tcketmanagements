@@ -48,27 +48,29 @@
                                 </ul>                                    
                             </div>                                
                             <div class="panel-body padding-0">
+
                                 <div class="chart-holder" id="dashboard-bar-1" style="height: auto">
 
                                     <div class="container" style="padding-top: 10px;">
                                         <div class="row">
                                             <!-- left column -->
-                                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                                <div class="text-center">
-                                                    <img src="assets/images/users/avatar.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                                            <form id ="myform" enctype="multipart/form-data" name ="myform">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                    <div class="text-center">
+                                                        <img src="assets/images/users/avatar.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
 
-                                                    <input type="file" style="margin-top: 10px" class="text-center center-block well well-sm">
+                                                        <input type="file" id="input_file" name="input_file" style="margin-top: 10px" class="text-center center-block well well-sm">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- edit form column -->
-                                            <div class="col-md-6 col-sm-6 col-xs-12 personal-info">
+                                                <!-- edit form column -->
+                                                <div class="col-md-6 col-sm-6 col-xs-12 personal-info">
 
-                                                <h3>Info User</h3>
-                                                <form class="form-horizontal" role="form">
+                                                    <h3>Info User</h3>
+
                                                     <div class="form-group">
                                                         <label class="col-lg-3 control-label">Nama :</label>
                                                         <div class="col-lg-8">
-                                                            <input class="form-control" id="nama_prfl"value="Rosidki" type="text">
+                                                            <input class="form-control" id="nama_prfl" value="Rosidki" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -106,17 +108,19 @@
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label"></label>
                                                         <div class="col-md-8" style="margin-bottom: 10px;">
-                                                            <input style="" class="btn btn-primary" value="Save Changes" type="button">
+                                                            <input style="" id="submit" class="btn btn-primary" value="Save Changes" type="button">
                                                             <span></span>
                                                             <input class="btn btn-default" value="Cancel" type="reset">
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
 
                                 </div>
+
                             </div>                                    
                         </div>
                         <!-- END MEMBER PROPORTION BLOCK -->

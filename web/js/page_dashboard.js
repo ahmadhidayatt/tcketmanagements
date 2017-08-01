@@ -5,7 +5,7 @@ $(document).ready(function () {
     var id_atm;
     var id_masalah;
     var nik;
-
+    var files;
     $.post("getSession", function (returnedData) {
         var obj = JSON.parse(returnedData);
         console.log(returnedData);
@@ -129,45 +129,112 @@ $(document).ready(function () {
         });
         $("#submitreopen").click(function () {
             var file = document.getElementById('input_kartel').files[0];
-            console.log($('#myform').serializeArray());
+            var formElement = $("[name='myform']")[0];
+            var fd = new FormData(formElement);
+            var fileInput = $("#input_kartel")[0];
+            fd.append('file', fileInput.files[0]);
 
-            $.post("helper_ticket", {code: "2",
-                id_ticket: $("#input_atm_name").val(),
-                id_atm: id_atm,
-                id_masalah: id_masalah,
-                nama_atm: $("#input_nama_atm2").val(),
-                start_time: $("#input_start").val(),
-                end_time: $("#input_end").val(),
-                custody: $("#input_cuss").val(),
-                nik: $("#input_nik").val(),
-                satwal: $("#input_satwal").val(),
-                kartu_tertelan: $("#input_kartel").val(),
-                deskripsi: $("#input_desk").val(),
-                status: "reopen"
-            }, function (data) {
-                alert(data);
 
+            var fd = new FormData();
+            fd.append("kartu_tertelan", file);
+            fd.append("code", "2");
+            fd.append("id_ticket", $("#input_atm_name").val());
+            fd.append("id_atm", id_atm);
+            fd.append("id_masalah", id_masalah);
+            fd.append("nama_atm", $("#input_nama_atm2").val());
+            fd.append("start_time", $("#input_start").val());
+            fd.append("end_time", $("#input_end").val());
+            fd.append("custody", $("#input_cuss").val());
+            fd.append("nik", $("#input_nik").val());
+            fd.append("satwal", $("#input_satwal").val());
+            fd.append("deskripsi", $("#input_desk").val());
+            fd.append("status", "reopen");
+
+            console.log(fd);
+            $.ajax({
+                url: 'helper_ticket',
+                data: fd,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    alert(data);
+                }
             });
+
+//            $.post("helper_ticket", 
+//                    {code: "2",
+//                        id_ticket: $("#input_atm_name").val(),
+//                        id_atm: id_atm,
+//                        id_masalah: id_masalah,
+//                        nama_atm: $("#input_nama_atm2").val(),
+//                        start_time: $("#input_start").val(),
+//                        end_time: $("#input_end").val(),
+//                        custody: $("#input_cuss").val(),
+//                        nik: $("#input_nik").val(),
+//                        satwal: $("#input_satwal").val(),
+//                        kartu_tertelan: $("#input_kartel").val(),
+//                        deskripsi: $("#input_desk").val(),
+//                        status: "reopen"
+//                    }, function (data) {
+//                alert(data);
+//
+//            });
         });
         $("#btn_close").click(function () {
-            alert("aaaa");
-            $.post("helper_ticket", {code: "2",
-                id_ticket: $("#input_atm_name").val(),
-                id_atm: id_atm,
-                id_masalah: id_masalah,
-                nama_atm: $("#input_nama_atm").val(),
-                start_time: $("#input_start").val(),
-                end_time: $("#input_end").val(),
-                custody: $("#input_cuss").val(),
-                nik: $("#input_nik").val(),
-                satwal: $("#input_satwal").val(),
-                kartu_tertelan: $("#input_kartel").val(),
-                deskripsi: $("#input_desk").val(),
-                status: "close"
-            }, function (data) {
-                alert(data);
 
+            var file = document.getElementById('input_kartel').files[0];
+            var formElement = $("[name='myform']")[0];
+            var fd = new FormData(formElement);
+            var fileInput = $("#input_kartel")[0];
+            fd.append('file', fileInput.files[0]);
+
+
+            var fd = new FormData();
+            fd.append("kartu_tertelan", file);
+            fd.append("code", "2");
+            fd.append("id_ticket", $("#input_atm_name").val());
+            fd.append("id_atm", id_atm);
+            fd.append("id_masalah", id_masalah);
+            fd.append("nama_atm", $("#input_nama_atm2").val());
+            fd.append("start_time", $("#input_start").val());
+            fd.append("end_time", $("#input_end").val());
+            fd.append("custody", $("#input_cuss").val());
+            fd.append("nik", $("#input_nik").val());
+            fd.append("satwal", $("#input_satwal").val());
+            fd.append("deskripsi", $("#input_desk").val());
+            fd.append("status", "close");
+
+            console.log(fd);
+            $.ajax({
+                url: 'helper_ticket',
+                data: fd,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    alert(data);
+                }
             });
+
+
+//            $.post("helper_ticket", {code: "2",
+//                id_ticket: $("#input_atm_name").val(),
+//                id_atm: id_atm,
+//                id_masalah: id_masalah,
+//                nama_atm: $("#input_nama_atm").val(),
+//                start_time: $("#input_start").val(),
+//                end_time: $("#input_end").val(),
+//                custody: $("#input_cuss").val(),
+//                nik: $("#input_nik").val(),
+//                satwal: $("#input_satwal").val(),
+//                kartu_tertelan: $("#input_kartel").val(),
+//                deskripsi: $("#input_desk").val(),
+//                status: "close"
+//            }, function (data) {
+//                alert(data);
+//
+//            });
         });
         // On each draw, loop over the `detailRows` array and show any child rows
 
@@ -177,6 +244,8 @@ $(document).ready(function () {
             var reader = new FileReader();
             console.log($("#input_kartel").val());
             reader.onload = function (e) {
+                files = e.target.result;
+
                 $('#preview_img').attr('src', e.target.result);
                 $('#preview_img').attr('width', '250px');
                 $('#preview_img').attr('height', '250px');

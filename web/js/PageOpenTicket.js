@@ -75,7 +75,8 @@ $(document).ready(function () {
                 return {
                     label: value.nik,
                     ID: value.nik,
-                    Name: value.nama
+                    Name: value.nama,
+                    value : value.value
 
 
                 }
@@ -109,17 +110,40 @@ $(document).ready(function () {
 
 
     $('#select_atm').autocomplete({
-        minLength: 2,
+
         source: function (request, response) {
             response($.map(data_atm, function (value, key) {
                 return {
+                    ID :value.mesin,
                     label: value.mesin,
-                    value: value.mesin
+                    value: value.atm_klien,
+                    Name: value.nama_atm
                 }
             }));
 
-        }
-    });
+        }, minLength: 2,
+
+        focus:
+                function (event, ui) {
+                    var nik = ui.item.ID;
+                    $(this).val(nik);
+                    event.preventDefault();
+                },
+
+        select:
+                function (event, ui) {
+                    var custody = ui.item.label;
+                    $('#select_atm').val(custody);
+                    event.preventDefault();
+                }
+    }).data('ui-autocomplete')._renderItem = function (ul, item) {
+        return $("<li>")
+                .data("item.autocomplete", item.ID)
+                .append("<a>" + item.ID + "</a>")
+                .append("<a style = 'float : right ;'>" + item.Name + "</a>")
+                .appendTo(ul);
+    };
+
 
     $('#nik').on('autocompletechange change', function () {
         var nik = this.value;
@@ -128,6 +152,20 @@ $(document).ready(function () {
             if (data_peg[i]["nik"].trim() === nik.trim()) {
                 //nih disini 
                 $('#custody').val(data_peg[i]["nama"]);
+            }
+
+        });
+//   $('#custody').val(this.value);
+    }).change();
+    $('#select_atm').on('autocompletechange change', function () {
+        var mesin = this.value;
+
+        jQuery.each(data_atm, function (i, val) {
+//            console.log(data_peg[i]["nik"]);
+            if (data_atm[i]["mesin"].trim() === mesin.trim()) {
+                //nih disini 
+                $("#input_atm_name").val(data_atm[i]["nama_atm"]);
+                $("#input_atm_loct").val(data_atm[i]["atm_klien"]);
             }
 
         });
@@ -149,7 +187,6 @@ $(document).ready(function () {
         var atm_name = document.getElementById("input_atm_name").value;
         var atm_klien = document.getElementById("input_atm_loct").value;
         var custody = document.getElementById("custody").value;
-
         var niks = document.getElementById("nik").value;
         console.log(idatm + " " + idmasalah + " " + atm_name + " " + atm_klien + " " + custody + " " + niks + " ");
         $.post('helper_ticket', {code: "1", id_atm: idatm,
@@ -162,7 +199,6 @@ $(document).ready(function () {
             kartu_tertelan: ""},
                 function (returnedData) {
                     alert("transaksi anda berhasil");
-
                     document.getElementById("select_atm").value = "";
                     document.getElementById("select_masalah").value = "";
                     document.getElementById("input_atm_name").value = "";
@@ -174,7 +210,7 @@ $(document).ready(function () {
             console.log("error");
         });
     });
-
-});
+}
+);
 
 

@@ -5,6 +5,7 @@
  */
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -202,8 +203,9 @@ public class helper_ticket extends HttpServlet {
                 String nik = request.getParameter("nik");
                 String satwal = request.getParameter("satwal");
 //                File imgfile = new File("pic.jpg");
-                Part kartu_tertelan = request.getPart("kartu_tertelan");
-                InputStream kartu_tertelana = kartu_tertelan.getInputStream();
+                Part part = request.getPart("kartu_tertelan");
+                String filePath = "/home/ahmad/NetBeansProjects/tcketmanagement/web/assets/images/users/user.jpg";
+                InputStream kartu_tertelana = part.getInputStream();
 //                double kartu_tertelan = Double.parseDouble(request.getParameter("kartu_tertelan"));
 //                File kartu_tertelan = request.getParameter("kartu_tertelan");
                 String deskripsi = request.getParameter("deskripsi");
@@ -217,13 +219,13 @@ public class helper_ticket extends HttpServlet {
                 statement.setTimestamp(4, end_time);
                 statement.setString(5, nik);
                 statement.setString(6, satwal);
-                statement.setBlob(7, (Blob) kartu_tertelana);
+                statement.setBlob(7, kartu_tertelana);
                 statement.setString(8, deskripsi);
                 statement.setString(9, status);
                 statement.setString(10, custody);
                 statement.setString(11, id_ticket);
 
-                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),end_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),id_ticket)values(?,?,?,?,?,?,?,?)";
+                String query2 = "insert into tb_report(id_atm,id_masalah,status,custody,nik,start_time,end_time,id_ticket)values(?,?,?,?,?,STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),?)";
                 PreparedStatement statement2 = conn.prepareStatement(query2);
 
                 statement2.setString(1, id_atm);

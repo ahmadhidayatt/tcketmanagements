@@ -150,7 +150,7 @@ public class helper_pegawai extends HttpServlet {
 
                 PrintWriter out = response.getWriter();
 
-                Part foto = request.getPart("foto");
+                Part foto = request.getPart("foro");
                 InputStream fotos = foto.getInputStream();
                 String nama = request.getParameter("nama");
                 String alamat = request.getParameter("alamat");

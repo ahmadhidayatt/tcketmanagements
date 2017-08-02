@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#refresh_pending").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
     var dataticket;
     var id_atm;
     var id_masalah;
@@ -140,9 +143,9 @@ $(document).ready(function () {
                             $("#input_desk").val(obj[i]["deskripsi"]);
                             $("#input_status").val(obj[i]["status"]);
                             $("#input_satwal").val(obj[i]["satwal"]);
-                            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
-                            id_atm = dataticket[i]["id_atm"];
-                            id_masalah = dataticket[i]["id_masalah"];
+//                            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
+                            id_atm = obj[i]["id_atm"];
+                            id_masalah = obj[i]["id_masalah"];
                             $('.table-user-information').append(tr);
                             alert(obj[i]["id_ticket"]);
                         });
@@ -189,6 +192,7 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function (data) {
                     alert(data);
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
                 }
             });
 
@@ -225,6 +229,7 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function (data) {
                     alert(data);
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
                 }
             });
 

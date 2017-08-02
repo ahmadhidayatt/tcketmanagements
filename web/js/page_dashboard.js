@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#refresh_dashboard").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
     $('#infotiket').hide();
     $('#iforeepen').hide();
     var dataticket;
@@ -50,7 +53,7 @@ $(document).ready(function () {
         //  var response = jQuery.parseJSON(data);
 
         $("#myTable").dataTable({
-          
+
             "data": JSON.parse(data),
             "columns": [{
                     "data": "id_ticket"
@@ -97,9 +100,9 @@ $(document).ready(function () {
             },
                     function (returnedData2) {
                         var obj = JSON.parse(returnedData2);
-                        data_atm = JSON.parse(returnedData2);
+//                        data_atm = JSON.parse(returnedData2);
                         dataticket = JSON.parse(returnedData2);
-                        console.log(data_atm);
+                        console.log(dataticket);
                         var tr = $('<tr/>');
                         jQuery.each(obj, function (i, val) {
 //                            console.log(obj[i]["id_ticket"]);
@@ -114,9 +117,9 @@ $(document).ready(function () {
                             $("#input_desk").val(obj[i]["deskripsi"]);
                             $("#input_status").val(obj[i]["status"]);
                             $("#input_satwal").val(obj[i]["satwal"]);
-                            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
-                            id_atm = dataticket[i]["id_atm"];
-                            id_masalah = dataticket[i]["id_masalah"];
+//                            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
+                            id_atm = obj[i]["id_atm"];
+                            id_masalah = obj[i]["id_masalah"];
                             $('.table-user-information').append(tr);
                             alert(obj[i]["id_ticket"]);
                         });
@@ -159,6 +162,7 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function (data) {
                     alert(data);
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
                 }
             });
 
@@ -180,14 +184,15 @@ $(document).ready(function () {
 //                alert(data);
 //
 //            });
+
+
+
         });
         $("#btn_close").click(function () {
 
             var file = document.getElementById('input_kartel').files[0];
             var formElement = $("[name='myform']")[0];
-            var fd = new FormData(formElement);
-            var fileInput = $("#input_kartel")[0];
-            fd.append('file', fileInput.files[0]);
+           
 
 
             var fd = new FormData();
@@ -214,6 +219,7 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function (data) {
                     alert(data);
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
                 }
             });
 
@@ -235,6 +241,10 @@ $(document).ready(function () {
 //                alert(data);
 //
 //            });
+
+
+            
+
         });
         // On each draw, loop over the `detailRows` array and show any child rows
 

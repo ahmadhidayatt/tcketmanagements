@@ -7,6 +7,9 @@
 
 
 $(document).ready(function () {
+    $("#refresh_open").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
     var data_atm;
     var data_peg;
     var peg_nik;
@@ -76,7 +79,7 @@ $(document).ready(function () {
                     label: value.nik,
                     ID: value.nik,
                     Name: value.nama,
-                    value : value.value
+                    value: value.value
 
 
                 }
@@ -114,7 +117,7 @@ $(document).ready(function () {
         source: function (request, response) {
             response($.map(data_atm, function (value, key) {
                 return {
-                    ID :value.mesin,
+                    ID: value.mesin,
                     label: value.mesin,
                     value: value.atm_klien,
                     Name: value.nama_atm
@@ -206,6 +209,7 @@ $(document).ready(function () {
                     document.getElementById("custody").value = "";
                     document.getElementById("nik").value = "";
 //                parent.document.getElementById('iframe').contentWindow.location.reload();
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
                 }).fail(function () {
             console.log("error");
         });

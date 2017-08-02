@@ -160,7 +160,7 @@ public class helper_ticket extends HttpServlet {
                 statement2.setString(3, "open");
                 statement2.setString(4, custody);
                 statement2.setString(5, nik);
-                statement2.setTimestamp(6,new Timestamp(System.currentTimeMillis()));
+                statement2.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
                 statement2.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
                 statement2.setString(8, id_ticket);
 
@@ -211,6 +211,10 @@ public class helper_ticket extends HttpServlet {
                 String deskripsi = request.getParameter("deskripsi");
                 String status = request.getParameter("status");
 
+//                String querys = "delete kartu_tertelan from tb_ticket where id_ticket =?";
+//                PreparedStatement statement3 = conn.prepareStatement(querys);
+//                statement3.setString(1, id_ticket);
+
                 String query = "update tb_ticket set id_atm=?,id_masalah=?,start_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),end_time=STR_TO_DATE(?, '%Y-%m-%d %H:%i:%s'),nik=?,satwal=?,kartu_tertelan=?,deskripsi=?,status=?,custody=? where id_ticket =?";
                 PreparedStatement statement = conn.prepareStatement(query);
                 statement.setString(1, id_atm);
@@ -236,7 +240,8 @@ public class helper_ticket extends HttpServlet {
                 statement2.setTimestamp(6, start_time);
                 statement2.setTimestamp(7, end_time);
                 statement2.setString(8, id_ticket);
-
+                
+//                statement3.executeUpdate();
                 statement.executeUpdate();
                 statement2.executeUpdate();
                 if (statement2.executeUpdate() != 0) {

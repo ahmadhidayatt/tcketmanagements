@@ -10,6 +10,8 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
         <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/filtering/row-based/range_dates.js"></script> 
+
         <script src="js/page_report.js">
         </script>
         <!-- CSS INCLUDE -->        
@@ -127,13 +129,12 @@
 
 
         <link rel="stylesheet" href="js/import/maxcd.bootsratpcdn.com-bootstrap-3.37-css-bootsrtap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/>">
+        <link rel="stylesheet" href="js/import/datatable-pfd.css"/>">
         <link rel="stylesheet" href="js/import/cdn.datatables.net-responsive-2.1.1-css-responsive.bootstrap.min.css">
 
 
 
-        <script type="text/javascript" src="js/import//cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script> 
+        <script type="text/javascript" src="js/import/datatables-pdf.js"></script> 
 
         <!--        <script type="text/javascript" src="js/import/cdn.datatables.net-buttons-1.3.1-js-dataTables.buttons.min.js"></script>
         
@@ -157,6 +158,7 @@
         <script src="js/build/jquery.datetimepicker.min.js"></script>
         <script src="js/build/jquery.datetimepicker.full.min.js"></script>
         <link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>
+        <script type="text/javascript" src="js/import/cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
 
 
     </body>
@@ -240,15 +242,14 @@
                 $.datetimepicker.setLocale('id');
 
                 $("#datepicker").datetimepicker({value: '',
-
-                    format: $("#datetimepicker_format_value").val()});
+                    format: 'Y-m-d H:m:s',
+                    minDate: getFormattedDate(new Date())});
 
                 console.log($('#datetimepicker_format').datetimepicker('getValue'));
 
                 $("#datepicker2").datetimepicker({value: 'now()',
-
-                    format: $("#datetimepicker_format_value").val()});
-
+                    format: 'Y-m-d H:m:s',
+                    minDate: getFormattedDate(new Date())});
                 console.log($('#datetimepicker_format').datetimepicker('getValue'));
 
 

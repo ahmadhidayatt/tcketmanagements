@@ -5,6 +5,7 @@
  */
 
 $(document).ready(function () {
+    
     $.post("helper_ticket", {code: "4", statuss: "reopen"}, function (data) {
         console.log(data);
         //  var response = jQuery.parseJSON(data);

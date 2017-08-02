@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#refresh_news").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
     var nama;
     var kordinator;
     var jabatan;
@@ -39,11 +42,11 @@ $(document).ready(function () {
                             "  </div>" +
                             " <div class='panel-heading'>" +
                             " <img class='[ img-circle pull-left ]' src='https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg' alt='Mouse0270' />" +
-                            " <h3>"+obj[i]["subject"]+"</h3>" +
-                            "<h5><span>"+obj[i]["nama"]+"</span>      <span>"+obj[i]["tanggal"]+"</span> </h5>" +
+                            " <h3>" + obj[i]["subject"] + "</h3>" +
+                            "<h5><span>" + obj[i]["nama"] + "</span>      <span>" + obj[i]["tanggal"] + "</span> </h5>" +
                             " </div>" +
                             " <div class='panel-body'>" +
-                            " <p>"+obj[i]["deskripsi"]+"</p>" +
+                            " <p>" + obj[i]["deskripsi"] + "</p>" +
                             " </div>" +
                             "  </div>" +
                             "  </div>" +
@@ -208,8 +211,9 @@ $(document).ready(function () {
         },
                 function (returnedData) {
                     alert("transaksi anda berhasil" + returnedData);
-
-
+                    document.getElementById("input_subject").value = "";
+                    document.getElementById("status_message").value = "";
+                    window.parent.document.getElementById("iframe").contentWindow.location.reload();
 //                parent.document.getElementById('iframe').contentWindow.location.reload();
                 }).fail(function () {
             console.log("error");

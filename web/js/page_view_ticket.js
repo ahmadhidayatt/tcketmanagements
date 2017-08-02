@@ -29,9 +29,9 @@ $(document).ready(function () {
             $("#input_desk").val(obj[i]["deskripsi"]);
             $("#input_status").val(obj[i]["status"]);
             $("#input_satwal").val(obj[i]["satwal"]);
-            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
-            id_atm = dataticket[i]["id_atm"];
-            id_masalah = dataticket[i]["id_masalah"];
+//            $("#input_kartel").val(obj[i]["kartu_tertelan"]);
+            id_atm = obj[i]["id_atm"];
+            id_masalah = obj[i]["id_masalah"];
             $('.table-user-information').append(tr);
             alert(obj[i]["id_ticket"]);
 

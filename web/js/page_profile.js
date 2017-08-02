@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $("#refresh_profile").click(function () {
+        window.parent.document.getElementById("iframe").contentWindow.location.reload();
+    });
     var nik;
     $.post("getSession", function (returnedData) {
         var obj = JSON.parse(returnedData);
@@ -22,13 +25,12 @@ $(document).ready(function () {
     $("#submit").click(function () {
         var file = document.getElementById('input_file').files[0];
         var formElement = $("[name='myform']")[0];
+    
+       
+
+
+
         var fd = new FormData(formElement);
-        var fileInput = $("#input_file")[0];
-        fd.append('file', fileInput.files[0]);
-
-
-
-        var fd = new FormData();
         fd.append("foto", file);
         fd.append("code", "2");
         fd.append("nama", $("#nama_prfl").val());

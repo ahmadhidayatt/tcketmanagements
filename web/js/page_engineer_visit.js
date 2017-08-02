@@ -2,19 +2,24 @@ $(document).ready(function () {
     $("#refresh_report").click(function () {
         window.parent.document.getElementById("iframe").contentWindow.location.reload();
     });
+    var table;
+
+// #myInput is a <input type="text"> element
 
 //
+
+
     $.post("helper_report", {code: "0"}, function (data) {
         console.log(data);
 
-        $("#myTable").dataTable({
+        table = $("#myTable").dataTable({
             data: JSON.parse(data),
-            searching: false,
+           
             retrieve: true,
             columns: [{
                     "data": "nik"
                 }, {
-                    "data": "custody"
+                    "data": "nama"
                 }, {
                     "data": "mesin"
                 }, {
@@ -23,8 +28,6 @@ $(document).ready(function () {
                     "data": "start_time"
                 }, {
                     "data": "end_time"
-                }, {
-                    "data": "satwal"
                 }, {
                     "data": "id_ticket"
                 }, {
@@ -35,11 +38,12 @@ $(document).ready(function () {
                     "data": "status"
                 }
             ]
-           
+
         });
 
         var detailRows = [];
         var dt = $("#myTable").DataTable();
+
         $('#myTable tbody').on('click', 'tr ', function () {
             console.log(dt.row(this).data());
             alert('You clicked on ' + dt.row(this).data().nama_atm + '\'s row');
@@ -85,13 +89,13 @@ $(document).ready(function () {
 //            });
 //
         });
+        $('#myInputTextField').on('keyup', function () {
+           
+            dt.search(this.value).draw();
+        });
         // On each draw, loop over the `detailRows` array and show any child rows
 
     });
-//    jQuery(function ($) {
-//        oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
-//        $('#myInputTextField').keyup(function () {
-//            oTable.search($(this).val()).draw();
-//        });
-//    });
+
+
 });

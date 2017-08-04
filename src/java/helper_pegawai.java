@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -150,7 +149,7 @@ public class helper_pegawai extends HttpServlet {
 
                 PrintWriter out = response.getWriter();
 
-                Part foto = request.getPart("foro");
+                Part foto = request.getPart("foto");
                 InputStream fotos = foto.getInputStream();
                 String nama = request.getParameter("nama");
                 String alamat = request.getParameter("alamat");
@@ -181,38 +180,14 @@ public class helper_pegawai extends HttpServlet {
                 while (rs.next()) {
                     String fileName = rs.getString("nik");
                     Blob blob = rs.getBlob("foto");
-                    InputStream inputStream = blob.getBinaryStream();
-                    int fileLength = inputStream.available();
+                    byte[] imgData = blob.getBytes(1, (int) blob.length());
 
-//                    System.out.println("fileLength = " + fileLength);
+                    response.setContentType("image/png");
+                    OutputStream o = response.getOutputStream();
+                    o.write(imgData);
+                    o.flush();
+                    o.close();
 
-                    ServletContext context = getServletContext();
-
-                    // sets MIME type for the file download
-                    String mimeType = context.getMimeType(fileName);
-                    if (mimeType == null) {
-                        mimeType = "application/octet-stream";
-                    }
-
-                    // set content properties and header attributes for the response
-                    response.setContentType(mimeType);
-                    response.setContentLength(fileLength);
-                    String headerKey = "Content-Disposition";
-                    String headerValue = String.format("attachment; filename=\"%s\"", fileName);
-                    response.setHeader(headerKey, headerValue);
-
-                    // writes the file to the client
-                    OutputStream outStream = response.getOutputStream();
-
-                    byte[] buffer = new byte[fileLength];
-                    int bytesRead = -1;
-
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outStream.write(buffer, 0, bytesRead);
-                    }
-
-                    inputStream.close();
-                    outStream.close();
                 }
 
 //                hasil = jArray.toString();

@@ -44,6 +44,10 @@
         <servlet-name>helper_report</servlet-name>
         <servlet-class>helper_report</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>helper_image</servlet-name>
+        <servlet-class>helper_image</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>retrieve_ticket</servlet-name>
         <url-pattern>/retrieve_ticket</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>helper_report</servlet-name>
         <url-pattern>/helper_report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>helper_image</servlet-name>
+        <url-pattern>/helper_image</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

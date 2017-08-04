@@ -117,14 +117,17 @@ public class helper_ticket extends HttpServlet {
                 out.print(code);
 
                 String id_ticket = "";
-                String queries = "SELECT * from tb_ticket ";
+                String queries = "SELECT max(id_ticket) AS id_ticket from tb_ticket ";
 
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(queries);
                 int i = 0;
+                
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
-                    id_ticket = rs.getString("id_ticket");
+                 String id_tickets = rs.getString("id_ticket");
+                 id_ticket =String.valueOf( Integer.parseInt(id_tickets)+1);
+                    
                 }
 
                 String id_atm = request.getParameter("id_atm");
@@ -234,7 +237,7 @@ public class helper_ticket extends HttpServlet {
 
                 statement2.setString(1, id_atm);
                 statement2.setString(2, id_masalah);
-                statement2.setString(3, "open");
+                statement2.setString(3, status);
                 statement2.setString(4, custody);
                 statement2.setString(5, nik);
                 statement2.setTimestamp(6, start_time);
@@ -243,8 +246,8 @@ public class helper_ticket extends HttpServlet {
                 
 //                statement3.executeUpdate();
                 statement.executeUpdate();
-                statement2.executeUpdate();
-                if (statement2.executeUpdate() != 0) {
+               int in = statement2.executeUpdate();
+                if (in != 0) {
                     hasil = "sukses";
                     conn.commit();
                 } else {

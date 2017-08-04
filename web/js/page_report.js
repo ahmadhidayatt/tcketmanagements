@@ -49,10 +49,10 @@ $(document).ready(function () {
 
         var detailRows = [];
         var dt = $("#myTable").DataTable();
-        $('#datepicker').keyup(function () {
+        $('#datepicker').on('keyup', function () {
             dt.draw();
         });
-        $('#datepicker2').keyup(function () {
+        $('#datepicker2').on('keyup', function () {
             dt.draw();
         });
           $('#autoid').on('keyup', function () {

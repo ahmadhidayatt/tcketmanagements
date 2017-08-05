@@ -40,21 +40,7 @@ $(document).ready(function () {
             }).fail(function () {
         console.log("error");
     });
-    $.post('helper_pegawai', {code: "0"},
-            function (returnedData) {
-                var obj = JSON.parse(returnedData);
 
-                data_peg = obj;
-                console.log(data_peg);
-//                jQuery.each(obj, function (i, val) {
-//                    peg_nik = obj[i]["nik"];
-////                    console.log(obj[i]["id_masalah"]);
-//                });
-//                ;
-
-            }).fail(function () {
-        console.log("error");
-    });
 
     $("#select_atm").click(function () {
         var mesin = $("#select_atm").val();
@@ -69,7 +55,22 @@ $(document).ready(function () {
 
         });
     });
+    $.post('helper_pegawai', {code: "0"},
+            function (returnedData) {
+                console.log(returnedData);
+                var obj = JSON.parse(returnedData);
 
+                data_peg = obj;
+                console.log(data_peg);
+//                jQuery.each(obj, function (i, val) {
+//                    peg_nik = obj[i]["nik"];
+////                    console.log(obj[i]["id_masalah"]);
+//                });
+//                ;
+
+            }).fail(function () {
+        console.log("error");
+    });
 
     $('#nik').autocomplete({
 
@@ -201,7 +202,7 @@ $(document).ready(function () {
             satwal: "0",
             kartu_tertelan: ""},
                 function (returnedData) {
-                    alert("transaksi anda berhasil");
+                    alert("berhasil");
                     document.getElementById("select_atm").value = "";
                     document.getElementById("select_masalah").value = "";
                     document.getElementById("input_atm_name").value = "";

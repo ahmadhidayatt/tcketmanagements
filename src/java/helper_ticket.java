@@ -314,7 +314,7 @@ public class helper_ticket extends HttpServlet {
                         + "FROM tb_ticket d\n"
                         + "INNER JOIN tb_pegawai a ON d.nik = a.nik\n"
                         + "INNER JOIN tb_atm     b ON  b.id_atm = d.id_atm\n"
-                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where d.nik = " + niks;
+                        + "INNER JOIN tb_masalah  c ON c.id_masalah   = d.id_masalah where (d.status = 'open' OR d.status='reopen') and  d.nik = " + niks;
 
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);

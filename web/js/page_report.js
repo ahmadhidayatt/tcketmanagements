@@ -37,7 +37,6 @@ $(document).ready(function () {
                     extend: 'collection',
                     text: 'Export',
                     buttons: [
-                        'copy',
                         'excel',
                         'csv',
                         'pdf',

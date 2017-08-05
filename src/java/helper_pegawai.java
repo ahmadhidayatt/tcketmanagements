@@ -39,6 +39,8 @@ public class helper_pegawai extends HttpServlet {
     public final String insert_pegawai = "1";
     public final String update_pegawai = "2";
     public final String retrieve_foto = "3";
+     public final String retrieve_pegawai_id = "4";
+    
     private Connection conn;
 
     /**
@@ -108,6 +110,7 @@ public class helper_pegawai extends HttpServlet {
                 response.setContentType("text/html");
 
                 PrintWriter out = response.getWriter();
+ 
                 String query = "{call retrieve_pegawai()}";
                 st = conn.prepareCall(query);
                 rs = st.executeQuery();
@@ -123,7 +126,7 @@ public class helper_pegawai extends HttpServlet {
                     String jabatan = rs.getString("jabatan");
                     String no_telp = rs.getString("no_telp");
                     String regional = rs.getString("regional");
-                    String foto = rs.getString("foto");
+                    
 
                     JSONObject arrayObj = new JSONObject();
 
@@ -135,7 +138,7 @@ public class helper_pegawai extends HttpServlet {
                     arrayObj.put("jabatan", jabatan);
                     arrayObj.put("no_telp", no_telp);
                     arrayObj.put("regional", regional);
-                    arrayObj.put("foto", foto);
+                   
 
                     jArray.add(i, arrayObj);
                     i++;
@@ -145,28 +148,24 @@ public class helper_pegawai extends HttpServlet {
                 hasil = jArray.toString();
                 out.print(hasil);
             } else if (code.equals(update_pegawai)) {
+                conn.setAutoCommit(false);
                 response.setContentType("text/html");
-
                 PrintWriter out = response.getWriter();
-
                 Part foto = request.getPart("foto");
                 InputStream fotos = foto.getInputStream();
                 String nama = request.getParameter("nama");
                 String alamat = request.getParameter("alamat");
                 String no_telp = request.getParameter("no_telp");
                 String nik = request.getParameter("nik");
-
-                String query = "update tb_pegawai set nama=?,alamat=?,no_telp=?,foto=? where nik = ?";
+                String query = "update tb_pegawai set nama=?,alamat=?,no_telp=?,foto=? where nik =?";
                 PreparedStatement statement = conn.prepareStatement(query);
-
                 statement.setString(1, nama);
                 statement.setString(2, alamat);
                 statement.setString(3, no_telp);
                 statement.setBlob(4, fotos);
                 statement.setString(5, nik);
-
                 statement.executeUpdate();
-
+                conn.commit();
                 hasil = "sukses";
                 out.print(hasil);
             } else if (code.equals(retrieve_foto)) {
@@ -181,21 +180,64 @@ public class helper_pegawai extends HttpServlet {
                     String fileName = rs.getString("nik");
                     Blob blob = rs.getBlob("foto");
                     byte[] imgData = blob.getBytes(1, (int) blob.length());
-
+                    String encoded = javax.xml.bind.DatatypeConverter
+                            .printBase64Binary(imgData);
                     response.setContentType("image/png");
-                    OutputStream o = response.getOutputStream();
-                    o.write(imgData);
-                    o.flush();
-                    o.close();
+                    response.getOutputStream().print(encoded);
 
                 }
-
+                rs.close();
+                stmt.close();
+                response.getOutputStream().close();
 //                hasil = jArray.toString();
+            }else if (code.equals(retrieve_pegawai_id)) {
+                response.setContentType("text/html");
+
+                PrintWriter out = response.getWriter();
+                String niks = request.getParameter("nik");
+                String query = "SELECT nik,nama,alamat,status,jabatan,no_telp,regional FROM tb_pegawai where nik = " + niks;
+
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+                int i = 0;
+                JSONArray jArray = new JSONArray();
+                while (rs.next()) {
+
+                    String nik = rs.getString("nik");
+                    String nama = rs.getString("nama");
+                    String status = rs.getString("status");
+                    String alamat = rs.getString("alamat");
+                    String jabatan = rs.getString("jabatan");
+                    String no_telp = rs.getString("no_telp");
+                    String regional = rs.getString("regional");
+                    
+
+                    JSONObject arrayObj = new JSONObject();
+
+                    arrayObj.put("nik", nik);
+                    arrayObj.put("nama", nama);
+                    arrayObj.put("status", status);
+
+                    arrayObj.put("alamat", alamat);
+                    arrayObj.put("jabatan", jabatan);
+                    arrayObj.put("no_telp", no_telp);
+                    arrayObj.put("regional", regional);
+                   
+
+                    jArray.add(i, arrayObj);
+                    i++;
+
+                }
+                rs.close();
+                hasil = jArray.toString();
+                out.print(hasil);
             }
 
             conn.close();
         } catch (SQLException sx) {
             hasil = sx.toString();
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
             out.print(hasil);
         }
     }

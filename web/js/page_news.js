@@ -5,6 +5,7 @@ $(document).ready(function () {
     var nama;
     var kordinator;
     var jabatan;
+    var all_news;
     console.log(kordinator);
     $.post("getSession", function (returnedData) {
         var obj = JSON.parse(returnedData);
@@ -25,9 +26,12 @@ $(document).ready(function () {
                 var obj = JSON.parse(returnedData);
                 console.log(returnedData);
                 jQuery.each(obj, function (i, val) {
-                    nik = obj[i]["nik"];
+                    nik = obj[i]["id_kordinator"];
+                    all_news = obj[i]["id_news"];
+                    var img;
 
 
+                    console.log(img);
                     var $response = " <div style='margin-top: 35px; margin-bottom: 10px'>" +
                             "<div class='form-row'>" +
                             " <div  class='[ col-xs-12  col-sm-12 col-md-12]'>" +
@@ -41,7 +45,7 @@ $(document).ready(function () {
                             " </ul>" +
                             "  </div>" +
                             " <div class='panel-heading'>" +
-                            " <img class='[ img-circle pull-left ]' src='https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg' alt='Mouse0270' />" +
+                            " <img class='[ img-circle pull-left ]' src='data:image/png;base64," + img + "' id='img" + obj[i]["id_news"] + "' alt='Mouse0270' />" +
                             " <h3>" + obj[i]["subject"] + "</h3>" +
                             "<h5><span>" + obj[i]["nama"] + "</span>      <span>" + obj[i]["tanggal"] + "</span> </h5>" +
                             " </div>" +
@@ -53,12 +57,15 @@ $(document).ready(function () {
                             "  </div>" +
                             "</div>";
                     $('#dashboards').append($response);
-
+                    getImage(obj[i]["id_kordinator"], obj[i]["id_news"]);
                 });
 
             }).fail(function () {
         console.log("error");
     });
+
+
+
 //    $.post('helper_pegawai', {code: "0"},
 //            function (returnedData) {
 //                var obj = JSON.parse(returnedData);
@@ -210,7 +217,7 @@ $(document).ready(function () {
             kordinator: kordinator
         },
                 function (returnedData) {
-                    alert("transaksi anda berhasil" + returnedData);
+                    alert("berhasil" + returnedData);
                     document.getElementById("input_subject").value = "";
                     document.getElementById("status_message").value = "";
                     window.parent.document.getElementById("iframe").contentWindow.location.reload();
@@ -222,7 +229,16 @@ $(document).ready(function () {
 
 
 });
+function getImage(nik, id) {
+    $.post("helper_pegawai", {code: "3", nik: nik}, function (data) {
+        var outputImg = document.getElementById('img' + id);
+        outputImg.src = "data:image/png;base64," + data.toString();
+        $('#img' + id).attr('width', '60px');
+        $('#img' + id).attr('height', '60px');
+        console.log(data.toString());
+    });
 
+}
 
 
 ;

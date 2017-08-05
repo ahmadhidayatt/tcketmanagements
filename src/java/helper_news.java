@@ -132,7 +132,7 @@ public class helper_news extends HttpServlet {
                 hasil = "sukses";
             } else if (code.equals(retrieve_news)) {
 
-                String query = "SELECT a.id_news,a.deskripsi,a.id_kordinator,a.tanggal,b.nama,a.subject FROM tb_news a INNER JOIN tb_pegawai b ON a.id_kordinator = b.nik";
+                String query = "SELECT a.id_news,a.deskripsi,a.id_kordinator,a.tanggal,b.nama,a.subject FROM tb_news a INNER JOIN tb_pegawai b ON a.id_kordinator = b.nik ORDER BY a.tanggal DESC";
                 PreparedStatement statement = conn.prepareStatement(query);
 //                st = conn.prepareCall(query);
                 rs = statement.executeQuery();

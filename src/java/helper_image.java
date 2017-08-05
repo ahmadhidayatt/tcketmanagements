@@ -98,47 +98,7 @@ public class helper_image extends HttpServlet {
         String code = request.getParameter("code");
         conn = new connection().getConn();
         try {
-            if (code.equals(retrieve_image)) {
-                response.setContentType("text/html");
-
-                PrintWriter out = response.getWriter();
-                String query = "{call retrieve_pegawai()}";
-                st = conn.prepareCall(query);
-                rs = st.executeQuery();
-                int i = 0;
-                JSONArray jArray = new JSONArray();
-                while (rs.next()) {
-
-                    String nik = rs.getString("nik");
-                    String nama = rs.getString("nama");
-                    String status = rs.getString("status");
-                    String tanggal = rs.getString("tanggal");
-                    String alamat = rs.getString("alamat");
-                    String jabatan = rs.getString("jabatan");
-                    String no_telp = rs.getString("no_telp");
-                    String regional = rs.getString("regional");
-                    String foto = rs.getString("foto");
-
-                    JSONObject arrayObj = new JSONObject();
-
-                    arrayObj.put("nik", nik);
-                    arrayObj.put("nama", nama);
-                    arrayObj.put("status", status);
-                    arrayObj.put("tanggal", tanggal);
-                    arrayObj.put("alamat", alamat);
-                    arrayObj.put("jabatan", jabatan);
-                    arrayObj.put("no_telp", no_telp);
-                    arrayObj.put("regional", regional);
-                    arrayObj.put("foto", foto);
-
-                    jArray.add(i, arrayObj);
-                    i++;
-
-                }
-                rs.close();
-                hasil = jArray.toString();
-                out.print(hasil);
-            } else if (code.equals(update_image)) {
+             if (code.equals(update_image)) {
                 response.setContentType("text/html");
 
                 PrintWriter out = response.getWriter();
@@ -173,14 +133,12 @@ public class helper_image extends HttpServlet {
                 JSONArray jArray = new JSONArray();
                 while (rs.next()) {
                     String fileName = rs.getString("id_ticket");
-                    Blob blob = rs.getBlob("kartu_tertelan");
+                     Blob blob = rs.getBlob("kartu_tertelan");
                     byte[] imgData = blob.getBytes(1, (int) blob.length());
-
+                    String encoded = javax.xml.bind.DatatypeConverter
+                            .printBase64Binary(imgData);
                     response.setContentType("image/png");
-                    OutputStream o = response.getOutputStream();
-                    o.write(imgData);
-                    o.flush();
-                    o.close();
+                    response.getOutputStream().print(encoded);
 
                 }
 

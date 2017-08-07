@@ -1,4 +1,9 @@
+
+
 $(document).ready(function () {
+
+    var minDateFilter = "";
+    var maxDateFilter = "";
     $("#refresh_report").click(function () {
         window.parent.document.getElementById("iframe").contentWindow.location.reload();
     });
@@ -48,45 +53,71 @@ $(document).ready(function () {
 
         var detailRows = [];
         var dt = $("#myTable").DataTable();
-        $('#datepicker').on('keyup', function () {
+
+
+
+        $.datetimepicker.setLocale('id');
+
+        $("#datepicker").datetimepicker({value: 'now()',
+            format: 'Y-m-d H:m:s',
+            minDate: getFormattedDate(new Date()),
+            "onSelect": function (date) {
+
+                minDateFilter = new Date(date).getTime();
+                dt.draw();
+                console.log(document.getElementById('datepicker').value);
+            }, onClose: function (selectedDate) {
+                $("#datepicker2").datetimepicker("option", "minDate", selectedDate);
+            }
+        }).keyup(function () {
+            minDateFilter = new Date(this.value).getTime();
+            dt.draw();
+            console.log(document.getElementById('datepicker').value);
+        }).change(function () {
+            minDateFilter = new Date(this.value).getTime();
             dt.draw();
         });
-        $('#datepicker2').on('keyup', function () {
+
+
+        console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+        $("#datepicker2").datetimepicker({value: 'now()',
+            format: 'Y-m-d H:m:s',
+            minDate: getFormattedDate(new Date()),
+            "onSelect": function (date) {
+                maxDateFilter = new Date(date).getTime();
+                dt.draw();
+                console.log(document.getElementById('datepicker2').value);
+            },
+            onClose: function (selectedDate) {
+                $("#datepicker").datetimepicker("option", "maxDate", selectedDate);
+            }
+        }).keyup(function () {
+            maxDateFilter = new Date(this.value).getTime();
+            dt.draw();
+            console.log(document.getElementById('datepicker2').value);
+        }).change(function () {
+            maxDateFilter = new Date(this.value).getTime();
             dt.draw();
         });
-          $('#autoid').on('keyup', function () {
-           
+        console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+
+
+        function getFormattedDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear().toString().slice(2);
+            return day + '-' + month + '-' + year;
+        }
+
+
+
+        $('#autoid').on('keyup', function () {
+
             dt.search(this.value).draw();
         });
-        $.fn.dataTableExt.afnFiltering.push(
-                function (oSettings, aData, iDataIndex) {
-                    var iFini = document.getElementById('datepicker').value;
-                    var iFfin = document.getElementById('datepicker2').value;
-                    var iStartDateCol = 6;
-                    var iEndDateCol = 7;
 
-                    iFini = iFini.substring(6, 10) + iFini.substring(3, 5) + iFini.substring(0, 2);
-                    iFfin = iFfin.substring(6, 10) + iFfin.substring(3, 5) + iFfin.substring(0, 2);
-
-                    var datofini = aData[iStartDateCol].substring(6, 10) + aData[iStartDateCol].substring(3, 5) + aData[iStartDateCol].substring(0, 2);
-                    var datoffin = aData[iEndDateCol].substring(6, 10) + aData[iEndDateCol].substring(3, 5) + aData[iEndDateCol].substring(0, 2);
-
-                    if (iFini === "" && iFfin === "")
-                    {
-                        return true;
-                    } else if (iFini <= datofini && iFfin === "")
-                    {
-                        return true;
-                    } else if (iFfin >= datoffin && iFini === "")
-                    {
-                        return true;
-                    } else if (iFini <= datofini && iFfin >= datoffin)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-        );
 
         $('#myTable tbody').on('click', 'tr ', function () {
             console.log(dt.row(this).data());
@@ -145,4 +176,38 @@ $(document).ready(function () {
 //        });
 //    });
 
+
+    $.fn.dataTableExt.afnFiltering.push(
+            function (oSettings, aData, iDataIndex) {
+                var iFini = document.getElementById('datepicker').value;
+                var iFfin = document.getElementById('datepicker2').value;
+                var iStartDateCol = 7;
+                var iEndDateCol = 8;
+                console.log(document.getElementById('datepicker').value);
+                console.log(document.getElementById('datepicker2').value);
+                iFini = iFini.substring(0, 4) + iFini.substring(5, 7) + iFini.substring(8, 10);
+                iFfin = iFfin.substring(0, 4) + iFfin.substring(5, 7) + iFfin.substring(8, 10);
+                console.log("iFini " + iFini);
+                console.log('iFfin ' + iFfin);
+                var datofini = aData[iStartDateCol].substring(0, 4) + aData[iStartDateCol].substring(5, 7) + aData[iStartDateCol].substring(8, 10);
+                var datoffin = aData[iEndDateCol].substring(0, 4) + aData[iEndDateCol].substring(5, 7) + aData[iEndDateCol].substring(8, 10);
+                console.log("datofini " + datofini);
+                console.log('datoffin ' + datoffin);
+                if (iFini === "" && iFfin === "")
+                {
+                    return true;
+                } else if (iFini <= datofini && iFfin === "")
+                {
+                    return true;
+                } else if (iFfin >= datoffin && iFini === "")
+                {
+                    return true;
+                } else if (iFini <= datofini && iFfin >= datoffin)
+                {
+                    return true;
+                }
+                return false;
+            }
+    );
 });
+

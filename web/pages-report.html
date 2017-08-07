@@ -10,7 +10,6 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <!-- END META SECTION -->
         <script src="js/import/code.jquery.com-jquery-1.12.4.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/filtering/row-based/range_dates.js"></script> 
 
         <script src="js/page_report.js">
         </script>
@@ -146,19 +145,21 @@
                 
                 
         -->
+
+
         <script type="text/javascript" src="js/import/maxcdn.bootstrapcdn.com-bootstrap-3.2.0-js-bootstrap.min.js"></script>
         <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="js/import/cdn.datatables.net-responsive-2.1.1-js-responsive.bootstrap.min.js"></script>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>-->
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
         <script src="js/build/jquery.datetimepicker.full.js"></script>
-        <script src="js/build/jquery.datetimepicker.min.js"></script>
-        <script src="js/build/jquery.datetimepicker.full.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>
-        <script type="text/javascript" src="js/import/cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>
-
+        <!--<script src="js/build/jquery.datetimepicker.min.js"></script>-->
+        <!--<script src="js/build/jquery.datetimepicker.full.min.js"></script>-->
+        <!--<link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>-->
+        <!--<script type="text/javascript" src="js/import/cdn.datatables.net-1.10.2-js-jquery.dataTables.min.js"></script>-->
+        <!--<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/filtering/row-based/range_dates.js"></script>--> 
 
     </body>
     <style>
@@ -237,30 +238,7 @@
 
     </style>
     <script type="text/javascript">
-            jQuery(function ($) {
-                $.datetimepicker.setLocale('id');
 
-                $("#datepicker").datetimepicker({value: '',
-                    format: 'Y-m-d H:m:s',
-                    minDate: getFormattedDate(new Date())});
-
-                console.log($('#datetimepicker_format').datetimepicker('getValue'));
-
-                $("#datepicker2").datetimepicker({value: 'now()',
-                    format: 'Y-m-d H:m:s',
-                    minDate: getFormattedDate(new Date())});
-                console.log($('#datetimepicker_format').datetimepicker('getValue'));
-
-
-
-                function getFormattedDate(date) {
-                    var day = date.getDate();
-                    var month = date.getMonth() + 1;
-                    var year = date.getFullYear().toString().slice(2);
-                    return day + '-' + month + '-' + year;
-                }
-
-            });
     </script>
 
 </html>

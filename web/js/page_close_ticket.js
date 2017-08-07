@@ -2,7 +2,7 @@ $(document).ready(function () {
     var dataticket;
     var id_atm;
     var id_masalah;
-    
+    $('#infotiket').hide();
     $("#refresh_close").click(function () {
         window.parent.document.getElementById("iframe").contentWindow.location.reload();
     });
@@ -95,7 +95,7 @@ $(document).ready(function () {
 
         var detailRows = [];
         var dt = $("#myTable").DataTable();
-       
+
         // On each draw, loop over the `detailRows` array and show any child rows
 
     });
